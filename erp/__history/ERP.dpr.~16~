@@ -19,7 +19,7 @@ uses
   Acesso.model in '..\shared\Models\Usuario\Acesso.model.pas',
   Perfil.model in '..\shared\Models\Usuario\Perfil.model.pas',
   Acao.model in '..\shared\Models\Usuario\Acao.model.pas',
-  Dm.Principal in '..\shared\Data Modules\Dm.Principal.pas' {DmPrincipal: TDataModule};
+  Dm.Principal in '..\shared\Data Modules\Dm.Principal.pas' {ProviderConexao1: TDataModule};
 
 {$R *.res}
 

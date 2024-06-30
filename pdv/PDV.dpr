@@ -2,7 +2,7 @@ program PDV;
 
 uses
   Vcl.Forms,
-  View.Base in '..\comuns\view\base\View.Base.pas' {ViewBase};
+  View.Base in '..\shared\view\base\View.Base.pas' {ViewBase};
 
 {$R *.res}
 

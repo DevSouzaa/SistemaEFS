@@ -103,41 +103,37 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="..\comuns\view\base\View.Base.pas">
+        <DCCReference Include="..\shared\view\base\View.Base.pas">
             <Form>ViewBase</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\view\principal\View.Principal.pas">
             <Form>ViewPrincipal</Form>
             <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="..\comuns\provider\Constants\Provider.Constantes.pas"/>
-        <DCCReference Include="..\comuns\Models\Connection\Conexao.model.pas"/>
-        <DCCReference Include="..\comuns\provider\Conexao\Provider.Conexao.pas">
+        <DCCReference Include="..\shared\provider\Constants\Provider.Constantes.pas"/>
+        <DCCReference Include="..\shared\Models\Connection\Conexao.model.pas"/>
+        <DCCReference Include="..\shared\provider\Conexao\Provider.Conexao.pas">
             <Form>ProviderConexao</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="..\comuns\view\base\View.Base.Tela.Modal.pas">
+        <DCCReference Include="..\shared\view\base\View.Base.Tela.Modal.pas">
             <Form>ViewBaseTelaModal</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
-        <DCCReference Include="..\comuns\Models\Empresa.model.pas"/>
-        <DCCReference Include="..\comuns\Terceiros\TDI\PageControlEx.pas"/>
-        <DCCReference Include="..\comuns\Terceiros\TDI\TabCloseButton.pas"/>
-        <DCCReference Include="..\comuns\Terceiros\TDI\TDI.pas"/>
-        <DCCReference Include="..\comuns\Terceiros\TDI\VisualizaImagensDasGuiasAbertas.pas">
-            <Form>/  Sistema.model in &apos;..\comuns\Models\Sistema.model.pas&apos;;</Form>
+        <DCCReference Include="..\shared\Models\Empresa.model.pas"/>
+        <DCCReference Include="..\shared\Terceiros\TDI\PageControlEx.pas"/>
+        <DCCReference Include="..\shared\Terceiros\TDI\TabCloseButton.pas"/>
+        <DCCReference Include="..\shared\Terceiros\TDI\TDI.pas"/>
+        <DCCReference Include="..\shared\Terceiros\TDI\VisualizaImagensDasGuiasAbertas.pas">
+            <Form>VisualizaImagensDasGuiasAbertas</Form>
         </DCCReference>
-        <DCCReference Include="..\comuns\Models\Sistema.model.pas"/>
-        <DCCReference Include="..\comuns\Enums\Enums.pas"/>
-        <DCCReference Include="..\comuns\Models\Usuario\Usuario.model.pas"/>
-        <DCCReference Include="..\comuns\Models\Usuario\Acesso.model.pas"/>
-        <DCCReference Include="..\comuns\Models\Usuario\Perfil.model.pas"/>
-        <DCCReference Include="..\comuns\Models\Usuario\Acao.model.pas"/>
-        <DCCReference Include="..\comuns\Data Modules\Dm.Principal.pas">
-            <Form>ProviderConexao1</Form>
-            <FormType>dfm</FormType>
+        <DCCReference Include="..\shared\Models\Sistema.model.pas"/>
+        <DCCReference Include="..\shared\Enums\Enums.pas"/>
+        <DCCReference Include="..\shared\Models\Usuario\Usuario.model.pas"/>
+        <DCCReference Include="..\shared\Models\Usuario\Acesso.model.pas"/>
+        <DCCReference Include="..\shared\Models\Usuario\Perfil.model.pas"/>
+        <DCCReference Include="..\shared\Models\Usuario\Acao.model.pas"/>
+        <DCCReference Include="..\shared\Data Modules\Dm.Principal.pas">
+            <Form>DmPrincipal</Form>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <BuildConfiguration Include="Base">
