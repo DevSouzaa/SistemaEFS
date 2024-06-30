@@ -1,0 +1,31 @@
+unit View.Base.Tela.Modal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, View.Base, Vcl.ExtCtrls, Vcl.StdCtrls;
+
+type
+  TViewBaseTelaModal = class(TViewBase)
+    PnlTopo: TPanel;
+    PnlRodaPe: TPanel;
+    PnlLogoTela: TPanel;
+    ImgLogoTelaVerde: TImage;
+    ImgLogoTelaBranca: TImage;
+    LblTituloDaTela: TLabel;
+    PnlFecharTela: TPanel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ViewBaseTelaModal: TViewBaseTelaModal;
+
+implementation
+
+{$R *.dfm}
+
+end.

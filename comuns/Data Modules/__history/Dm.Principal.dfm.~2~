@@ -1,0 +1,18 @@
+inherited ProviderConexao1: TProviderConexao1
+  Width = 483
+  object QRY_Aux: TFDQuery
+    Connection = FDConnection
+    Left = 136
+    Top = 184
+  end
+  object QRY_Usuario: TFDQuery
+    Connection = FDConnection
+    Left = 136
+    Top = 104
+  end
+  object QRY_Empresa: TFDQuery
+    Connection = FDConnection
+    Left = 136
+    Top = 32
+  end
+end

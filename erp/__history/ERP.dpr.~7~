@@ -1,0 +1,18 @@
+program ERP;
+
+uses
+  Vcl.Forms,
+  View.Base in '..\comuns\view\base\View.Base.pas' {ViewBase},
+  View.Principal in 'src\view\principal\View.Principal.pas' {ViewPrincipal},
+  Provider.Constantes in '..\comuns\provider\Constants\Provider.Constantes.pas',
+  Classe.Conexao in '..\comuns\Class\Classe.Conexao.pas',
+  Provider.Conexao in '..\comuns\provider\Conexao\Provider.Conexao.pas' {ProviderConexao: TDataModule};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TViewPrincipal, ViewPrincipal);
+  Application.Run;
+end.

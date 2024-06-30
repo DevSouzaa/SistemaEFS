@@ -1,0 +1,16 @@
+program ERP;
+
+uses
+  Vcl.Forms,
+  View.Base in '..\..\comuns\view\base\View.Base.pas' {ViewBase},
+  View.Principal in 'view\principal\View.Principal.pas' {ViewPrincipal};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TViewBase, ViewBase);
+  Application.CreateForm(TViewPrincipal, ViewPrincipal);
+  Application.Run;
+end.

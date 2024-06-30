@@ -1,0 +1,26 @@
+unit Sistema.model;
+
+interface
+uses
+
+  VCL.Forms;
+type
+  TSistema = class
+  private
+
+  public
+
+    constructor New;
+
+  end;
+
+implementation
+
+{ TSistema }
+
+constructor TSistema.New;
+begin//create
+
+end;
+
+end.

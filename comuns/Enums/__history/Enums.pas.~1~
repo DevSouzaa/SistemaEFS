@@ -1,0 +1,37 @@
+unit Enums;
+
+
+
+interface
+
+type
+  // Tipo de Movimento
+  TTipoMovimento = (tmVenda, tmPreVenda, tmOrcamento);
+
+  // Status de Cliente
+  TStatusCliente = (scAtivo, scInativo);
+
+  // Tipo de Nota Fiscal
+  TTipoNotaFiscal = (tnfNFe, tnfNFCe, tnfCCE);
+
+  // Tipo de Ação
+  TTipoAcao = (taCancelar, taConfirmar);
+
+  // Tipo de Usuário
+  TTipoUsuario = (tuAdmin, tuVendedor, tuCaixa);
+
+  // Status de Pedido
+  TStatusPedido = (spPendente, spPago, spCancelado);
+
+  // Tipo de Pagamento
+  TTipoPagamento = (tpDinheiro, tpCartaoCredito, tpCartaoDebito, tpPix, tpBoleto);
+
+  // Categoria de Produto
+  TCategoriaProduto = (cpAlimentos, cpBebidas, cpEletronicos, cpVestuarios, cpMoveis);
+
+  // Unidade de Medida
+  TUnidadeMedida = (umUnidade, umKg, umLitro, umMetro);
+
+implementation
+
+end.

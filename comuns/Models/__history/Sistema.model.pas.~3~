@@ -1,0 +1,34 @@
+unit Sistema.model;
+
+interface
+uses
+
+  VCL.Forms,
+  Empresa.model,
+  System.SysUtils,
+  System.Classes;
+type
+  TSistema = class
+  private
+    FEmpresa: TEmpresa;
+    class var FInstance: TSistema;
+  public
+    Constructor Create(AOwner: TComponent); override;
+    Destructor Destroy; Override;
+    class function New: TSistema;
+
+    property Empresa: TEmpresa read FEmpresa write FEmpresa;
+
+
+  end;
+
+implementation
+
+{ TSistema }
+
+//constructor TSistema.New;
+//begin//create
+//
+//end;
+
+end.
