@@ -1,0 +1,79 @@
+unit View.Login;
+
+interface
+
+uses
+  Winapi.Windows,
+  Winapi.Messages,
+
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  Vcl.ExtCtrls,
+  Vcl.StdCtrls,
+  Vcl.Mask,sMaskEdit,
+  Vcl.Imaging.jpeg,
+  Vcl.Buttons,
+  Provider.Constantes,
+
+  View.Base,
+
+  sComboBox,
+  sComboBoxes,
+  sCustomComboEdit;
+
+type
+  TViewLogin = class(TViewBase)
+    PnlPrincipal: TPanel;
+    PnlLeft: TPanel;
+    PnlLogin: TPanel;
+    LblSenha: TLabel;
+    LblUsuario: TLabel;
+    PnlLogo: TPanel;
+    LblEmpresa: TLabel;
+    ImageLogo: TImage;
+    EdtUsuario: TEdit;
+    BtnSair: TSpeedButton;
+    EdtSenha: TEdit;
+    CBB_Empresas: TsComboBoxEx;
+    LblLogin: TLabel;
+    procedure FormCreate(Sender: TObject);
+    procedure BtnSairClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ViewLogin: TViewLogin;
+
+implementation
+
+{$R *.dfm}
+
+procedure TViewLogin.FormCreate(Sender: TObject);
+begin
+  inherited;
+  ArredondarBorda(ViewLogin);
+  ArredondarBorda(PnlPrincipal);
+  ArredondarBorda(PnlLeft);
+  ArredondarBorda(PnlLogin);
+  ArredondarBorda(EdtUsuario);
+  ArredondarBorda(EdtSenha);
+  ArredondarBorda(CBB_Empresas);
+
+end;
+
+procedure TViewLogin.BtnSairClick(Sender: TObject);
+begin
+  inherited;
+  self.Close;
+end;
+
+end.

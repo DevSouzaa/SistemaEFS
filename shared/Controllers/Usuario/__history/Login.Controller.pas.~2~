@@ -1,0 +1,50 @@
+unit Login.Controller;
+
+interface
+
+uses
+  UsuarioService, cryptography.model, Usuario.model;
+
+type
+  TLoginController = class
+  private
+    FUsuarioService: TUsuarioService;
+    FCryptography: Tcryptography;
+  public
+    constructor Create;
+    destructor Destroy; override;
+    function Autenticar(const Login, Senha: string): Boolean;
+  end;
+
+implementation
+
+{ TLoginController }
+
+constructor TLoginController.Create;
+begin
+  FUsuarioService := TUsuarioService.Create;
+  FCryptography := Tcryptography.Create;
+end;
+
+destructor TLoginController.Destroy;
+begin
+  FUsuarioService.Free;
+  FCryptography.Free;
+  inherited;
+end;
+
+function TLoginController.Autenticar(const Login, Senha: string): Boolean;
+var
+  Usuario: TUsuario;
+begin
+  Result := False;
+  Usuario := FUsuarioService.Autenticar(Login, Senha);
+  if Assigned(Usuario) then
+  begin
+    Result := FCryptography.CampareHash(Senha, Usuario.Senha);
+    Usuario.Free;
+  end;
+end;
+
+end.
+

@@ -1,0 +1,8 @@
+inherited DmPrincipal: TDmPrincipal
+  Width = 338
+  object QRY_Acesso: TFDQuery
+    Connection = FDConnection
+    Left = 224
+    Top = 40
+  end
+end

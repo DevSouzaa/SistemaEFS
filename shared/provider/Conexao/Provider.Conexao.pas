@@ -26,13 +26,13 @@ uses
 
 type
   TProviderConexao = class(TDataModule)
-    FDConnection: TFDConnection;
-    WaitCursor: TFDGUIxWaitCursor;
-    FDDriverLink: TFDPhysFBDriverLink;
     QRY_Aux: TFDQuery;
     QRY_Usuario: TFDQuery;
     QRY_Empresa: TFDQuery;
-    procedure FDConnectionBeforeConnect(Sender: TObject);
+    FDConn: TFDConnection;
+    FBDriverLink: TFDPhysFBDriverLink;
+    WaitCursor: TFDGUIxWaitCursor;
+    procedure FDConnBeforeConnect(Sender: TObject);
   private
     { Private declarations }
   public
@@ -48,15 +48,15 @@ implementation
 
 {$R *.dfm}
 
-procedure TProviderConexao.FDConnectionBeforeConnect(Sender: TObject);
+procedure TProviderConexao.FDConnBeforeConnect(Sender: TObject);
 var
   LConnection : TConnection;
 begin
   LConnection := TConnection.create(Self);
     Try
-      LConnection.GetConfigConnection(FDConnection);
+      LConnection.GetConfigConnection(FDConn);
     Finally
-      Freeandnil(FDConnection);
+      Freeandnil(LConnection);
     End;
 end;
 

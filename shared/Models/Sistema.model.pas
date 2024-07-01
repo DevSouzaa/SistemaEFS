@@ -4,13 +4,17 @@ interface
 uses
 
   VCL.Forms,
+
+  Usuario.model,
   Empresa.model,
+
   System.SysUtils,
   System.Classes;
 type
   TSistema = class(TComponent)
   private
     FEmpresa: TEmpresa;
+    FUsuario: TUsuario;
     class var FInstance: TSistema;
   public
     Constructor Create(AOwner: TComponent); override;
@@ -18,7 +22,7 @@ type
     class function New: TSistema;
 
     property Empresa: TEmpresa read FEmpresa write FEmpresa;
-
+    property Usuario: TUsuario read FUsuario write FUsuario;
 
   end;
 
@@ -32,14 +36,15 @@ implementation
 constructor TSistema.Create(AOwner: TComponent);
 begin
   inherited;
-  FEmpresa := TEmpresa.create
+  FEmpresa := TEmpresa.create;
+  FUsuario := TUsuario.Create;
 end;
 
 destructor TSistema.Destroy;
 begin
   inherited;
   FreeAndNil(FEmpresa);
-
+  FreeAndNil(FUsuario);
 end;
 
 class function TSistema.New: TSistema;

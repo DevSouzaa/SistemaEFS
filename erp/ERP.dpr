@@ -19,13 +19,20 @@ uses
   Acesso.model in '..\shared\Models\Usuario\Acesso.model.pas',
   Perfil.model in '..\shared\Models\Usuario\Perfil.model.pas',
   Acao.model in '..\shared\Models\Usuario\Acao.model.pas',
-  Dm.Principal in '..\shared\Data Modules\Dm.Principal.pas' {DmPrincipal: TDataModule};
+  Dm.Principal in '..\shared\Data Modules\Dm.Principal.pas' {DmPrincipal: TDataModule},
+  View.Login in '..\shared\View\View.Login.pas' {ViewLogin},
+  cryptography.model in '..\shared\Models\Usuario\cryptography.model.pas',
+  Login.Controller in '..\shared\Controllers\Usuario\Login.Controller.pas',
+  UsuarioService in '..\shared\services\Usuario\UsuarioService.pas',
+  UFuncoes in '..\shared\Utils\UFuncoes.pas',
+  UMenssagem in '..\shared\Utils\UMenssagens\UMenssagem.pas' {ViewMenssagem};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TViewPrincipal, ViewPrincipal);
+  Application.CreateForm(TDmPrincipal, DmPrincipal);
+  Application.CreateForm(TViewLogin, ViewLogin);
   Application.Run;
 end.

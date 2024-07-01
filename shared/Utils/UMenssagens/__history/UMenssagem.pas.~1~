@@ -1,0 +1,37 @@
+unit UMenssagem;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, View.Base, Vcl.Buttons, Vcl.ExtCtrls,
+  Vcl.StdCtrls;
+
+type
+  TUMenssagens = class(TViewBase)
+    Panel3: TPanel;
+    Panel1: TPanel;
+    LbTitulo: TLabel;
+    LbMsg: TLabel;
+    ImgMsg: TImage;
+    Panel4: TPanel;
+    PnNao: TPanel;
+    BtnNao: TSpeedButton;
+    PnSim: TPanel;
+    BtnSim: TSpeedButton;
+    Panel2: TPanel;
+    LbTituloJanela: TLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  UMenssagens: TUMenssagens;
+
+implementation
+
+{$R *.dfm}
+
+end.

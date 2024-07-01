@@ -86,9 +86,9 @@
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <Icon_MainIcon>..\comuns\imgs\icon\ICON PRINCIPAL.ico</Icon_MainIcon>
-        <DCC_ExeOutput>C:\Users\EMANUEL\Desktop\SYS Completo\compiled\</DCC_ExeOutput>
-        <DCC_DcuOutput>C:\Users\EMANUEL\Desktop\SYS Completo\dcus\</DCC_DcuOutput>
+        <Icon_MainIcon>..\Icon.ico</Icon_MainIcon>
+        <DCC_ExeOutput>..\compiled\</DCC_ExeOutput>
+        <DCC_DcuOutput>.\dcus\</DCC_DcuOutput>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -136,6 +136,18 @@
             <Form>DmPrincipal</Form>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
+        <DCCReference Include="..\shared\View\View.Login.pas">
+            <Form>ViewLogin</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\shared\Models\Usuario\cryptography.model.pas"/>
+        <DCCReference Include="..\shared\Controllers\Usuario\Login.Controller.pas"/>
+        <DCCReference Include="..\shared\services\Usuario\UsuarioService.pas"/>
+        <DCCReference Include="..\shared\Utils\UFuncoes.pas"/>
+        <DCCReference Include="..\shared\Utils\UMenssagens\UMenssagem.pas">
+            <Form>ViewMenssagem</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
@@ -159,19 +171,10 @@
                 <Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dcloffice2k280.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dclofficexp280.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
-                    <Excluded_Packages Name="C:\DELPHI\COMPONENTES\fortesreport-ce-master\Binary\LibD28\dclfrce.bpl">File C:\DELPHI\COMPONENTES\fortesreport-ce-master\Binary\LibD28\dclfrce.bpl not found</Excluded_Packages>
-                    <Excluded_Packages Name="C:\AcBr\Lib\Delphi\LibD28\Win32\DCLACBr_NFeDanfeRL.bpl">ACBr - (design-time) DANFe em Fortes Report - (http://www.projetoacbr.com.br/)</Excluded_Packages>
-                    <Excluded_Packages Name="C:\AcBr\Lib\Delphi\LibD28\Win32\DCLACBr_NFSeDanfseRL.bpl">ACBr - (design-time) DANFSe em Fortes Report - (http://www.projetoacbr.com.br/)</Excluded_Packages>
-                    <Excluded_Packages Name="C:\AcBr\Lib\Delphi\LibD28\Win32\DCLACBr_NFSeXDanfseRL.bpl">ACBr - (design-time) DANFSe X em Fortes Report - (http://www.projetoacbr.com.br/)</Excluded_Packages>
-                    <Excluded_Packages Name="C:\AcBr\Lib\Delphi\LibD28\Win32\DCLACBr_CTeDacteRL.bpl">ACBr - (design-time) DACTe em Fortes Report - (http://www.projetoacbr.com.br/)</Excluded_Packages>
-                    <Excluded_Packages Name="C:\AcBr\Lib\Delphi\LibD28\Win32\DCLACBr_BoletoRL.bpl">ACBr - (design-time) Boleto Impressão em Fortes Report - (http://www.projectoacbr.com.br/)</Excluded_Packages>
-                    <Excluded_Packages Name="C:\AcBr\Lib\Delphi\LibD28\Win32\DCLACBr_MDFeDamdfeRL.bpl">ACBr - (design-time) DAMDFe em Fortes Report - (http://www.projetoacbr.com.br/)</Excluded_Packages>
-                    <Excluded_Packages Name="C:\AcBr\Lib\Delphi\LibD28\Win32\DCLACBr_SATExtratoRL.bpl">ACBr - (design-time) Extrato Cupom Fiscal Eletrônico SAT para Fortes Report - (http://www.projectoacbr.com.br/)</Excluded_Packages>
-                    <Excluded_Packages Name="C:\AcBr\Lib\Delphi\LibD28\Win32\DCLACBr_GNREGuiaRL.bpl">ACBr - (design-time) GNRE Impressão em Fortes Report - (http://www.projectoacbr.com.br/)</Excluded_Packages>
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="4">
-                <DeployFile LocalName="C:\Users\EMANUEL\Desktop\SYS Completo\compiled\ERP.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="..\compiled\ERP.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>ERP.exe</RemoteName>
                         <Overwrite>true</Overwrite>

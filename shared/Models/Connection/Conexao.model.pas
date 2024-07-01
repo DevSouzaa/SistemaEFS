@@ -19,7 +19,7 @@ Type
     FPorta      : Integer;
     FUserName   : String;
     FPassword   : String;
-    FDriveId    : String;
+    FDriverId    : String;
 
   Public
     Constructor Create(AOwner: TComponent);
@@ -38,7 +38,7 @@ Type
     Property Porta:      integer  read FPorta      ;
     Property UserName:   String   read FUserName   ;
     Property Password:   String   read FPassword   ;
-    Property DriveId :   String   read FDriveId    ;
+    Property DriverId :   String   read FDriverId    ;
 
     Const _NOMEARQUIVOINI = 'Caminho.ini';
 
@@ -77,7 +77,7 @@ begin    //
         FIniFIle.writeInteger ('Conexao'     , 'Porta'         , 3050            );
         FIniFIle.writeString  ('Conexao'     , 'Uses'          , 'SYSDBA'        );
         FIniFIle.writeString  ('Conexao'     , 'Pass'          , 'masterkey'     );
-        FIniFIle.writeString  ('Conexao'     , 'DriveId'       , 'FB'            );
+        FIniFIle.writeString  ('Conexao'     , 'DriverId'       , 'FB'            );
       finally
         FIniFile.Free;
       end;
@@ -91,7 +91,7 @@ begin    //
         FPorta     :=  FIniFIle.ReadInteger ('Conexao'     , 'Porta'         , 3050             );
         FUserName  :=  FIniFIle.ReadString  ('Conexao'     , 'Uses'          , ''               );
         FPassword  :=  FIniFIle.ReadString  ('Conexao'     , 'Pass'          , ''               );
-        FDriveID   :=  FIniFIle.ReadString  ('Conexao'     , 'DriveId'       , 'FB'             );
+        FDriverID   :=  FIniFIle.ReadString  ('Conexao'     , 'DriverId'       , 'FB'             );
 
         FDConn.Params.Clear;
         FDConn.Params.Add('Database='        + FDataBase        );
@@ -100,7 +100,7 @@ begin    //
         FDConn.Params.Add('Port='            + FPorta.ToString  );
         FDConn.Params.Add('User_Name='       + FUserName        );
         FDConn.Params.Add('Password='        + FPassword        );
-        FDConn.Params.Add('DriveID='         + FDriveID         );
+        FDConn.Params.Add('DriverID='         + FDriverID         );
       finally
         FIniFile.Free;
       end;
@@ -116,26 +116,26 @@ begin     //Gravar Arquivo.INI
     Begin
       FIniFIle := TIniFIle.Create(FCaminhoINI);
         try
-          FIniFIle.writeString  ('Conexao'     , 'DataBase'      , 'Seu Database'  );
-          FIniFIle.writeString  ('Conexao'     , 'Protocol'     ,  'TCPIP'         );
-          FIniFIle.writeString  ('Conexao'     , 'Server'        , '127.0.0.1'     );
-          FIniFIle.writeInteger ('Conexao'     , 'Porta'         , 3050            );
-          FIniFIle.writeString  ('Conexao'     , 'Uses'          , 'SYSDBA'        );
-          FIniFIle.writeString  ('Conexao'     , 'Pass'          , 'masterkey'     );
-          FIniFIle.writeString  ('Conexao'     , 'DriveId'       , 'FB'            );
+          FIniFIle.writeString  ('Conexao'     , 'DataBase'       , 'Seu Database'  );
+          FIniFIle.writeString  ('Conexao'     , 'Protocol'       ,  'TCPIP'        );
+          FIniFIle.writeString  ('Conexao'     , 'Server'         , '127.0.0.1'     );
+          FIniFIle.writeInteger ('Conexao'     , 'Porta'          , 3050            );
+          FIniFIle.writeString  ('Conexao'     , 'Uses'           , 'SYSDBA'        );
+          FIniFIle.writeString  ('Conexao'     , 'Pass'           , 'masterkey'     );
+          FIniFIle.writeString  ('Conexao'     , 'DriverId'       , 'FB'            );
         finally
           FIniFile.Free;
         end;
 
     FIniFIle := TIniFIle.Create(FCaminhoINI);
       try
-        FIniFIle.writeString  ('Conexao'     , 'DataBase'      , FDataBase  );
-        FIniFIle.writeString  ('Conexao'     , 'Protocol'      , FProtocolo );
-        FIniFIle.writeString  ('Conexao'     , 'Server'        , FServidor  );
-        FIniFIle.writeInteger ('Conexao'     , 'Porta'         , FPorta     );
-        FIniFIle.writeString  ('Conexao'     , 'Uses'          , FUserName  );
-        FIniFIle.writeString  ('Conexao'     , 'Pass'          , FPassword  );
-        FIniFIle.writeString  ('Conexao'     , 'DriveId'       , FDriveID   );
+        FIniFIle.writeString  ('Conexao'     , 'DataBase'       , FDataBase  );
+        FIniFIle.writeString  ('Conexao'     , 'Protocol'       , FProtocolo );
+        FIniFIle.writeString  ('Conexao'     , 'Server'         , FServidor  );
+        FIniFIle.writeInteger ('Conexao'     , 'Porta'          , FPorta     );
+        FIniFIle.writeString  ('Conexao'     , 'Uses'           , FUserName  );
+        FIniFIle.writeString  ('Conexao'     , 'Pass'           , FPassword  );
+        FIniFIle.writeString  ('Conexao'     , 'DriverId'       , FDriverID   );
       finally
         FIniFile.Free;
       end;

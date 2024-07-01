@@ -5,7 +5,7 @@ interface
   Vcl.Graphics;
 
 Const
-  _CorReceberFoco = $0095c258;
+  _CorReceberFoco = $007EF4F8;
   _CorPerderFoco = ClWindow;
 implementation
 

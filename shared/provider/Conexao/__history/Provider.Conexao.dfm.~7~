@@ -1,0 +1,42 @@
+object ProviderConexao: TProviderConexao
+  Height = 303
+  Width = 241
+  object WaitCursor: TFDGUIxWaitCursor
+    Provider = 'Forms'
+    Left = 48
+    Top = 184
+  end
+  object FDDriverLink: TFDPhysFBDriverLink
+    Left = 48
+    Top = 104
+  end
+  object QRY_Aux: TFDQuery
+    Left = 136
+    Top = 184
+  end
+  object QRY_Usuario: TFDQuery
+    Left = 136
+    Top = 104
+  end
+  object QRY_Empresa: TFDQuery
+    Left = 136
+    Top = 32
+  end
+  object FDConn: TFDConnection
+    Params.Strings = (
+      
+        'Database=C:\Programacao\Compilado\Dados\DB_RAFAEL_NFCE\BANCODADO' +
+        'S_FB30_RAFAEL.FDB'
+      'User_Name=SYSDBA'
+      'Password=masterkey'
+      'Protocol=TCPIP'
+      'Server=LOCALHOST'
+      'Port=3030'
+      'CharacterSet=win1252'
+      'DriverID=FB')
+    ConnectedStoredUsage = []
+    LoginPrompt = False
+    Left = 49
+    Top = 36
+  end
+end

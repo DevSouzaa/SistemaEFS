@@ -1,0 +1,7 @@
+unit cryptography.model;
+
+interface
+
+implementation
+
+end.

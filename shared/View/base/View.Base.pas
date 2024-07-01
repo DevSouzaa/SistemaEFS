@@ -23,6 +23,8 @@ uses
 
   Enums,
 
+
+
   Sistema.model;
 
 type
@@ -50,7 +52,8 @@ var
 implementation
 
 {$R *.dfm}
-
+uses
+  UFuncoes;
 procedure TViewBase.ArredondarBorda(Control: TWinControl) ;
 var       //Arredondar borda
    R: TRect;

@@ -1,0 +1,39 @@
+unit UFuncoes;
+
+interface
+uses
+
+  IdHashMessageDigest,
+  UMensagem,
+
+  System.SysUtils,
+
+  Vcl.Dialogs,
+  Vcl.Forms,
+  Vcl.StdCtrls;
+
+
+Function fnc_CriarMensagem(TituloJanela, TituloMSG, MSG, Icone,
+  Tipo: String): boolean;
+
+
+implementation
+
+Function fnc_CriarMensagem(TituloJanela, TituloMSG, MSG, Icone, Tipo: String): boolean;
+begin
+  Result := False;
+
+  FrmMensagem := TFrmMensagem.Create(nil);
+  FrmMensagem.sTituloJanela := TituloJanela;
+  FrmMensagem.sTituloMsg := TituloMSG;
+  FrmMensagem.sMSG := MSG;
+  FrmMensagem.sCaminhoIcone := Icone;
+
+  FrmMensagem.sTipo := Tipo;
+
+  FrmMensagem.ShowModal;
+  Result := FrmMensagem.bRespostaMsg;
+
+end;
+
+end.
