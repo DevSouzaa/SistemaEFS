@@ -1,0 +1,64 @@
+unit User.Controller;
+
+
+interface
+
+uses
+  UserService, User.Model;
+
+type
+  TUserController = class
+  private
+    FUserService: TUserService;
+  public
+    constructor Create;
+    destructor Destroy; override;
+    function CreateUser(const User: TUser): Boolean;
+    function EditUser(const User: TUser): Boolean;
+    function DeleteUser(const UserId: Integer): Boolean;
+    function GetUserById(const UserId: Integer): TUser;
+    function GetAllUsers: TList<TUser>;
+  end;
+
+implementation
+
+{ TUserController }
+
+constructor TUserController.Create;
+begin
+  FUserService := TUserService.Create;
+end;
+
+destructor TUserController.Destroy;
+begin
+  FUserService.Free;
+  inherited;
+end;
+
+function TUserController.CreateUser(const User: TUser): Boolean;
+begin
+  Result := FUserService.CreateUser(User);
+end;
+
+function TUserController.EditUser(const User: TUser): Boolean;
+begin
+  Result := FUserService.EditUser(User);
+end;
+
+function TUserController.DeleteUser(const UserId: Integer): Boolean;
+begin
+  Result := FUserService.DeleteUser(UserId);
+end;
+
+function TUserController.GetUserById(const UserId: Integer): TUser;
+begin
+  Result := FUserService.GetUserById(UserId);
+end;
+
+function TUserController.GetAllUsers: TList<TUser>;
+begin
+  Result := FUserService.GetAllUsers;
+end;
+
+end.
+

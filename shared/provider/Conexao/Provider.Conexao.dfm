@@ -6,7 +6,7 @@ object ProviderConexao: TProviderConexao
     Left = 136
     Top = 184
   end
-  object QRY_Usuario: TFDQuery
+  object QRY_Usuarios: TFDQuery
     Connection = FDConn
     Left = 136
     Top = 104

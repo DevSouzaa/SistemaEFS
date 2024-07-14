@@ -1,0 +1,34 @@
+inherited ViewListaUsuario: TViewListaUsuario
+  Caption = 'Usuario'
+  TextHeight = 21
+  inherited PnlTopo: TPanel
+    inherited PnlBotoes: TPanel
+      inherited PnlBtnNovo: TPanel
+        inherited LblBtnNovo: TLabel
+          OnClick = LblBtnNovoClick
+        end
+      end
+      inherited PnlBtnEditar: TPanel
+        inherited LblBtnEditar: TLabel
+          OnClick = LblBtnEditarClick
+        end
+      end
+    end
+    inherited ViewFrameCaminho1: TViewFrameCaminho
+      inherited PnlBackGound: TPanel
+        inherited PnlIcon2: TPanel
+          inherited LblTexto1: TLabel
+            Caption = 'Gest'#227'o'
+            ExplicitWidth = 48
+          end
+        end
+        inherited PnlIconText2: TPanel
+          inherited LblTexto2: TLabel
+            Caption = 'Usuarios'
+            ExplicitWidth = 62
+          end
+        end
+      end
+    end
+  end
+end

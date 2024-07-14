@@ -1,0 +1,145 @@
+unit Repositorio.Unidade;
+
+interface
+
+uses
+  System.Generics.Collections, RepositorioBase, Model.Unidade, FireDAC.Comp.Client;
+
+type
+  TRepositorioUnidade = class(TRepositorioBase)
+  public
+    function ObterTodos: TList<TUnidade>;
+    function ObterPorId(AID: Integer): TUnidade;
+    function ObterPorNome(ANome: string): TList<TUnidade>;
+    procedure Inserir(Unidade: TUnidade);
+    procedure Atualizar(Unidade: TUnidade);
+    procedure Deletar(AID: Integer);
+  end;
+
+implementation
+
+function TRepositorioUnidade.ObterTodos: TList<TUnidade>;
+var
+  Query: TFDQuery;
+  Unidades: TList<TUnidade>;
+  Unidade: TUnidade;
+begin
+  Unidades := TList<TUnidade>.Create;
+  Query := TFDQuery.Create(nil);
+  try
+    Query.Connection := FDConn;
+    Query.SQL.Text := 'SELECT ID, Nome FROM Unidade';
+    Query.Open;
+    while not Query.Eof do
+    begin
+      Unidade := TUnidade.Create;
+      Unidade.ID := Query.FieldByName('ID').AsInteger;
+      Unidade.Nome := Query.FieldByName('Nome').AsString;
+      Unidades.Add(Unidade);
+      Query.Next;
+    end;
+  finally
+    Query.Free;
+  end;
+  Result := Unidades;
+end;
+
+function TRepositorioUnidade.ObterPorId(AID: Integer): TUnidade;
+var
+  Query: TFDQuery;
+  Unidade: TUnidade;
+begin
+  Unidade := nil;
+  Query := TFDQuery.Create(nil);
+  try
+    Query.Connection := FDConn;
+    Query.SQL.Text := 'SELECT ID, Nome FROM Unidade WHERE ID = :ID';
+    Query.ParamByName('ID').AsInteger := AID;
+    Query.Open;
+    if not Query.Eof then
+    begin
+      Unidade := TUnidade.Create;
+      Unidade.ID := Query.FieldByName('ID').AsInteger;
+      Unidade.Nome := Query.FieldByName('Nome').AsString;
+    end;
+  finally
+    Query.Free;
+  end;
+  Result := Unidade;
+end;
+
+function TRepositorioUnidade.ObterPorNome(ANome: string): TList<TUnidade>;
+var
+  Query: TFDQuery;
+  Unidades: TList<TUnidade>;
+  Unidade: TUnidade;
+begin
+  Unidades := TList<TUnidade>.Create;
+  Query := TFDQuery.Create(nil);
+  try
+    Query.Connection := FDConn;
+    Query.SQL.Text := 'SELECT ID, Nome FROM Unidade WHERE Nome LIKE :Nome';
+    Query.ParamByName('Nome').AsString := '%' + ANome + '%';
+    Query.Open;
+    while not Query.Eof do
+    begin
+      Unidade := TUnidade.Create;
+      Unidade.ID := Query.FieldByName('ID').AsInteger;
+      Unidade.Nome := Query.FieldByName('Nome').AsString;
+      Unidades.Add(Unidade);
+      Query.Next;
+    end;
+  finally
+    Query.Free;
+  end;
+  Result := Unidades;
+end;
+
+procedure TRepositorioUnidade.Inserir(Unidade: TUnidade);
+var
+  Query: TFDQuery;
+begin
+  Query := TFDQuery.Create(nil);
+  try
+    Query.Connection := FDConn;
+    Query.SQL.Text := 'INSERT INTO Unidade (Nome) VALUES (:Nome)';
+    Query.ParamByName('Nome').AsString := Unidade.Nome;
+    Query.ExecSQL;
+  finally
+    Query.Free;
+  end;
+end;
+
+procedure TRepositorioUnidade.Atualizar(Unidade: TUnidade);
+var
+  Query: TFDQuery;
+begin
+  Query := TFDQuery.Create(nil);
+  try
+    Query.Connection := FDConn;
+    Query.SQL.Text := 'UPDATE Unidade SET Nome = :Nome WHERE ID = :ID';
+    Query.ParamByName('Nome').AsString := Unidade.Nome;
+    Query.ParamByName('ID').AsInteger := Unidade.ID;
+    Query.ExecSQL;
+  finally
+    Query.Free;
+  end;
+end;
+
+procedure TRepositorioUnidade.Deletar(AID: Integer);
+var
+  Query: TFDQuery;
+begin
+  Query := TFDQuery.Create(nil);
+  try
+    Query.Connection := FDConn;
+    Query.SQL.Text := 'DELETE FROM Unidade WHERE ID = :ID';
+    Query.ParamByName('ID').AsInteger := AID;
+    Query.ExecSQL;
+  finally
+    Query.Free;
+  end;
+end;
+
+end.
+

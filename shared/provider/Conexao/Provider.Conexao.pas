@@ -21,13 +21,13 @@ uses
   FireDAC.Comp.UI,
   Data.DB,
   FireDAC.Comp.Client,
-  Conexao.Model, FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf,
+  Conexao, FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf,
   FireDAC.DApt, FireDAC.Comp.DataSet;
 
 type
   TProviderConexao = class(TDataModule)
     QRY_Aux: TFDQuery;
-    QRY_Usuario: TFDQuery;
+    QRY_Usuarios: TFDQuery;
     QRY_Empresa: TFDQuery;
     FDConn: TFDConnection;
     FBDriverLink: TFDPhysFBDriverLink;

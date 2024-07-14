@@ -1,7 +1,7 @@
 object ViewBase: TViewBase
   Left = 0
   Top = 0
-  Caption = 'ViewBse'
+  Caption = 'ViewBase'
   ClientHeight = 441
   ClientWidth = 624
   Color = clBtnFace
@@ -2127,7 +2127,6 @@ object ViewBase: TViewBase
     FFFFFFFFFF0001FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
   KeyPreview = True
   OnCreate = FormCreate
-  OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
   TextHeight = 21
 end

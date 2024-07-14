@@ -1,0 +1,48 @@
+unit Controller.Empresa;
+
+interface
+
+uses
+  Empresa, Service.Empresa, Generics.Collections;
+
+type
+  TEmpresaController = class
+  private
+    FService: TServiceEmpresa;
+  public
+    constructor Create(AService: TServiceEmpresa);
+    function ObterPorId(Id: Integer): TEmpresa;
+    function ObterTodas: TList<TEmpresa>;
+    function Salvar(Empresa: TEmpresa): Boolean;
+    function Deletar(Id: Integer): Boolean;
+  end;
+
+implementation
+
+constructor TEmpresaController.Create(AService: TServiceEmpresa);
+begin
+  FService := AService;
+end;
+
+function TEmpresaController.ObterPorId(Id: Integer): TEmpresa;
+begin
+  Result := FService.ObterPorId(Id);
+end;
+
+function TEmpresaController.ObterTodas: TList<TEmpresa>;
+begin
+  Result := FService.ObterTodas;
+end;
+
+function TEmpresaController.Salvar(Empresa: TEmpresa): Boolean;
+begin
+  Result := FService.Salvar(Empresa);
+end;
+
+function TEmpresaController.Deletar(Id: Integer): Boolean;
+begin
+  Result := FService.Deletar(Id);
+end;
+
+end.
+

@@ -1,0 +1,30 @@
+unit View.modal.cadastro.usuario;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, View.Base.Tela.Modal, Vcl.ExtCtrls,
+  acPNG, Vcl.StdCtrls;
+
+type
+  TViewModalCadastroUsuario = class(TViewBaseTelaModal)
+    PnlFundo: TPanel;
+    EdtID: TEdit;
+    EdtNome: TEdit;
+    EdtLogin: TEdit;
+    EdtSenha: TEdit;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ViewModalCadastroUsuario: TViewModalCadastroUsuario;
+
+implementation
+
+{$R *.dfm}
+
+end.

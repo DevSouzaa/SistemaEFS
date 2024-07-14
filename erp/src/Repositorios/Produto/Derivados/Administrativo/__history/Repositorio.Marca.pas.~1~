@@ -1,0 +1,145 @@
+unit Repositorio.Marca;
+
+interface
+
+uses
+  System.Generics.Collections, RepositorioBase, Model.Marca, FireDAC.Comp.Client;
+
+type
+  TRepositorioMarca = class(TRepositorioBase)
+  public
+    function ObterTodos: TList<TMarca>;
+    function ObterPorId(AID: Integer): TMarca;
+    function ObterPorNome(ANome: string): TList<TMarca>;
+    procedure Inserir(Marca: TMarca);
+    procedure Atualizar(Marca: TMarca);
+    procedure Deletar(AID: Integer);
+  end;
+
+implementation
+
+function TRepositorioMarca.ObterTodos: TList<TMarca>;
+var
+  Query: TFDQuery;
+  Marcas: TList<TMarca>;
+  Marca: TMarca;
+begin
+  Marcas := TList<TMarca>.Create;
+  Query := TFDQuery.Create(nil);
+  try
+    Query.Connection := FDConn;
+    Query.SQL.Text := 'SELECT ID, Nome FROM Marca';
+    Query.Open;
+    while not Query.Eof do
+    begin
+      Marca := TMarca.Create;
+      Marca.ID := Query.FieldByName('ID').AsInteger;
+      Marca.Nome := Query.FieldByName('Nome').AsString;
+      Marcas.Add(Marca);
+      Query.Next;
+    end;
+  finally
+    Query.Free;
+  end;
+  Result := Marcas;
+end;
+
+function TRepositorioMarca.ObterPorId(AID: Integer): TMarca;
+var
+  Query: TFDQuery;
+  Marca: TMarca;
+begin
+  Marca := nil;
+  Query := TFDQuery.Create(nil);
+  try
+    Query.Connection := FDConn;
+    Query.SQL.Text := 'SELECT ID, Nome FROM Marca WHERE ID = :ID';
+    Query.ParamByName('ID').AsInteger := AID;
+    Query.Open;
+    if not Query.Eof then
+    begin
+      Marca := TMarca.Create;
+      Marca.ID := Query.FieldByName('ID').AsInteger;
+      Marca.Nome := Query.FieldByName('Nome').AsString;
+    end;
+  finally
+    Query.Free;
+  end;
+  Result := Marca;
+end;
+
+function TRepositorioMarca.ObterPorNome(ANome: string): TList<TMarca>;
+var
+  Query: TFDQuery;
+  Marcas: TList<TMarca>;
+  Marca: TMarca;
+begin
+  Marcas := TList<TMarca>.Create;
+  Query := TFDQuery.Create(nil);
+  try
+    Query.Connection := FDConn;
+    Query.SQL.Text := 'SELECT ID, Nome FROM Marca WHERE Nome LIKE :Nome';
+    Query.ParamByName('Nome').AsString := '%' + ANome + '%';
+    Query.Open;
+    while not Query.Eof do
+    begin
+      Marca := TMarca.Create;
+      Marca.ID := Query.FieldByName('ID').AsInteger;
+      Marca.Nome := Query.FieldByName('Nome').AsString;
+      Marcas.Add(Marca);
+      Query.Next;
+    end;
+  finally
+    Query.Free;
+  end;
+  Result := Marcas;
+end;
+
+procedure TRepositorioMarca.Inserir(Marca: TMarca);
+var
+  Query: TFDQuery;
+begin
+  Query := TFDQuery.Create(nil);
+  try
+    Query.Connection := FDConn;
+    Query.SQL.Text := 'INSERT INTO Marca (Nome) VALUES (:Nome)';
+    Query.ParamByName('Nome').AsString := Marca.Nome;
+    Query.ExecSQL;
+  finally
+    Query.Free;
+  end;
+end;
+
+procedure TRepositorioMarca.Atualizar(Marca: TMarca);
+var
+  Query: TFDQuery;
+begin
+  Query := TFDQuery.Create(nil);
+  try
+    Query.Connection := FDConn;
+    Query.SQL.Text := 'UPDATE Marca SET Nome = :Nome WHERE ID = :ID';
+    Query.ParamByName('Nome').AsString := Marca.Nome;
+    Query.ParamByName('ID').AsInteger := Marca.ID;
+    Query.ExecSQL;
+  finally
+    Query.Free;
+  end;
+end;
+
+procedure TRepositorioMarca.Deletar(AID: Integer);
+var
+  Query: TFDQuery;
+begin
+  Query := TFDQuery.Create(nil);
+  try
+    Query.Connection := FDConn;
+    Query.SQL.Text := 'DELETE FROM Marca WHERE ID = :ID';
+    Query.ParamByName('ID').AsInteger := AID;
+    Query.ExecSQL;
+  finally
+    Query.Free;
+  end;
+end;
+
+end.
+

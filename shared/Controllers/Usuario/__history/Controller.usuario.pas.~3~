@@ -1,0 +1,72 @@
+unit Controller.usuario;
+
+interface
+
+uses
+  Service.Usuario, Usuario, Generics.Collections, SysUtils;
+
+type
+  TControllerUsuario = class
+  private
+    FServiceUsuario: TServiceUsuario;
+  public
+    constructor Create(AUsuarioService: TServiceUsuario);
+    destructor Destroy; override;
+    function Autenticar(const Login, Senha: string): Boolean;
+    procedure SalvarUsuario(Usuario: TUsuario);
+    function CarregarUsuarios: TList<TUsuario>;
+    function CarregarUsuarioPorId(Id: Integer): TUsuario;
+    procedure DeletarUsuario(Id: Integer);
+  end;
+
+implementation
+
+{ TUsuarioController }
+
+constructor TUsuarioController.Create(AUsuarioService: TServiceUsuario);
+begin
+  FServiceUsuario := AUsuarioService;
+end;
+
+destructor TUsuarioController.Destroy;
+begin
+  FUsuarioService.Free;
+  inherited;
+end;
+
+function TControllerUsuario.Autenticar(const Login, Senha: string): Boolean;
+var
+  Usuario: TUsuario;
+begin
+  Result := False;
+  Usuario := FServiceUsuario.Autenticar(Login, Senha);
+  if Assigned(Usuario) then
+  begin
+    Result := True;
+  end;
+end;
+
+procedure TControllerUsuario.SalvarUsuario(Usuario: TUsuario);
+begin
+  if not FServiceUsuario.SalvarUsuario(Usuario) then
+    raise Exception.Create('Erro ao salvar usuário');
+end;
+
+function TControllerUsuario.CarregarUsuarios: TList<TUsuario>;
+begin
+  Result := FServiceUsuario.CarregarUsuarios;
+end;
+
+function TControllerUsuario.CarregarUsuarioPorId(Id: Integer): TUsuario;
+begin
+  Result := FServiceUsuario.CarregarUsuarioPorId(Id);
+end;
+
+procedure TControllerUsuario.DeletarUsuario(Id: Integer);
+begin
+  if not FServiceUsuario.DeletarUsuario(Id) then
+    raise Exception.Create('Erro ao deletar usuário');
+end;
+
+end.
+

@@ -1,0 +1,46 @@
+unit Repositorio.Acao;
+
+interface
+
+uses
+  Acao, Generics.Collections, FireDAC.Comp.Client, RepositorioBase, System.SysUtils;
+
+type
+  TRepositorioAcao = class(TRepositorioBase)
+  public
+    function ObterTodas: TList<TAcao>;
+  end;
+
+implementation
+
+{ TRepositorioAcao }
+
+function TRepositorioAcao.ObterTodas: TList<TAcao>;
+var
+  Query: TFDQuery;
+  Acoes: TList<TAcao>;
+  Acao: TAcao;
+begin
+  Acoes := TList<TAcao>.Create;
+  Query := TFDQuery.Create(nil);
+  try
+    Query.Connection := FDConn;
+    Query.SQL.Text := 'SELECT * FROM ACOES';
+    Query.Open;
+
+    while not Query.Eof do
+    begin
+      Acao := TAcao.Create;
+      Acao.Id := Query.FieldByName('ID').AsInteger;
+      Acao.Nome := Query.FieldByName('NOME').AsString;
+      Acoes.Add(Acao);
+      Query.Next;
+    end;
+    Result := Acoes;
+  finally
+    Query.Free;
+  end;
+end;
+
+end.
+

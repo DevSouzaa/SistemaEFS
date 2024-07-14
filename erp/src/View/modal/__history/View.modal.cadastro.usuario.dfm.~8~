@@ -1,0 +1,189 @@
+inherited ViewModalCadastroUsuario: TViewModalCadastroUsuario
+  Caption = 'ViewModalCadastroUsuario'
+  ClientHeight = 653
+  ClientWidth = 1013
+  OnShow = FormShow
+  ExplicitWidth = 1013
+  ExplicitHeight = 653
+  TextHeight = 21
+  inherited PnlTopo: TPanel
+    Width = 1013
+    ExplicitWidth = 668
+    inherited LblTituloDaTela: TLabel
+      Width = 862
+      Height = 29
+      Caption = 'Cadastro de Usuarios'
+      ExplicitWidth = 206
+    end
+    inherited PnlFecharTela: TPanel
+      Left = 903
+      ExplicitLeft = 558
+      inherited lblFechar: TLabel
+        Width = 102
+        Height = 23
+      end
+    end
+  end
+  inherited PnlRodaPe: TPanel
+    Top = 605
+    Width = 1013
+    ExplicitTop = 361
+    ExplicitWidth = 668
+    inherited PnlBtnGravar: TPanel
+      Left = 860
+      ExplicitLeft = 515
+      inherited LblBtnGravar: TLabel
+        Width = 97
+        Height = 36
+      end
+    end
+  end
+  object PnlFundo: TPanel
+    Left = 0
+    Top = 35
+    Width = 1013
+    Height = 570
+    Align = alClient
+    BevelOuter = bvNone
+    TabOrder = 2
+    ExplicitWidth = 668
+    ExplicitHeight = 326
+    object Label1: TLabel
+      Left = 624
+      Top = 0
+      Width = 44
+      Height = 21
+      Caption = 'Senha'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = 5395026
+      Font.Height = -16
+      Font.Name = 'Segoe UI Semibold'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label2: TLabel
+      Left = 24
+      Top = 6
+      Width = 15
+      Height = 21
+      Caption = 'Id'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = 5395026
+      Font.Height = -16
+      Font.Name = 'Segoe UI Semibold'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label3: TLabel
+      Left = 88
+      Top = 3
+      Width = 45
+      Height = 21
+      Caption = 'Nome'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = 5395026
+      Font.Height = -16
+      Font.Name = 'Segoe UI Semibold'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label4: TLabel
+      Left = 356
+      Top = 6
+      Width = 41
+      Height = 21
+      Caption = 'Login'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = 5395026
+      Font.Height = -16
+      Font.Name = 'Segoe UI Semibold'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label5: TLabel
+      Left = 832
+      Top = 0
+      Width = 40
+      Height = 21
+      Caption = 'Perfis'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = 5395026
+      Font.Height = -16
+      Font.Name = 'Segoe UI Semibold'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object EdtID: TEdit
+      Left = 20
+      Top = 27
+      Width = 49
+      Height = 29
+      TabOrder = 0
+    end
+    object EdtNome: TEdit
+      Left = 88
+      Top = 27
+      Width = 241
+      Height = 29
+      TabOrder = 1
+    end
+    object EdtLogin: TEdit
+      Left = 356
+      Top = 27
+      Width = 243
+      Height = 29
+      TabOrder = 2
+    end
+    object EdtSenha: TEdit
+      Left = 620
+      Top = 27
+      Width = 197
+      Height = 29
+      TabOrder = 3
+    end
+    object CBXPerfil: TComboBox
+      Left = 832
+      Top = 27
+      Width = 145
+      Height = 29
+      TabOrder = 4
+    end
+    object CardPanel1: TCardPanel
+      Left = 20
+      Top = 152
+      Width = 973
+      Height = 401
+      ActiveCard = Card1
+      Caption = 'CardPanel1'
+      TabOrder = 5
+      object Card1: TCard
+        Left = 1
+        Top = 1
+        Width = 971
+        Height = 399
+        Caption = 'Card1'
+        CardIndex = 0
+        Color = clGrayText
+        ParentBackground = False
+        TabOrder = 0
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 185
+        ExplicitHeight = 41
+      end
+      object Card2: TCard
+        Left = 1
+        Top = 1
+        Width = 971
+        Height = 399
+        Caption = 'Card2'
+        CardIndex = 1
+        TabOrder = 1
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 185
+        ExplicitHeight = 41
+      end
+    end
+  end
+end

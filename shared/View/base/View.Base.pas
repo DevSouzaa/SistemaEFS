@@ -18,31 +18,44 @@ uses
   Vcl.Mask,
   Vcl.ExtCtrls,
   Vcl.DBCtrls,
+  view.telaFundo,
+
 
   Provider.Constantes,
-
   Enums,
 
 
 
-  Sistema.model;
+  Sistema;
 
 type
   TViewBase = class(TForm)
     procedure FormKeyPress(Sender: TObject; var Key: Char);
-    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormCreate(Sender: TObject);
   private
-
+    FOperacao: String;
+    FIDPesquisa: Integer;
+    FIDPesquisa2: Integer;
+//    FFilialPadrao: Integer;
   published
     FSistema : TSistema;
+    TelaFundo: TViewTelaFundo;
 
     Procedure SetPropertys;
     procedure CorReceberFocoEnter(Sender: TObject);
     procedure CorPerderFocoExit(Sender: TObject);
 
-  public
     procedure ArredondarBorda(Control: TWinControl);
+
+    procedure AplicarArredondamentoEmTodosOsControles;
+
+    property Operacao: String read FOperacao write FOperacao;
+    property IDPesquisa: Integer read FIDPesquisa write FIDPesquisa;
+    property IDPesquisa2: Integer read FIDPesquisa2 write FIDPesquisa2;
+//    property FilialPadrao: integer read FFilialPadrao write FFilialPadrao;
+
+  public
+
 
   end;
 
@@ -80,6 +93,10 @@ begin     //Ao perder foco do componente
   if (Sender is TEdit) then
      (Sender as TEdit).Color := _CorPerderFoco;
 
+//         //TLabel
+//  if (Sender is TLabel) then
+//     (Sender as TLabel).Font.Color   := _CorPerderFoco;
+
 end;
 
 procedure TViewBase.CorReceberFocoEnter(Sender: TObject);
@@ -93,26 +110,16 @@ begin   //Ao focar no componente
   if (Sender is TEdit) then
      (Sender as TEdit).Color   := _CorReceberFoco;
 
+//    //TLabel
+//  if (Sender is TLabel) then
+//     (Sender as TLabel).Font.Color   := _CorReceberFoco;
+
 end;
 
 procedure TViewBase.FormCreate(Sender: TObject);
 begin     //Create
   FSistema := TSistema.New;
-
   SetPropertys;
-end;
-
-procedure TViewBase.FormKeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
-begin     //OnKeyDown
-  case key of
-
-  VK_ESCAPE:
-    Begin
-      self.Close;
-    End;
-
-  end;
 end;
 
 procedure TViewBase.FormKeyPress(Sender: TObject; var Key: Char);
@@ -144,8 +151,25 @@ begin     //Setar propriedades Enter e Exit do componente
       TEdit(self.Components[I]).OnEnter := CorReceberFocoEnter;
       TEdit(self.Components[I]).OnExit := CorPerderFocoExit;
     end;
-  end;
 
+      //TLabel
+//      if self.Components[I] is TLabel then
+//    begin
+//      TLabel(self.Components[I]).OnMouseEnter := CorReceberFocoEnter;
+//      TLabel(self.Components[I]).OnMouseLeave := CorPerderFocoExit;
+//    end;
+  end;
+end;
+
+procedure TViewBase.AplicarArredondamentoEmTodosOsControles;
+var
+  I: Integer;
+begin
+  for I := 0 to Self.ComponentCount - 1 do
+  begin
+    if Self.Components[I] is TWinControl then
+      ArredondarBorda(TWinControl(Self.Components[I]));
+  end;
 end;
 
 end.

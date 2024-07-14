@@ -1,0 +1,43 @@
+unit RepositorioBase;
+
+interface
+
+uses
+  FireDAC.Comp.Client, System.SysUtils, Conexao;
+
+type
+  TBaseRepository = class(TInterfacedObject)
+  protected
+    FDConn: TFDConnection;
+  public
+    constructor Create;
+    destructor Destroy; override;
+  end;
+
+implementation
+
+{ TBaseRepository }
+
+constructor TBaseRepository.Create;
+var
+  LConexao: TConnection;
+begin
+  inherited Create;
+  FDConn := TFDConnection.Create(nil);
+  LConexao := TConnection.Create(nil);
+  try
+    LConexao.GetConfigConnection(FDConn);
+    FDConn.Connected := True; // Conecta ao banco de dados
+  finally
+    LConexao.Free;
+  end;
+end;
+
+destructor TBaseRepository.Destroy;
+begin
+  FDConn.Free;
+  inherited;
+end;
+
+end.
+

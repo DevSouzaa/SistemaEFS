@@ -1,0 +1,81 @@
+unit Login.Controller;
+
+interface
+
+uses
+  UsuarioService,
+  Usuario,
+  Generics.Collections,
+  Empresa,
+  EmpresaController,
+
+  Sistema,
+
+  UFuncoes,
+  SysUtils,
+  vcl.Forms;
+
+type
+  TLoginController = class
+  private
+    FUsuarioService: TUsuarioService;
+    FEmpresaController: TEmpresaController;
+    FUsuario: TUsuario;
+  public
+    constructor Create;
+    destructor Destroy; override;
+    function Autenticar(const Login, Senha: string): Boolean;
+    function CarregarEmpresas: TList<TEmpresa>;
+    function CarregarEmpresaPorId(Id: Integer): TEmpresa; // Método para carregar empresa por ID
+    property Usuario: TUsuario read FUsuario;
+  end;
+
+implementation
+
+{ TLoginController }
+
+constructor TLoginController.Create;
+begin
+  FUsuarioService := TUsuarioService.Create(nil);
+  FEmpresaController := TEmpresaController.Create;
+end;
+
+destructor TLoginController.Destroy;
+begin
+  FUsuarioService.Free;
+  FEmpresaController.Free;
+  inherited;
+end;
+
+function TLoginController.Autenticar(const Login, Senha: string): Boolean;
+var
+  Usuario: TUsuario;
+begin
+  Result := False;
+  Usuario := FUsuarioService.Autenticar(Login, Senha);
+  if Assigned(Usuario) then
+  begin
+    Result := TSistema.New.Criptografia.CompareHash(Senha, Usuario.Senha);
+    if Result then
+    begin
+      TSistema.New.Usuario := Usuario // Atualiza o usuário no sistema somente se a senha estiver correta
+    end
+    else
+      fnc_CriarMensagem('Erro de Autenticação', 'Senha Incorreta', 'A senha informada está incorreta.', ExtractFilePath(Application.ExeName) + '\Icones\Atencao.png', 'OK');
+  end
+  else
+    fnc_CriarMensagem('Erro de Autenticação', 'Usuário Não Encontrado', 'Usuário não encontrado. Verifique o login informado.', ExtractFilePath(Application.ExeName) + '\Icones\Atencao.png', 'OK');
+end;
+
+function TLoginController.CarregarEmpresas: TList<TEmpresa>;
+begin
+  Result := FEmpresaController.CarregarEmpresas;
+end;
+
+function TLoginController.CarregarEmpresaPorId(Id: Integer): TEmpresa;
+begin
+  Result := FEmpresaController.CarregarEmpresaPorId(Id);
+end;
+
+end.
+

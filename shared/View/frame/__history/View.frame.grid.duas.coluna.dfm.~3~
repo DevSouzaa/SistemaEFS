@@ -1,0 +1,24 @@
+object ViewFrameDuasColuna: TViewFrameDuasColuna
+  Left = 0
+  Top = 0
+  Width = 981
+  Height = 448
+  TabOrder = 0
+  object ControlList1: TControlList
+    Left = 112
+    Top = 72
+    Width = 793
+    Height = 200
+    ItemMargins.Left = 0
+    ItemMargins.Top = 0
+    ItemMargins.Right = 0
+    ItemMargins.Bottom = 0
+    ParentColor = False
+    TabOrder = 0
+  end
+  object ImageCollection: TImageCollection
+    Images = <>
+    Left = 352
+    Top = 16
+  end
+end

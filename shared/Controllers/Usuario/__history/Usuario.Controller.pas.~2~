@@ -1,0 +1,64 @@
+unit Usuario.Controller;
+
+
+interface
+
+uses
+  UsuarioService, Usuario, Generics.Collections;
+
+type
+  TUserController = class
+  private
+    FUsuarioService: TUsuarioService;
+  public
+    constructor Create;
+    destructor Destroy; override;
+    function CreateUsuario(const Usuario: TUsuario): Boolean;
+    function EditUsuario(const Usuario: TUsuario): Boolean;
+    function DeleteUsuario(const UsuarioID: Integer): Boolean;
+    function GetUsuarioById(const UsuarioID: Integer): TUsuario;
+    function GetAllUsuarios: TList<TUsuario>;
+  end;
+
+implementation
+
+{ TUserController }
+
+constructor TUserController.Create;
+begin
+  FUsuarioService := TUsuarioService.Create;
+end;
+
+destructor TUserController.Destroy;
+begin
+  FUsuarioService.Free;
+  inherited;
+end;
+
+function TUserController.CreateUsuario(const Usuario: TUsuario): Boolean;
+begin
+//  Result := FUsuarioService.CreateUsuario(Usuario);
+end;
+
+function TUserController.EditUsuario(const Usuario: TUsuario): Boolean;
+begin
+//  Result := FUsuarioService.EditUsuario(Usuario);
+end;
+
+function TUserController.DeleteUsuario(const UsuarioId: Integer): Boolean;
+begin
+//  Result := FUsuarioService.DeleteUsuario(UsuarioId);
+end;
+
+function TUserController.GetUsuarioById(const UsuarioId: Integer): TUsuario;
+begin
+//  Result := FUsuarioService.GetUsuarioById(UsuarioId);
+end;
+
+function TUserController.GetAllUsuarios: TList<TUsuario>;
+begin
+//  Result := FUsuarioService.GetAllUsuarios;
+end;
+
+end.
+

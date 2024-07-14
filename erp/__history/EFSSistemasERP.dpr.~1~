@@ -1,0 +1,44 @@
+program ERP;
+
+uses
+  Vcl.Forms,
+  View.Base in '..\shared\view\base\View.Base.pas' {ViewBase},
+  View.Principal in 'src\view\principal\View.Principal.pas' {ViewPrincipal},
+  Provider.Constantes in '..\shared\provider\Constants\Provider.Constantes.pas',
+  Conexao in '..\shared\Models\Connection\Conexao.pas',
+  Provider.Conexao in '..\shared\provider\Conexao\Provider.Conexao.pas' {ProviderConexao: TDataModule},
+  View.Base.Tela.Modal in '..\shared\view\base\View.Base.Tela.Modal.pas' {ViewBaseTelaModal},
+  Empresa in '..\shared\Models\Empresa.pas',
+  PageControlEx in '..\shared\Terceiros\TDI\PageControlEx.pas',
+  TabCloseButton in '..\shared\Terceiros\TDI\TabCloseButton.pas',
+  TDI in '..\shared\Terceiros\TDI\TDI.pas',
+  VisualizaImagensDasGuiasAbertas in '..\shared\Terceiros\TDI\VisualizaImagensDasGuiasAbertas.pas' {VisualizaImagensDasGuiasAbertas},
+  Sistema in '..\shared\Models\Sistema.pas',
+  Enums in '..\shared\Enums\Enums.pas',
+  Usuario in '..\shared\Models\Usuario\Usuario.pas',
+  Acesso in '..\shared\Models\Usuario\Acesso.pas',
+  Perfil in '..\shared\Models\Usuario\Perfil.pas',
+  Acao in '..\shared\Models\Usuario\Acao.pas',
+  Dm.Principal in '..\shared\Data Modules\Dm.Principal.pas' {DmPrincipal: TDataModule},
+  View.Login in '..\shared\View\View.Login.pas' {ViewLogin},
+  Criptografia in '..\shared\Models\Usuario\Criptografia.pas',
+  Login.Controller in '..\shared\Controllers\Usuario\Login.Controller.pas',
+  UsuarioService in '..\shared\services\Usuario\UsuarioService.pas',
+  UFuncoes in '..\shared\Utils\UFuncoes.pas',
+  UMenssagem in '..\shared\Utils\UMenssagens\UMenssagem.pas' {ViewMenssagem},
+  Usuario.Controller in '..\shared\Controllers\Usuario\Usuario.Controller.pas',
+  EmpresaService in '..\shared\services\Empresa\EmpresaService.pas',
+  EmpresaController in '..\shared\Controllers\Empresa\EmpresaController.pas',
+  UsuarioRepositorio in '..\shared\Repositorios\Usuario\UsuarioRepositorio.pas',
+  RepositorioBase in '..\shared\Repositorios\Base\RepositorioBase.pas',
+  View.Base.Lista in '..\shared\View\base\View.Base.Lista.pas' {ViewBaseLista};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TDmPrincipal, DmPrincipal);
+  Application.CreateForm(TViewPrincipal, ViewPrincipal);
+  Application.Run;
+end.

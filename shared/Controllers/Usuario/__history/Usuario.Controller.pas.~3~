@@ -1,0 +1,52 @@
+unit UsuarioController;
+
+interface
+
+uses
+  UsuarioService, Usuario, Generics.Collections, SysUtils;
+
+type
+  TUsuarioController = class
+  private
+    FUsuarioService: TUsuarioService;
+  public
+    constructor Create;
+    destructor Destroy; override;
+    procedure SalvarUsuario(Usuario: TUsuario);
+    function CarregarUsuarios: TList<TUsuario>;
+    function CarregarUsuarioPorId(Id: Integer): TUsuario;
+  end;
+
+implementation
+
+{ TUsuarioController }
+
+constructor TUsuarioController.Create;
+begin
+  FUsuarioService := TUsuarioService.Create;
+end;
+
+destructor TUsuarioController.Destroy;
+begin
+  FUsuarioService.Free;
+  inherited;
+end;
+
+procedure TUsuarioController.SalvarUsuario(Usuario: TUsuario);
+begin
+  if not FUsuarioService.SalvarUsuario(Usuario) then
+    raise Exception.Create('Erro ao salvar usuário');
+end;
+
+function TUsuarioController.CarregarUsuarios: TList<TUsuario>;
+begin
+  // Implementação para carregar todos os usuários
+end;
+
+function TUsuarioController.CarregarUsuarioPorId(Id: Integer): TUsuario;
+begin
+  // Implementação para carregar um usuário por ID
+end;
+
+end.
+

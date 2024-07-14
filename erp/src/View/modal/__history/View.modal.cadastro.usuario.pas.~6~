@@ -1,0 +1,199 @@
+unit View.modal.cadastro.usuario;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, View.Base.Tela.Modal, Vcl.ExtCtrls,
+  acPNG, Vcl.StdCtrls, Controller.usuario, Usuario, Perfil, Generics.Collections, Acao, Acesso;
+
+type
+  TViewModalCadastroUsuario = class(TViewBaseTelaModal)
+    PnlFundo: TPanel;
+    EdtID: TEdit;
+    EdtNome: TEdit;
+    EdtLogin: TEdit;
+    EdtSenha: TEdit;
+    CbxPerfil: TComboBox;
+    BtnSalvar: TButton;
+    procedure FormShow(Sender: TObject);
+    procedure BtnSalvarClick(Sender: TObject);
+  private
+    FControllerUsuario: TControllerUsuario;
+    FUsuario: TUsuario;
+    FCheckBoxList: TObjectDictionary<String, TArray<TCheckBox>>;
+    procedure CarregarPerfis;
+    procedure CriarCheckBoxes;
+    procedure SalvarUsuario;
+    procedure CarregarPermissoes;
+  public
+    procedure EditarUsuario(AUsuario: TUsuario);
+  end;
+
+var
+  ViewModalCadastroUsuario: TViewModalCadastroUsuario;
+
+implementation
+
+{$R *.dfm}
+
+procedure TViewModalCadastroUsuario.FormShow(Sender: TObject);
+begin
+  inherited;
+  FControllerUsuario := TControllerUsuario.Create;
+  FCheckBoxList := TObjectDictionary<String, TArray<TCheckBox>>.Create([doOwnsValues]);
+  CarregarPerfis;
+  CriarCheckBoxes;
+
+  if Assigned(FUsuario) then
+    CarregarPermissoes;
+end;
+
+procedure TViewModalCadastroUsuario.CarregarPerfis;
+var
+  Perfis: TList<TPerfil>;
+  Perfil: TPerfil;
+begin
+  CbxPerfil.Items.Clear;
+  Perfis := FControllerUsuario.CarregarPerfis;
+  try
+    for Perfil in Perfis do
+      CbxPerfil.Items.AddObject(Perfil.Nome, TObject(Perfil.Id));
+  finally
+    Perfis.Free;
+  end;
+end;
+
+procedure TViewModalCadastroUsuario.CriarCheckBoxes;
+var
+  Acoes: TList<TAcesso>;
+  Acao: TAcao;
+  CheckBoxIncluir, CheckBoxEditar, CheckBoxExcluir, CheckBoxVisualizar: TCheckBox;
+  TopOffset: Integer;
+  CheckBoxArray: TArray<TCheckBox>;
+begin
+  Acoes := FControllerUsuario.CarregarAcoes;
+  TopOffset := 24;
+
+  for Acao in Acoes do
+  begin
+    var LabelAcao := TLabel.Create(PnlFundo);
+    LabelAcao.Parent := PnlFundo;
+    LabelAcao.Caption := Acao.Nome;
+    LabelAcao.Left := 16;
+    LabelAcao.Top := TopOffset + (Acoes.IndexOf(Acao) * 96);
+    LabelAcao.Font.Style := [fsBold];
+
+    CheckBoxIncluir := TCheckBox.Create(PnlFundo);
+    CheckBoxIncluir.Parent := PnlFundo;
+    CheckBoxIncluir.Caption := 'Incluir';
+    CheckBoxIncluir.Left := 16;
+    CheckBoxIncluir.Top := LabelAcao.Top + 24;
+    CheckBoxIncluir.Width := 150;
+
+    CheckBoxEditar := TCheckBox.Create(PnlFundo);
+    CheckBoxEditar.Parent := PnlFundo;
+    CheckBoxEditar.Caption := 'Editar';
+    CheckBoxEditar.Left := 180;
+    CheckBoxEditar.Top := LabelAcao.Top + 24;
+    CheckBoxEditar.Width := 150;
+
+    CheckBoxExcluir := TCheckBox.Create(PnlFundo);
+    CheckBoxExcluir.Parent := PnlFundo;
+    CheckBoxExcluir.Caption := 'Excluir';
+    CheckBoxExcluir.Left := 16;
+    CheckBoxExcluir.Top := LabelAcao.Top + 48;
+    CheckBoxExcluir.Width := 150;
+
+    CheckBoxVisualizar := TCheckBox.Create(PnlFundo);
+    CheckBoxVisualizar.Parent := PnlFundo;
+    CheckBoxVisualizar.Caption := 'Visualizar';
+    CheckBoxVisualizar.Left := 180;
+    CheckBoxVisualizar.Top := LabelAcao.Top + 48;
+    CheckBoxVisualizar.Width := 150;
+
+    CheckBoxArray := TArray<TCheckBox>.Create(CheckBoxIncluir, CheckBoxEditar, CheckBoxExcluir, CheckBoxVisualizar);
+    FCheckBoxList.Add(Acao.Nome, CheckBoxArray);
+  end;
+
+  Acoes.Free;
+end;
+
+procedure TViewModalCadastroUsuario.CarregarPermissoes;
+var
+  Permissao: TPermissao;
+  CheckBoxArray: TArray<TCheckBox>;
+  AcaoNome: String;
+begin
+  for AcaoNome in FCheckBoxList.Keys do
+  begin
+    CheckBoxArray := FCheckBoxList[AcaoNome];
+    Permissao := FSistema.Permissoes[AcaoNome];
+
+    CheckBoxArray[0].Checked := Assigned(Permissao) and Permissao.Inserir;
+    CheckBoxArray[1].Checked := Assigned(Permissao) and Permissao.Editar;
+    CheckBoxArray[2].Checked := Assigned(Permissao) and Permissao.Excluir;
+    CheckBoxArray[3].Checked := Assigned(Permissao) and Permissao.Visualizar;
+  end;
+end;
+
+procedure TViewModalCadastroUsuario.EditarUsuario(AUsuario: TUsuario);
+begin
+  FUsuario := AUsuario;
+  EdtID.Text := IntToStr(AUsuario.Id);
+  EdtNome.Text := AUsuario.Nome;
+  EdtLogin.Text := AUsuario.Login;
+  EdtSenha.Text := AUsuario.Senha;
+  CbxPerfil.ItemIndex := CbxPerfil.Items.IndexOfObject(TObject(AUsuario.PerfilId));
+
+  CarregarPermissoes;
+end;
+
+procedure TViewModalCadastroUsuario.BtnSalvarClick(Sender: TObject);
+begin
+  SalvarUsuario;
+end;
+
+procedure TViewModalCadastroUsuario.SalvarUsuario;
+var
+  Permissao: TPermissao;
+  CheckBoxArray: TArray<TCheckBox>;
+  AcaoNome: String;
+begin
+  if not Assigned(FUsuario) then
+    FUsuario := TUsuario.Create;
+
+  FUsuario.Nome := EdtNome.Text;
+  FUsuario.Login := EdtLogin.Text;
+  FUsuario.Senha := EdtSenha.Text;
+  FUsuario.PerfilId := Integer(CbxPerfil.Items.Objects[CbxPerfil.ItemIndex]);
+
+  try
+    FControllerUsuario.SalvarUsuario(FUsuario);
+
+    for AcaoNome in FCheckBoxList.Keys do
+    begin
+      CheckBoxArray := FCheckBoxList[AcaoNome];
+
+      Permissao := FSistema.Permissoes[AcaoNome];
+      if not Assigned(Permissao) then
+        Permissao := TPermissao.Create;
+
+      Permissao.Inserir := CheckBoxArray[0].Checked;
+      Permissao.Editar := CheckBoxArray[1].Checked;
+      Permissao.Excluir := CheckBoxArray[2].Checked;
+      Permissao.Visualizar := CheckBoxArray[3].Checked;
+
+      FSistema.Permissoes.AddOrSetValue(AcaoNome, Permissao);
+    end;
+
+    ShowMessage('Usuário salvo com sucesso!');
+    Close;
+  except
+    on E: Exception do
+      ShowMessage('Erro ao salvar usuário: ' + E.Message);
+  end;
+end;
+
+end.
+

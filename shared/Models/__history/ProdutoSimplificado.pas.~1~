@@ -1,0 +1,37 @@
+unit ProdutoSimplificado;
+
+interface
+
+type
+  TProdutoSimplificado = class
+  private
+    FIdProduto: Integer;
+    FDescricao: string;
+    FNCM: string;
+    FValorVenda: Double;
+  public
+    property IdProduto: Integer read FIdProduto write FIdProduto;
+    property Descricao: string read FDescricao write FDescricao;
+    property NCM: string read FNCM write FNCM;
+    property ValorVenda: Double read FValorVenda write FValorVenda;
+  end;
+
+  TProdutoCompleto = class
+  private
+    FIdProduto: Integer;
+    FDescricao: string;
+    FNCM: string;
+    FValorVenda: Double;
+    // Adicione aqui os demais campos da tabela PRODUTOS e PRODUTOSITENS conforme necessário
+  public
+    property IdProduto: Integer read FIdProduto write FIdProduto;
+    property Descricao: string read FDescricao write FDescricao;
+    property NCM: string read FNCM write FNCM;
+    property ValorVenda: Double read FValorVenda write FValorVenda;
+    // Adicione aqui os demais campos com suas propriedades
+  end;
+
+implementation
+
+end.
+

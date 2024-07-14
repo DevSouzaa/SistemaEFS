@@ -5,6 +5,7 @@ inherited ViewMenssagem: TViewMenssagem
   ClientWidth = 549
   Position = poScreenCenter
   OnClose = FormClose
+  OnKeyDown = FormKeyDown
   OnShow = FormShow
   ExplicitWidth = 549
   ExplicitHeight = 306
@@ -20,9 +21,6 @@ inherited ViewMenssagem: TViewMenssagem
     Color = 1644825
     ParentBackground = False
     TabOrder = 0
-    ExplicitTop = -12
-    ExplicitWidth = 550
-    ExplicitHeight = 309
     object Panel1: TPanel
       AlignWithMargins = True
       Left = 1
@@ -37,8 +35,6 @@ inherited ViewMenssagem: TViewMenssagem
       Color = clWhite
       ParentBackground = False
       TabOrder = 0
-      ExplicitWidth = 548
-      ExplicitHeight = 267
       object LbTitulo: TLabel
         Left = 195
         Top = 10
@@ -139,7 +135,7 @@ inherited ViewMenssagem: TViewMenssagem
           Margins.Bottom = 55
           Align = alRight
           BevelOuter = bvNone
-          Color = 7625228
+          Color = 6374953
           ParentBackground = False
           TabOrder = 1
           object BtnSim: TSpeedButton
@@ -177,10 +173,9 @@ inherited ViewMenssagem: TViewMenssagem
       Margins.Bottom = 0
       Align = alTop
       BevelOuter = bvNone
-      Color = 7625228
+      Color = 6374953
       ParentBackground = False
       TabOrder = 1
-      ExplicitWidth = 548
       object LbTituloJanela: TLabel
         AlignWithMargins = True
         Left = 5

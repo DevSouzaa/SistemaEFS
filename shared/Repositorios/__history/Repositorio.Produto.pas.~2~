@@ -1,0 +1,206 @@
+unit Repositorio.Produto;
+
+interface
+
+uses
+  ProdutoSimplificado, ProdutoCompleto, Generics.Collections, FireDAC.Comp.Client, RepositorioBase, System.SysUtils;
+
+type
+  TRepositorioProduto = class(TRepositorioBase)
+  public
+    function ObterPorId(Id: Integer): TProdutoCompleto;
+    function ObterPorNome(Nome: string): TList<TProdutoSimplificado>;
+    function ObterTodos: TList<TProdutoSimplificado>;
+    function Inserir(Produto: TProdutoCompleto): Boolean;
+    function Atualizar(Produto: TProdutoCompleto): Boolean;
+    function Deletar(Id: Integer): Boolean;
+  end;
+
+implementation
+
+{ TRepositorioProduto }
+
+function TRepositorioProduto.ObterPorId(Id: Integer): TProdutoCompleto;
+var
+  Query: TFDQuery;
+  Produto: TProdutoCompleto;
+begin
+  Query := TFDQuery.Create(nil);
+  try
+    Query.Connection := FDConn;
+    Query.SQL.Text := 'SELECT * FROM PRODUTOS WHERE IDPRODUTO = :ID';
+    Query.ParamByName('ID').AsInteger := Id;
+    Query.Open;
+
+    if not Query.Eof then
+    begin
+//      Produto := TProdutoCompleto.Create;
+//      Produto.IdProduto := Query.FieldByName('IDPRODUTO').AsInteger;
+//      Produto.Descricao := Query.FieldByName('DESCRICAO').AsString;
+//      Produto.NCM := Query.FieldByName('NCM').AsString;
+//      Produto.DataHoraCadastro := Query.FieldByName('DATAHORACADASTRO').AsDateTime;
+//      Produto.DataHoraAlteracao := Query.FieldByName('DATAHORAALTERACAO').AsDateTime;
+//      Produto.ValorVendaVista := Query.FieldByName('VLRVENDAVISTA').AsFloat;
+//      // Atribua os demais campos de Produto
+
+      Result := Produto;
+    end
+    else
+      Result := nil;
+  finally
+    Query.Free;
+  end;
+end;
+
+function TRepositorioProduto.ObterPorNome(Nome: string): TList<TProdutoSimplificado>;
+var
+  Query: TFDQuery;
+  Produtos: TList<TProdutoSimplificado>;
+  Produto: TProdutoSimplificado;
+begin
+  Produtos := TList<TProdutoSimplificado>.Create;
+  Query := TFDQuery.Create(nil);
+  try
+    Query.Connection := FDConn;
+    Query.SQL.Text := 'SELECT p.IDPRODUTO, p.DESCRICAO, p.NCM, pi.VLRVENDAVISTA ' +
+                      'FROM PRODUTOS p ' +
+                      'LEFT JOIN PRODUTOSITENS pi ON p.IDPRODUTO = pi.IDPRODUTO ' +
+                      'WHERE p.DESCRICAO LIKE :NOME';
+    Query.ParamByName('NOME').AsString := '%' + Nome + '%';
+    Query.Open;
+
+    while not Query.Eof do
+    begin
+      Produto := TProdutoSimplificado.Create;
+      Produto.IdProduto := Query.FieldByName('IDPRODUTO').AsInteger;
+      Produto.Descricao := Query.FieldByName('DESCRICAO').AsString;
+      Produto.NCM := Query.FieldByName('NCM').AsString;
+      Produto.ValorVenda := Query.FieldByName('VLRVENDAVISTA').AsFloat;
+      Produtos.Add(Produto);
+      Query.Next;
+    end;
+    Result := Produtos;
+  finally
+    Query.Free;
+  end;
+end;
+
+function TRepositorioProduto.ObterTodos: TList<TProdutoSimplificado>;
+var
+  Query: TFDQuery;
+  Produtos: TList<TProdutoSimplificado>;
+  Produto: TProdutoSimplificado;
+begin
+  Produtos := TList<TProdutoSimplificado>.Create;
+  Query := TFDQuery.Create(nil);
+  try
+    Query.Connection := FDConn;
+    Query.SQL.Text := 'SELECT p.IDPRODUTO, p.DESCRICAO, p.NCM, pi.VLRVENDAVISTA ' +
+                      'FROM PRODUTOS p ' +
+                      'LEFT JOIN PRODUTOSITENS pi ON p.IDPRODUTO = pi.IDPRODUTO';
+    Query.Open;
+
+    while not Query.Eof do
+    begin
+      Produto := TProdutoSimplificado.Create;
+      Produto.IdProduto := Query.FieldByName('IDPRODUTO').AsInteger;
+      Produto.Descricao := Query.FieldByName('DESCRICAO').AsString;
+      Produto.NCM := Query.FieldByName('NCM').AsString;
+      Produto.ValorVenda := Query.FieldByName('VLRVENDAVISTA').AsFloat;
+      Produtos.Add(Produto);
+      Query.Next;
+    end;
+    Result := Produtos;
+  finally
+    Query.Free;
+  end;
+end;
+
+function TRepositorioProduto.Inserir(Produto: TProdutoCompleto): Boolean;
+var
+  Query: TFDQuery;
+  ProdutoItem: TProdutoItem;
+begin
+  Query := TFDQuery.Create(nil);
+  try
+    Query.Connection := FDConn;
+    Query.SQL.Text := 'INSERT INTO PRODUTOS (IDPRODUTO, DESCRICAO, NCM, ...) ' +
+                      'VALUES (:IDPRODUTO, :DESCRICAO, :NCM, ...)';
+    Query.ParamByName('IDPRODUTO').AsInteger := Produto.IdProduto;
+    Query.ParamByName('DESCRICAO').AsString := Produto.Descricao;
+    Query.ParamByName('NCM').AsString := Produto.NCM;
+    // Atribua os parâmetros para os demais campos
+    Query.ExecSQL;
+
+    for ProdutoItem in Produto.Itens do
+    begin
+      Query.SQL.Text := 'INSERT INTO PRODUTOSITENS (IDPRODUTOITEM, IDPRODUTO, VLRVENDAVISTA, ...) ' +
+                        'VALUES (:IDPRODUTOITEM, :IDPRODUTO, :VLRVENDAVISTA, ...)';
+      Query.ParamByName('IDPRODUTOITEM').AsInteger := ProdutoItem.IdProdutoItem;
+      Query.ParamByName('IDPRODUTO').AsInteger := ProdutoItem.IdProduto;
+      Query.ParamByName('VLRVENDAVISTA').AsFloat := ProdutoItem.ValorVendaVista;
+      // Atribua os parâmetros para os demais campos de ProdutoItem
+      Query.ExecSQL;
+    end;
+
+    Result := True;
+  finally
+    Query.Free;
+  end;
+end;
+
+function TRepositorioProduto.Atualizar(Produto: TProdutoCompleto): Boolean;
+var
+  Query: TFDQuery;
+  ProdutoItem: TProdutoItem;
+begin
+  Query := TFDQuery.Create(nil);
+  try
+    Query.Connection := FDConn;
+    Query.SQL.Text := 'UPDATE PRODUTOS SET DESCRICAO = :DESCRICAO, NCM = :NCM, ... ' +
+                      'WHERE IDPRODUTO = :IDPRODUTO';
+    Query.ParamByName('IDPRODUTO').AsInteger := Produto.IdProduto;
+    Query.ParamByName('DESCRICAO').AsString := Produto.Descricao;
+    Query.ParamByName('NCM').AsString := Produto.NCM;
+    // Atribua os parâmetros para os demais campos
+    Query.ExecSQL;
+
+    for ProdutoItem in Produto.Itens do
+    begin
+      Query.SQL.Text := 'UPDATE PRODUTOSITENS SET VLRVENDAVISTA = :VLRVENDAVISTA, ... ' +
+                        'WHERE IDPRODUTOITEM = :IDPRODUTOITEM';
+      Query.ParamByName('IDPRODUTOITEM').AsInteger := ProdutoItem.IdProdutoItem;
+      Query.ParamByName('VLRVENDAVISTA').AsFloat := ProdutoItem.ValorVendaVista;
+      // Atribua os parâmetros para os demais campos de ProdutoItem
+      Query.ExecSQL;
+    end;
+
+    Result := True;
+  finally
+    Query.Free;
+  end;
+end;
+
+function TRepositorioProduto.Deletar(Id: Integer): Boolean;
+var
+  Query: TFDQuery;
+begin
+  Query := TFDQuery.Create(nil);
+  try
+    Query.Connection := FDConn;
+    Query.SQL.Text := 'DELETE FROM PRODUTOSITENS WHERE IDPRODUTO = :IDPRODUTO';
+    Query.ParamByName('IDPRODUTO').AsInteger := Id;
+    Query.ExecSQL;
+
+    Query.SQL.Text := 'DELETE FROM PRODUTOS WHERE IDPRODUTO = :IDPRODUTO';
+    Query.ParamByName('IDPRODUTO').AsInteger := Id;
+    Query.ExecSQL;
+
+    Result := True;
+  finally
+    Query.Free;
+  end;
+end;
+
+end.
+

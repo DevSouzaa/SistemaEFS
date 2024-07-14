@@ -1,0 +1,552 @@
+inherited ViewModalCadastroProduto: TViewModalCadastroProduto
+  Caption = 'CadastroProdutos'
+  ClientHeight = 626
+  ClientWidth = 891
+  OnShow = FormShow
+  ExplicitWidth = 891
+  ExplicitHeight = 626
+  TextHeight = 21
+  inherited PnlTopo: TPanel
+    Width = 891
+    ExplicitWidth = 891
+    inherited LblTituloDaTela: TLabel
+      Width = 740
+      Height = 29
+      Caption = 'Cadastro de Produtos'
+      ExplicitWidth = 212
+    end
+    inherited PnlFecharTela: TPanel
+      Left = 781
+      ExplicitLeft = 781
+      inherited lblFechar: TLabel
+        Width = 102
+        Height = 23
+      end
+    end
+  end
+  inherited PnlRodaPe: TPanel
+    Top = 578
+    Width = 891
+    ExplicitTop = 578
+    ExplicitWidth = 891
+    inherited PnlBtnGravar: TPanel
+      Left = 738
+      ExplicitLeft = 738
+      inherited LblBtnGravar: TLabel
+        Width = 97
+        Height = 36
+      end
+    end
+  end
+  object PnlPrincipal: TPanel
+    Left = 0
+    Top = 35
+    Width = 891
+    Height = 543
+    Align = alClient
+    BevelOuter = bvNone
+    TabOrder = 2
+    object Label1: TLabel
+      Left = 16
+      Top = 3
+      Width = 15
+      Height = 21
+      Caption = 'ID'
+    end
+    object Label2: TLabel
+      Left = 104
+      Top = 3
+      Width = 42
+      Height = 21
+      Caption = 'Nome'
+    end
+    object Label5: TLabel
+      Left = 160
+      Top = 61
+      Width = 71
+      Height = 21
+      Caption = 'Referencia'
+    end
+    object Label6: TLabel
+      Left = 15
+      Top = 61
+      Width = 36
+      Height = 21
+      Caption = 'NCM'
+    end
+    object Label7: TLabel
+      Left = 288
+      Top = 133
+      Width = 73
+      Height = 21
+      Caption = 'Sub Grupo'
+    end
+    object Label8: TLabel
+      Left = 530
+      Top = 61
+      Width = 117
+      Height = 21
+      Caption = 'Codigo de Barras'
+    end
+    object Label10: TLabel
+      Left = 16
+      Top = 133
+      Width = 43
+      Height = 21
+      Caption = 'Grupo'
+    end
+    object Label11: TLabel
+      Left = 15
+      Top = 195
+      Width = 81
+      Height = 21
+      Caption = 'Observacao'
+    end
+    object Label12: TLabel
+      Left = 608
+      Top = 133
+      Width = 70
+      Height = 21
+      Caption = 'Fabricante'
+    end
+    object EdtID: TEdit
+      Left = 16
+      Top = 24
+      Width = 65
+      Height = 29
+      TabOrder = 0
+    end
+    object EdtNome: TEdit
+      Left = 104
+      Top = 24
+      Width = 513
+      Height = 29
+      TabOrder = 1
+    end
+    object Edt_Referencia: TEdit
+      Left = 160
+      Top = 88
+      Width = 353
+      Height = 29
+      TabOrder = 2
+    end
+    object Edt_CodBarras: TEdit
+      Left = 528
+      Top = 88
+      Width = 345
+      Height = 29
+      TabOrder = 3
+    end
+    object CBB_Grupo: TAdvComboBox
+      Left = 16
+      Top = 160
+      Width = 257
+      Height = 29
+      Color = clWindow
+      Version = '2.0.0.6'
+      Visible = True
+      BevelOuter = bvNone
+      BorderColor = clGrayText
+      ButtonWidth = 17
+      EmptyTextStyle = []
+      DropWidth = 0
+      Enabled = True
+      ItemIndex = -1
+      LabelFont.Charset = ANSI_CHARSET
+      LabelFont.Color = clWindowText
+      LabelFont.Height = -16
+      LabelFont.Name = 'Segoe UI Semilight'
+      LabelFont.Style = []
+      TabOrder = 4
+    end
+    object CBB_SubGrupo: TAdvComboBox
+      Left = 288
+      Top = 160
+      Width = 305
+      Height = 29
+      Color = clWindow
+      Version = '2.0.0.6'
+      Visible = True
+      BevelOuter = bvNone
+      BorderColor = clGrayText
+      ButtonWidth = 17
+      EmptyTextStyle = []
+      DropWidth = 0
+      Enabled = True
+      ItemIndex = -1
+      LabelFont.Charset = ANSI_CHARSET
+      LabelFont.Color = clWindowText
+      LabelFont.Height = -16
+      LabelFont.Name = 'Segoe UI Semilight'
+      LabelFont.Style = []
+      TabOrder = 5
+    end
+    object CBB_Fabricante: TAdvComboBox
+      Left = 608
+      Top = 160
+      Width = 265
+      Height = 29
+      Color = clWindow
+      Version = '2.0.0.6'
+      Visible = True
+      BevelOuter = bvNone
+      BorderColor = clGrayText
+      ButtonWidth = 17
+      EmptyTextStyle = []
+      DropWidth = 0
+      Enabled = True
+      ItemIndex = -1
+      LabelFont.Charset = ANSI_CHARSET
+      LabelFont.Color = clWindowText
+      LabelFont.Height = -16
+      LabelFont.Name = 'Segoe UI Semilight'
+      LabelFont.Style = []
+      TabOrder = 6
+    end
+    object Mm_OBS: TMemo
+      Left = 16
+      Top = 217
+      Width = 857
+      Height = 64
+      TabOrder = 7
+    end
+    object CBB_NCM: TAdvComboBox
+      Left = 16
+      Top = 88
+      Width = 129
+      Height = 29
+      Color = clWindow
+      Version = '2.0.0.6'
+      Visible = True
+      BevelOuter = bvNone
+      BorderColor = clGrayText
+      ButtonWidth = 17
+      EmptyTextStyle = []
+      DropWidth = 0
+      Enabled = True
+      ItemIndex = -1
+      LabelFont.Charset = ANSI_CHARSET
+      LabelFont.Color = clWindowText
+      LabelFont.Height = -16
+      LabelFont.Name = 'Segoe UI Semilight'
+      LabelFont.Style = []
+      TabOrder = 8
+    end
+    object CardPanel_Detalhes: TCardPanel
+      Left = 16
+      Top = 296
+      Width = 862
+      Height = 209
+      ActiveCard = Card_Valores
+      BevelOuter = bvNone
+      TabOrder = 9
+      object Card_Valores: TCard
+        Left = 0
+        Top = 0
+        Width = 862
+        Height = 209
+        Caption = 'Card_Valores'
+        CardIndex = 0
+        TabOrder = 0
+        object CBX_CUSTO: TGroupBox
+          Left = 1
+          Top = 1
+          Width = 330
+          Height = 208
+          Caption = 'CUSTO / VENDA'
+          TabOrder = 0
+          object Label9: TLabel
+            Left = 3
+            Top = 22
+            Width = 67
+            Height = 17
+            Caption = 'Custo Inicial'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Segoe UI Semilight'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Label13: TLabel
+            Left = 174
+            Top = 22
+            Width = 96
+            Height = 17
+            Caption = 'Custo de Entrada'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Segoe UI Semilight'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Label18: TLabel
+            Left = 4
+            Top = 75
+            Width = 78
+            Height = 17
+            Caption = 'Valor de Frete'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Segoe UI Semilight'
+            Font.Style = []
+            ParentFont = False
+          end
+          object labelOutrasDesp: TLabel
+            Left = 4
+            Top = 130
+            Width = 93
+            Height = 17
+            Caption = 'Outras Despesas'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Segoe UI Semilight'
+            Font.Style = []
+            ParentFont = False
+          end
+          object EDT_VALORFRETE: TCalcEdit
+            Left = 3
+            Top = 91
+            Width = 121
+            Height = 29
+            TabOrder = 0
+            Text = ''
+            Link = False
+            ResultFormat = '%.2f'
+            ShowFormula = False
+          end
+          object EDT_CUSTOINICIAL: TCalcEdit
+            Left = 4
+            Top = 39
+            Width = 121
+            Height = 29
+            TabOrder = 1
+            Text = ''
+            Link = False
+            ResultFormat = '%.2f'
+            ShowFormula = False
+          end
+          object EDT_OUTRASDESPESAS: TCalcEdit
+            Left = 3
+            Top = 147
+            Width = 121
+            Height = 29
+            TabOrder = 2
+            Text = ''
+            Link = False
+            ResultFormat = '%.2f'
+            ShowFormula = False
+          end
+          object EDT_CUSTOENTRADA: TCalcEdit
+            Left = 173
+            Top = 39
+            Width = 121
+            Height = 29
+            TabOrder = 3
+            Text = ''
+            Link = False
+            ResultFormat = '%.2f'
+            ShowFormula = False
+          end
+        end
+        object CBX_FISCAL: TGroupBox
+          Left = 344
+          Top = 0
+          Width = 153
+          Height = 209
+          Caption = 'FISCAL'
+          TabOrder = 1
+          object Label14: TLabel
+            Left = 14
+            Top = 86
+            Width = 13
+            Height = 17
+            Caption = 'IPI'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Segoe UI Semilight'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Label15: TLabel
+            Left = 11
+            Top = 28
+            Width = 65
+            Height = 17
+            Caption = 'PIS/COFINS'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Segoe UI Semilight'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Label17: TLabel
+            Left = 11
+            Top = 148
+            Width = 29
+            Height = 17
+            Caption = 'ICMS'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Segoe UI Semilight'
+            Font.Style = []
+            ParentFont = False
+          end
+          object EDT_ICMS: TEdit
+            Left = 11
+            Top = 171
+            Width = 118
+            Height = 29
+            TabOrder = 0
+          end
+          object EDT_IPI: TEdit
+            Left = 11
+            Top = 113
+            Width = 118
+            Height = 29
+            TabOrder = 1
+          end
+          object EDT_PISCOFINS: TEdit
+            Left = 11
+            Top = 51
+            Width = 118
+            Height = 29
+            TabOrder = 2
+          end
+        end
+        object CBX_OUTROS: TGroupBox
+          Left = 514
+          Top = -1
+          Width = 341
+          Height = 210
+          Caption = 'OUTROS'
+          TabOrder = 2
+          object Label16: TLabel
+            Left = 22
+            Top = 28
+            Width = 81
+            Height = 17
+            Caption = 'Margem Lucro'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Segoe UI Semilight'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Label20: TLabel
+            Left = 174
+            Top = 30
+            Width = 67
+            Height = 17
+            Caption = 'Valor Venda'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Segoe UI Semilight'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Label21: TLabel
+            Left = 238
+            Top = 133
+            Width = 44
+            Height = 17
+            Caption = 'Estoque'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Segoe UI Semilight'
+            Font.Style = []
+            ParentFont = False
+          end
+          object EDT_ESTOQUE: TCalcEdit
+            Left = 24
+            Top = 156
+            Width = 257
+            Height = 38
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -21
+            Font.Name = 'Segoe UI Semilight'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 0
+            Text = ''
+            Link = False
+            ResultFormat = '%.2f'
+            ShowFormula = False
+          end
+          object EDT_VALORVENDA: TCalcEdit
+            Left = 173
+            Top = 53
+            Width = 148
+            Height = 38
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -21
+            Font.Name = 'Segoe UI'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 1
+            Text = ''
+            Link = False
+            ResultFormat = '%.2f'
+            ShowFormula = False
+          end
+          object EDT_MARGEMLUCRO: TCalcEdit
+            Left = 21
+            Top = 51
+            Width = 132
+            Height = 38
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -21
+            Font.Name = 'Segoe UI'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 2
+            Text = ''
+            Link = False
+            ResultFormat = '%.2f'
+            ShowFormula = False
+          end
+        end
+      end
+    end
+    object Check_Ativo: TCheckBox
+      Left = 625
+      Top = 30
+      Width = 128
+      Height = 17
+      Caption = 'Ativo/Inativo'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'Segoe UI Semilight'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 10
+    end
+    object CheckFracionar: TCheckBox
+      Left = 774
+      Top = 29
+      Width = 97
+      Height = 17
+      Caption = 'Fracionar'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -19
+      Font.Name = 'Segoe UI Semilight'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 11
+    end
+  end
+end

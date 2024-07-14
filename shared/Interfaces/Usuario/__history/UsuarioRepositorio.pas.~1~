@@ -1,0 +1,22 @@
+unit UsuarioRepositorio;
+
+interface
+
+uses
+  Usuario, Generics.Collections;
+
+type
+  IUsuarioRepository = interface
+    ['{A6B12C6F-D93C-4EF8-899F-7D1C1DE10E6B}']
+    function ObterPorId(Id: Integer): TUsuario;
+    function ObterPorLogin(Login: string): TUsuario;
+    function ObterTodos: TList<TUsuario>;
+    function Inserir(Usuario: TUsuario): Boolean;
+    function Atualizar(Usuario: TUsuario): Boolean;
+    function Deletar(Id: Integer): Boolean;
+  end;
+
+implementation
+
+end.
+

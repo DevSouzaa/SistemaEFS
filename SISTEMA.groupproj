@@ -3,7 +3,7 @@
         <ProjectGuid>{0A4E8006-6FC6-4E80-82F6-0ED708E09AA5}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
-        <Projects Include="erp\ERP.dproj">
+        <Projects Include="erp\EFS_SistemasERP.dproj">
             <Dependencies/>
         </Projects>
         <Projects Include="pdv\PDV.dproj">
@@ -17,14 +17,14 @@
             <Default.Personality/>
         </BorlandProject>
     </ProjectExtensions>
-    <Target Name="ERP">
-        <MSBuild Projects="erp\ERP.dproj"/>
+    <Target Name="EFS_SistemasERP">
+        <MSBuild Projects="erp\EFS_SistemasERP.dproj"/>
     </Target>
-    <Target Name="ERP:Clean">
-        <MSBuild Projects="erp\ERP.dproj" Targets="Clean"/>
+    <Target Name="EFS_SistemasERP:Clean">
+        <MSBuild Projects="erp\EFS_SistemasERP.dproj" Targets="Clean"/>
     </Target>
-    <Target Name="ERP:Make">
-        <MSBuild Projects="erp\ERP.dproj" Targets="Make"/>
+    <Target Name="EFS_SistemasERP:Make">
+        <MSBuild Projects="erp\EFS_SistemasERP.dproj" Targets="Make"/>
     </Target>
     <Target Name="PDV">
         <MSBuild Projects="pdv\PDV.dproj"/>
@@ -36,13 +36,13 @@
         <MSBuild Projects="pdv\PDV.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
-        <CallTarget Targets="ERP;PDV"/>
+        <CallTarget Targets="EFS_SistemasERP;PDV"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="ERP:Clean;PDV:Clean"/>
+        <CallTarget Targets="EFS_SistemasERP:Clean;PDV:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="ERP:Make;PDV:Make"/>
+        <CallTarget Targets="EFS_SistemasERP:Make;PDV:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

@@ -1,0 +1,46 @@
+inherited ViewListaProdutos: TViewListaProdutos
+  Caption = 'Produtos'
+  ClientWidth = 988
+  ExplicitWidth = 988
+  TextHeight = 21
+  inherited PnlTopo: TPanel
+    Width = 988
+    ExplicitWidth = 987
+    inherited LblTituloDaTela: TLabel
+      Width = 102
+      Height = 43
+      Caption = 'Produtos'
+      ExplicitWidth = 102
+      ExplicitHeight = 43
+    end
+    inherited PnlBotoes: TPanel
+      Left = 615
+      ExplicitLeft = 614
+      ExplicitHeight = 49
+      inherited PnlBtnNovo: TPanel
+        ExplicitLeft = 64
+        ExplicitTop = 3
+        ExplicitHeight = 43
+        inherited LblBtnNovo: TLabel
+          Width = 97
+          Height = 37
+        end
+      end
+      inherited PnlBtnEditar: TPanel
+        ExplicitLeft = 220
+        ExplicitTop = 3
+        ExplicitHeight = 43
+        inherited LblBtnEditar: TLabel
+          Width = 97
+          Height = 37
+        end
+      end
+    end
+  end
+  inherited PnlRodaPe: TPanel
+    Width = 988
+    ExplicitLeft = 0
+    ExplicitTop = 649
+    ExplicitWidth = 987
+  end
+end

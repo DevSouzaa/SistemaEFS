@@ -1,0 +1,67 @@
+inherited ViewModalCadastroUsuario: TViewModalCadastroUsuario
+  Caption = 'ViewModalCadastroUsuario'
+  ClientHeight = 409
+  ClientWidth = 668
+  ExplicitWidth = 668
+  ExplicitHeight = 409
+  TextHeight = 21
+  inherited PnlTopo: TPanel
+    Width = 668
+    inherited LblTituloDaTela: TLabel
+      Width = 517
+      Caption = 'Cadastro de Usuarios'
+      ExplicitWidth = 206
+    end
+    inherited PnlFecharTela: TPanel
+      Left = 558
+    end
+  end
+  inherited PnlRodaPe: TPanel
+    Top = 361
+    Width = 668
+    inherited PnlBtnGravar: TPanel
+      Left = 515
+    end
+  end
+  object PnlFundo: TPanel
+    Left = 0
+    Top = 35
+    Width = 668
+    Height = 326
+    Align = alClient
+    BevelOuter = bvNone
+    TabOrder = 2
+    ExplicitLeft = 192
+    ExplicitTop = 104
+    ExplicitWidth = 185
+    ExplicitHeight = 41
+    object EdtID: TEdit
+      Left = 20
+      Top = 27
+      Width = 49
+      Height = 29
+      TabOrder = 0
+    end
+    object EdtNome: TEdit
+      Left = 88
+      Top = 27
+      Width = 241
+      Height = 29
+      TabOrder = 1
+    end
+    object EdtLogin: TEdit
+      Left = 356
+      Top = 27
+      Width = 243
+      Height = 29
+      TabOrder = 2
+    end
+    object EdtSenha: TEdit
+      Left = 20
+      Top = 83
+      Width = 197
+      Height = 29
+      TabOrder = 3
+    end
+  end
+end

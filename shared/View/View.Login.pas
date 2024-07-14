@@ -21,42 +21,46 @@ uses
   Vcl.Buttons,
   Provider.Constantes,
 
-  Login.Controller,
+//  Controller.Login,
 
   View.Base,
   View.Principal,
 
-  Empresa.model,
+  Empresa,
+
+  Sistema,
 
   Generics.Collections,
 
   sComboBox,
   sComboBoxes,
-  sCustomComboEdit;
+  sCustomComboEdit,
+  sPanel,
+  acPNG;
 
 type
   TViewLogin = class(TViewBase)
-    PnlPrincipal: TPanel;
-    PnlLeft: TPanel;
-    PnlLogin: TPanel;
+    PnlPrincipal: TsGradientPanel;
+    BtnSair: TSpeedButton;
+    PnlLogin: TsGradientPanel;
+    CBB_Empresas: TComboBox;
+    EdtSenha: TEdit;
+    EdtUsuario: TEdit;
+    LblEmpresa: TLabel;
     LblSenha: TLabel;
     LblUsuario: TLabel;
-    PnlLogo: TPanel;
-    LblEmpresa: TLabel;
-    ImageLogo: TImage;
-    BtnSair: TSpeedButton;
-    EdtSenha: TEdit;
-    LblLogin: TLabel;
-    PnlBtnLogin: TPanel;
-    BtnLogin: TSpeedButton;
-    CBB_Empresas: TComboBox;
-    EdtUsuario: TEdit;
+    Image1: TImage;
+    BtnLogin: TsGradientPanel;
     procedure FormCreate(Sender: TObject);
     procedure BtnSairClick(Sender: TObject);
     procedure BtnLoginClick(Sender: TObject);
+    procedure EdtSenhaKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure BtnLoginMouseEnter(Sender: TObject);
+    procedure BtnLoginMouseLeave(Sender: TObject);
   private
     { Private declarations }
-    FLoginController: TLoginController; // Instância do controlador de login
+//    FLoginController: TLoginController; // Instância do controlador de login
 
     procedure CarregarEmpresas; // Método para carregar empresas
   public
@@ -70,20 +74,23 @@ implementation
 
 {$R *.dfm}
 
+uses
+  UFuncoes;
+
 procedure TViewLogin.FormCreate(Sender: TObject);
 begin
   inherited;
   ArredondarBorda(ViewLogin);
   ArredondarBorda(PnlPrincipal);
-  ArredondarBorda(PnlLeft);
   ArredondarBorda(PnlLogin);
   ArredondarBorda(EdtUsuario);
   ArredondarBorda(EdtSenha);
   ArredondarBorda(CBB_Empresas);
-  ArredondarBorda(PnlBtnLogin);
+  ArredondarBorda(BtnLogin);
 
-  FLoginController := TLoginController.Create; // Inicializa o controlador de login
+//  FLoginController := TLoginController.Create; // Inicializa o controlador de login
   CarregarEmpresas; // Carrega as empresas ao criar o formulário
+  CBB_Empresas.ItemIndex := 0;
 end;
 
 procedure TViewLogin.BtnLoginClick(Sender: TObject);
@@ -91,20 +98,40 @@ var
   UsuarioValido: Boolean;
 begin
   inherited;
-  UsuarioValido := FLoginController.Autenticar(EdtUsuario.Text, EdtSenha.Text);
-  if UsuarioValido then
-  begin
-    ShowMessage('Login bem-sucedido');
+//  UsuarioValido := FLoginController.Autenticar(EdtUsuario.Text, EdtSenha.Text);
+//  if UsuarioValido then
+//  begin
+//    if CBB_Empresas.ItemIndex >= 0 then
+//    begin
+//    TSistema.New.Empresa := TEmpresa(CBB_Empresas.Items.Objects[CBB_Empresas.ItemIndex]); // Casting para TEmpresa
+////      fnc_CriarMensagem('Autenticação Concluida', 'Usuario Encontrado',
+////        'Login Efetuado com Sucesso!', ExtractFilePath(Application.ExeName) + '\Icones\Confirmacao.png', 'OK');
+//      Application.CreateForm(TViewPrincipal, ViewPrincipal);
+//      try
+//        ViewPrincipal.ShowModal;
+//      finally
+//        Application.Terminate;
+//      end;
+//    end
+//    else
+//    begin
+//      ShowMessage('Selecione uma empresa.');
+//    end;
+//  end;
+end;
 
-    Application.CreateForm(TViewPrincipal, ViewPrincipal);
-    try
-      ViewPrincipal.ShowModal;
-    finally
-    Self.Close;
-    end;
-  end
-  else
-    ShowMessage('Usuário ou senha inválidos');
+procedure TViewLogin.BtnLoginMouseEnter(Sender: TObject);
+begin//on enter
+  inherited;
+  BtnLogin.PaintData.Color1.Color := CorClara2;
+  BtnLogin.PaintData.Color2.Color := CorClara;
+end;
+
+procedure TViewLogin.BtnLoginMouseLeave(Sender: TObject);
+begin//onleave
+  inherited;
+  BtnLogin.PaintData.Color1.Color := CorEscuroMax ;
+  BtnLogin.PaintData.Color2.Color := CorClara2  ;
 end;
 
 procedure TViewLogin.BtnSairClick(Sender: TObject);
@@ -114,19 +141,30 @@ begin
 end;
 
 procedure TViewLogin.CarregarEmpresas;
-var
-  Empresas: TList<TEmpresa>;
-  Empresa: TEmpresa;
 begin
-  Empresas := FLoginController.CarregarEmpresas;
-  try
-    CBB_Empresas.Items.Clear;  // Limpa a lista antes de adicionar novos itens
-    for Empresa in Empresas do
-    begin
-      CBB_Empresas.Items.AddObject(Empresa.RazaoSocial, TObject(Empresa.Id));
-    end;
-  finally
-    Empresas.Free;
+//var
+//  Empresas: TList<TEmpresa>;
+//  Empresa: TEmpresa;
+//begin
+//  Empresas := .CarregarEmpresas;
+//  try
+//    CBB_Empresas.Items.Clear;  // Limpa a lista antes de adicionar novos itens
+//    for Empresa in Empresas do
+//    begin
+//      CBB_Empresas.Items.AddObject(Empresa.RazaoSocial, Empresa); //carrega a empresa ja pq e mais facil pra passar na fsistema
+//    end;
+//  finally
+//    Empresas.Free;
+//  end;
+end;
+
+procedure TViewLogin.EdtSenhaKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  inherited;
+  if key = VK_RETURN then
+  begin
+    BtnLoginClick(sender);
   end;
 end;
 

@@ -1,0 +1,148 @@
+unit View.Login;
+
+interface
+
+uses
+  Winapi.Windows,
+  Winapi.Messages,
+
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  Vcl.ExtCtrls,
+  Vcl.StdCtrls,
+  Vcl.Mask,sMaskEdit,
+  Vcl.Imaging.jpeg,
+  Vcl.Buttons,
+  Provider.Constantes,
+
+  Login.Controller,
+
+  View.Base,
+  View.Principal,
+
+  Empresa,
+
+  Generics.Collections,
+
+  sComboBox,
+  sComboBoxes,
+  sCustomComboEdit,
+  sPanel,
+  acPNG;
+
+type
+  TViewLogin = class(TViewBase)
+    PnlPrincipal: TsGradientPanel;
+    BtnSair: TSpeedButton;
+    PnlLogin: TsGradientPanel;
+    CBB_Empresas: TComboBox;
+    EdtSenha: TEdit;
+    EdtUsuario: TEdit;
+    LblEmpresa: TLabel;
+    LblSenha: TLabel;
+    LblUsuario: TLabel;
+    Image1: TImage;
+    PnlBtnLogin: TsGradientPanel;
+    BtnLogin: TSpeedButton;
+    procedure FormCreate(Sender: TObject);
+    procedure BtnSairClick(Sender: TObject);
+    procedure BtnLoginClick(Sender: TObject);
+    procedure EdtSenhaKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+  private
+    { Private declarations }
+    FLoginController: TLoginController; // Instância do controlador de login
+
+    procedure CarregarEmpresas; // Método para carregar empresas
+  public
+    { Public declarations }
+  end;
+
+var
+  ViewLogin: TViewLogin;
+
+implementation
+
+{$R *.dfm}
+
+uses
+  UFuncoes;
+
+procedure TViewLogin.FormCreate(Sender: TObject);
+begin
+  inherited;
+  ArredondarBorda(ViewLogin);
+  ArredondarBorda(PnlPrincipal);
+  ArredondarBorda(PnlLogin);
+  ArredondarBorda(EdtUsuario);
+  ArredondarBorda(EdtSenha);
+  ArredondarBorda(CBB_Empresas);
+  ArredondarBorda(PnlBtnLogin);
+
+  FLoginController := TLoginController.Create; // Inicializa o controlador de login
+  CarregarEmpresas; // Carrega as empresas ao criar o formulário
+  CBB_Empresas.ItemIndex := 0;
+end;
+
+procedure TViewLogin.BtnLoginClick(Sender: TObject);
+var
+  UsuarioValido: Boolean;
+begin
+  inherited;
+  UsuarioValido := FLoginController.Autenticar(EdtUsuario.Text, EdtSenha.Text);
+  if UsuarioValido then
+  begin
+    fnc_CriarMensagem('Autenticação Concluida', 'Usuario Encontrado',
+     'Login Efetuado com Sucesso!',
+      ExtractFilePath(Application.ExeName) + '\Icones\Confirmacao.png', 'OK');
+
+    Application.CreateForm(TViewPrincipal, ViewPrincipal);
+    try
+      ViewPrincipal.ShowModal;
+    finally
+      Application.Terminate;
+    end;
+
+  end;
+end;
+
+procedure TViewLogin.BtnSairClick(Sender: TObject);
+begin
+  inherited;
+  self.Close;
+end;
+
+procedure TViewLogin.CarregarEmpresas;
+var
+  Empresas: TList<TEmpresa>;
+  Empresa: TEmpresa;
+begin
+  Empresas := FLoginController.CarregarEmpresas;
+  try
+    CBB_Empresas.Items.Clear;  // Limpa a lista antes de adicionar novos itens
+    for Empresa in Empresas do
+    begin
+      CBB_Empresas.Items.AddObject(Empresa.RazaoSocial, TObject(Empresa.Id));
+    end;
+  finally
+    Empresas.Free;
+  end;
+end;
+
+procedure TViewLogin.EdtSenhaKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  inherited;
+  if key = VK_RETURN then
+  begin
+    BtnLoginClick(sender);
+  end;
+end;
+
+end.

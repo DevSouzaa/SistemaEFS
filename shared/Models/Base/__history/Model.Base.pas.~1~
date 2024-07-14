@@ -1,0 +1,15 @@
+unit Model.Base;
+
+interface
+
+type
+  TModelBase = class
+  public
+    ID: Integer;
+    Nome: string;
+  end;
+
+implementation
+
+end.
+

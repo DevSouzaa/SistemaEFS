@@ -1,0 +1,78 @@
+unit Repositorio.ConfigCertificado;
+
+interface
+
+uses
+  RepositorioBase, ConfigCertificado, FireDAC.Comp.Client, System.SysUtils;
+
+type
+  TConfigCertificadoRepositorio = class(TRepositorioBase)
+  public
+    procedure Save(ACertificado: TConfigCertificado);
+    function LoadByFilial(AFilial: Integer): TConfigCertificado;
+    // Outros métodos conforme necessário
+  end;
+
+implementation
+
+procedure TConfigCertificadoRepository.Save(ACertificado: TConfigCertificado);
+var
+  Query: TFDQuery;
+begin
+  Query := TFDQuery.Create(nil);
+  try
+    Query.Connection := FConnection;
+    Query.SQL.Text := 'UPDATE CONFIG_CERTIFICADO SET ' +
+                      'CER_SSLLIB = :SSLLib, CER_CRYPTLIB = :CryptLib, CER_HTTPLIB = :HTTPLib, CER_XMLSIGNLIB = :XMLSignLib, ' +
+                      'CER_URL = :URL, CER_CAMINHO = :Caminho, CER_SENHA = :Senha, CER_NUMSERIE = :NumSerie, CER_STREAM = :Stream ' +
+                      'WHERE CER_FILIAL = :Filial';
+    Query.ParamByName('SSLLib').AsInteger := ACertificado.SSLLib;
+    Query.ParamByName('CryptLib').AsInteger := ACertificado.CryptLib;
+    Query.ParamByName('HTTPLib').AsInteger := ACertificado.HTTPLib;
+    Query.ParamByName('XMLSignLib').AsInteger := ACertificado.XMLSignLib;
+    Query.ParamByName('URL').AsString := ACertificado.URL;
+    Query.ParamByName('Caminho').AsString := ACertificado.Caminho;
+    Query.ParamByName('Senha').AsString := ACertificado.Senha;
+    Query.ParamByName('NumSerie').AsString := ACertificado.NumSerie;
+    Query.ParamByName('Stream').LoadFromStream(ACertificado.Stream, ftBlob);
+    Query.ParamByName('Filial').AsInteger := ACertificado.Filial;
+    Query.ExecSQL;
+  finally
+    Query.Free;
+  end;
+end;
+
+function TConfigCertificadoRepository.LoadByFilial(AFilial: Integer): TConfigCertificado;
+var
+  Query: TFDQuery;
+  ACertificado: TConfigCertificado;
+begin
+  Query := TFDQuery.Create(nil);
+  ACertificado := TConfigCertificado.Create;
+  try
+    Query.Connection := FConnection;
+    Query.SQL.Text := 'SELECT * FROM CONFIG_CERTIFICADO WHERE CER_FILIAL = :Filial';
+    Query.ParamByName('Filial').AsInteger := AFilial;
+    Query.Open;
+    if not Query.IsEmpty then
+    begin
+      ACertificado.Codigo := Query.FieldByName('CER_CODIGO').AsInteger;
+      ACertificado.SSLLib := Query.FieldByName('CER_SSLLIB').AsInteger;
+      ACertificado.CryptLib := Query.FieldByName('CER_CRYPTLIB').AsInteger;
+      ACertificado.HTTPLib := Query.FieldByName('CER_HTTPLIB').AsInteger;
+      ACertificado.XMLSignLib := Query.FieldByName('CER_XMLSIGNLIB').AsInteger;
+      ACertificado.URL := Query.FieldByName('CER_URL').AsString;
+      ACertificado.Caminho := Query.FieldByName('CER_CAMINHO').AsString;
+      ACertificado.Senha := Query.FieldByName('CER_SENHA').AsString;
+      ACertificado.NumSerie := Query.FieldByName('CER_NUMSERIE').AsString;
+      ACertificado.Filial := Query.FieldByName('CER_FILIAL').AsInteger;
+      Query.FieldByName('CER_STREAM').SaveToStream(ACertificado.Stream);
+    end;
+  finally
+    Query.Free;
+  end;
+  Result := ACertificado;
+end;
+
+end.
+

@@ -1,0 +1,15 @@
+unit Model.Unidade;
+
+interface
+
+uses
+  Model.Base;
+
+type
+  TUnidade = class(TModelBase)
+  end;
+
+implementation
+
+end.
+

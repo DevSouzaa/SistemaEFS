@@ -1,0 +1,64 @@
+unit EmpresaService;
+
+interface
+
+uses
+  Empresa, SysUtils, Generics.Collections, Dm.Principal, FireDAC.Comp.Client;
+
+type
+  TEmpresaService = class
+  public
+    function CarregarEmpresas: TList<TEmpresa>;
+    function CarregarEmpresaPorId(Id: Integer): TEmpresa;
+  end;
+
+implementation
+
+{ TEmpresaService }
+
+function TEmpresaService.CarregarEmpresas: TList<TEmpresa>;
+var
+  Query: TFDQuery;
+  Empresas: TList<TEmpresa>;
+  Empresa: TEmpresa;
+begin
+  Empresas := TList<TEmpresa>.Create;
+  Query := DMPrincipal.ExecutarQuery(DMPrincipal.QRY_Empresa, 'SELECT * FROM EMPRESA', []);
+  try
+    while not Query.Eof do
+    begin
+      Empresa := TEmpresa.Create;
+      Empresa.Id := Query.FieldByName('ID').AsInteger;
+      Empresa.RazaoSocial := Query.FieldByName('RAZAOSOCIAL').AsString;
+      Empresas.Add(Empresa);
+      Query.Next;
+    end;
+  finally
+    Query.Close;
+  end;
+  Result := Empresas;
+end;
+
+function TEmpresaService.CarregarEmpresaPorId(Id: Integer): TEmpresa;
+var
+  Query: TFDQuery;
+  Empresa: TEmpresa;
+begin
+  Query := DMPrincipal.ExecutarQuery(DMPrincipal.QRY_Empresa, 'SELECT * FROM EMPRESA WHERE ID = :ID', [Id]);
+  try
+    if not Query.Eof then
+    begin
+      Empresa := TEmpresa.Create;
+      Empresa.Id := Query.FieldByName('ID').AsInteger;
+      Empresa.RazaoSocial := Query.FieldByName('RAZAOSOCIAL').AsString;
+      Result := Empresa;
+    end
+    else
+      Result := nil;
+  finally
+    Query.Close;
+  end;
+end;
+
+end.
+

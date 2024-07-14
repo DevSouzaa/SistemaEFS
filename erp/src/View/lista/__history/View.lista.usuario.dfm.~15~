@@ -1,0 +1,61 @@
+inherited ViewListaUsuario: TViewListaUsuario
+  Caption = 'Usuario'
+  TextHeight = 21
+  inherited PnlTopo: TPanel
+    inherited PnlBotoes: TPanel
+      inherited PnlBtnNovo: TPanel
+        inherited LblBtnNovo: TLabel
+          OnClick = LblBtnNovoClick
+        end
+      end
+      inherited PnlBtnEditar: TPanel
+        inherited LblBtnEditar: TLabel
+          OnClick = LblBtnEditarClick
+        end
+      end
+    end
+    inherited ViewFrameCaminho1: TViewFrameCaminho
+      inherited PnlBackGound: TPanel
+        inherited PnlIcon2: TPanel
+          inherited LblTexto1: TLabel
+            Caption = 'Gest'#227'o'
+            ExplicitWidth = 48
+          end
+        end
+        inherited PnlIconText2: TPanel
+          inherited LblTexto2: TLabel
+            Caption = 'Usuarios'
+            ExplicitWidth = 62
+          end
+        end
+      end
+    end
+  end
+  inherited CadPanel_Dados: TCardPanel
+    ExplicitLeft = 0
+    ExplicitTop = 49
+    ExplicitWidth = 1024
+    ExplicitHeight = 600
+    inherited Card_DuasColuna: TCard
+      ExplicitLeft = 1
+      ExplicitTop = 1
+      ExplicitWidth = 1022
+      ExplicitHeight = 598
+      inherited ViewFrameDuasColuna: TViewFrameDuasColuna
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 1022
+        ExplicitHeight = 598
+        inherited ControlList1: TControlList
+          MarkDisabledItem = False
+          OnBeforeDrawItem = ViewFrameDuasColunaControlList1BeforeDrawItem
+          ExplicitWidth = 1022
+          ExplicitHeight = 598
+          inherited BtnEditar: TControlListButton
+            ExplicitLeft = 928
+          end
+        end
+      end
+    end
+  end
+end

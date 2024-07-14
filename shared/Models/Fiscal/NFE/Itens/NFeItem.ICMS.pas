@@ -1,0 +1,105 @@
+unit NFeItem.ICMS;
+
+interface
+
+uses
+  System.SysUtils, System.Classes;
+
+type
+  TNFeItemICMS = class
+  private
+    FIDNFeItem: Integer;
+    FICMS_CST: string;
+    FICMS_CSOSN: string;
+    FICMS_ORIG: string;
+    FICMS_MODBC: string;
+    FICMS_VBC: Double;
+    FICMS_PICMS: Double;
+    FICMS_VICMS: Double;
+    FICMS_MODBCST: string;
+    FICMS_PMVAST: Double;
+    FICMS_PREDBCST: Double;
+    FICMS_VBCST: Double;
+    FICMS_PICMSST: Double;
+    FICMS_VICMSST: Double;
+    FICMS_PREDBC: Double;
+    FICMS_PCREDSN: Double;
+    FICMS_VCREDICMSSN: Double;
+    FICMS_VBCFCPST: Double;
+    FICMS_PFCPST: Double;
+    FICMS_VFCPST: Double;
+    FICMS_VBCSTRET: Double;
+    FICMS_PST: Double;
+    FICMS_VICMSSUBSTITUTO: Double;
+    FICMS_VICMSSTRET: Double;
+    FICMS_VBCFCPSTRET: Double;
+    FICMS_PFCPSTRET: Double;
+    FICMS_VFCPSTRET: Double;
+    FICMS_PREDBCEFET: Double;
+    FICMS_VBCEFET: Double;
+    FICMS_PICMSEFET: Double;
+    FICMS_VICMSEFET: Double;
+    FICMS_VICMSSTDESON: Double;
+    FICMS_MOTDESICMSST: string;
+    FICMS_PFCPDIF: Double;
+    FICMS_VFCPDIF: Double;
+    FICMS_VFCPEFET: Double;
+    FICMSUFDEST_VBCUFDEST: Double;
+    FICMSUFDEST_PFCPUFDEST: Double;
+    FICMSUFDEST_PICMSUFDEST: Double;
+    FICMSUFDEST_PICMSINTER: Double;
+    FICMSUFDEST_PICMSINTERPART: Double;
+    FICMSUFDEST_VFCPUFDEST: Double;
+    FICMSUFDEST_VICMSUFDEST: Double;
+    FICMSUFDEST_VICMSUFREMET: Double;
+  public
+    property IDNFeItem: Integer read FIDNFeItem write FIDNFeItem;
+    property ICMS_CST: string read FICMS_CST write FICMS_CST;
+    property ICMS_CSOSN: string read FICMS_CSOSN write FICMS_CSOSN;
+    property ICMS_ORIG: string read FICMS_ORIG write FICMS_ORIG;
+    property ICMS_MODBC: string read FICMS_MODBC write FICMS_MODBC;
+    property ICMS_VBC: Double read FICMS_VBC write FICMS_VBC;
+    property ICMS_PICMS: Double read FICMS_PICMS write FICMS_PICMS;
+    property ICMS_VICMS: Double read FICMS_VICMS write FICMS_VICMS;
+    property ICMS_MODBCST: string read FICMS_MODBCST write FICMS_MODBCST;
+    property ICMS_PMVAST: Double read FICMS_PMVAST write FICMS_PMVAST;
+    property ICMS_PREDBCST: Double read FICMS_PREDBCST write FICMS_PREDBCST;
+    property ICMS_VBCST: Double read FICMS_VBCST write FICMS_VBCST;
+    property ICMS_PICMSST: Double read FICMS_PICMSST write FICMS_PICMSST;
+    property ICMS_VICMSST: Double read FICMS_VICMSST write FICMS_VICMSST;
+    property ICMS_PREDBC: Double read FICMS_PREDBC write FICMS_PREDBC;
+    property ICMS_PCREDSN: Double read FICMS_PCREDSN write FICMS_PCREDSN;
+    property ICMS_VCREDICMSSN: Double read FICMS_VCREDICMSSN write FICMS_VCREDICMSSN;
+    property ICMS_VBCFCPST: Double read FICMS_VBCFCPST write FICMS_VBCFCPST;
+    property ICMS_PFCPST: Double read FICMS_PFCPST write FICMS_PFCPST;
+    property ICMS_VFCPST: Double read FICMS_VFCPST write FICMS_VFCPST;
+    property ICMS_VBCSTRET: Double read FICMS_VBCSTRET write FICMS_VBCSTRET;
+    property ICMS_PST: Double read FICMS_PST write FICMS_PST;
+    property ICMS_VICMSSUBSTITUTO: Double read FICMS_VICMSSUBSTITUTO write FICMS_VICMSSUBSTITUTO;
+    property ICMS_VICMSSTRET: Double read FICMS_VICMSSTRET write FICMS_VICMSSTRET;
+    property ICMS_VBCFCPSTRET: Double read FICMS_VBCFCPSTRET write FICMS_VBCFCPSTRET;
+    property ICMS_PFCPSTRET: Double read FICMS_PFCPSTRET write FICMS_PFCPSTRET;
+    property ICMS_VFCPSTRET: Double read FICMS_VFCPSTRET write FICMS_VFCPSTRET;
+    property ICMS_PREDBCEFET: Double read FICMS_PREDBCEFET write FICMS_PREDBCEFET;
+    property ICMS_VBCEFET: Double read FICMS_VBCEFET write FICMS_VBCEFET;
+    property ICMS_PICMSEFET: Double read FICMS_PICMSEFET write FICMS_PICMSEFET;
+    property ICMS_VICMSEFET: Double read FICMS_VICMSEFET write FICMS_VICMSEFET;
+    property ICMS_VICMSSTDESON: Double read FICMS_VICMSSTDESON write FICMS_VICMSSTDESON;
+    property ICMS_MOTDESICMSST: string read FICMS_MOTDESICMSST write FICMS_MOTDESICMSST;
+    property ICMS_PFCPDIF: Double read FICMS_PFCPDIF write FICMS_PFCPDIF;
+    property ICMS_VFCPDIF: Double read FICMS_VFCPDIF write FICMS_VFCPDIF;
+    property ICMS_VFCPEFET: Double read FICMS_VFCPEFET write FICMS_VFCPEFET;
+    property ICMSUFDEST_VBCUFDEST: Double read FICMSUFDEST_VBCUFDEST write FICMSUFDEST_VBCUFDEST;
+    property ICMSUFDEST_PFCPUFDEST: Double read FICMSUFDEST_PFCPUFDEST write FICMSUFDEST_PFCPUFDEST;
+    property ICMSUFDEST_PICMSUFDEST: Double read FICMSUFDEST_PICMSUFDEST write FICMSUFDEST_PICMSUFDEST;
+    property ICMSUFDEST_PICMSINTER: Double read FICMSUFDEST_PICMSINTER write FICMSUFDEST_PICMSINTER;
+    property ICMSUFDEST_PICMSINTERPART: Double read FICMSUFDEST_PICMSINTERPART write FICMSUFDEST_PICMSINTERPART;
+    property ICMSUFDEST_VFCPUFDEST: Double read FICMSUFDEST_VFCPUFDEST write FICMSUFDEST_VFCPUFDEST;
+    property ICMSUFDEST_VICMSUFDEST: Double read FICMSUFDEST_VICMSUFDEST write FICMSUFDEST_VICMSUFDEST;
+    property ICMSUFDEST_VICMSUFREMET: Double read FICMSUFDEST_VICMSUFREMET write FICMSUFDEST_VICMSUFREMET;
+  end;
+
+implementation
+
+end.
+

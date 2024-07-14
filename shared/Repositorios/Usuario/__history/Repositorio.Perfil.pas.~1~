@@ -1,0 +1,46 @@
+unit Repositorio.Perfil;
+
+interface
+
+uses
+  Perfil, Generics.Collections, FireDAC.Comp.Client, RepositorioBase, System.SysUtils;
+
+type
+  TRepositorioPerfil = class(TRepositorioBase)
+  public
+    function ObterTodos: TList<TPerfil>;
+  end;
+
+implementation
+
+{ TRepositorioPerfil }
+
+function TRepositorioPerfil.ObterTodos: TList<TPerfil>;
+var
+  Query: TFDQuery;
+  Perfis: TList<TPerfil>;
+  Perfil: TPerfil;
+begin
+  Perfis := TList<TPerfil>.Create;
+  Query := TFDQuery.Create(nil);
+  try
+    Query.Connection := FDConn;
+    Query.SQL.Text := 'SELECT * FROM PERFIS';
+    Query.Open;
+
+    while not Query.Eof do
+    begin
+      Perfil := TPerfil.Create;
+      Perfil.Id := Query.FieldByName('ID').AsInteger;
+      Perfil.Nome := Query.FieldByName('NOME').AsString;
+      Perfis.Add(Perfil);
+      Query.Next;
+    end;
+    Result := Perfis;
+  finally
+    Query.Free;
+  end;
+end;
+
+end.
+

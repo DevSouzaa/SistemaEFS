@@ -1,0 +1,63 @@
+//Cores do sistema
+//
+//Da escura a clara
+//
+//#808cb0  convertida $00b08c80
+//
+//#929ec3  convertida $00c39e92
+//
+//#a5b1d6  convertida $00d6b1a5
+//
+//#b7c3e9  convertida $00e9c3b7
+//
+//#c9d5fc  convertida $00fcd5c9
+//
+
+
+
+unit UFuncoes;
+
+interface
+uses
+
+  IdHashMessageDigest,
+  UMenssagem,
+  Vcl.Graphics,
+
+  System.SysUtils,
+
+  Vcl.Dialogs,
+  Vcl.Forms,
+  Vcl.StdCtrls;
+
+  const
+    CorEscura:  TColor = $00b08c80;
+    CorEscura2: TColor = $00c39e92;
+    CorMedia:   TColor = $00d6b1a5;
+    CorClara2:  TColor = $00e9c3b7;
+    CorClara:   TColor = $00fcd5c9;
+
+
+Function fnc_CriarMensagem(TituloJanela, TituloMSG, MSG, Icone, Tipo: String): boolean;
+
+
+implementation
+
+Function fnc_CriarMensagem(TituloJanela, TituloMSG, MSG, Icone, Tipo: String): boolean;
+begin
+  Result := False;
+
+  ViewMenssagem := TViewMenssagem.Create(nil);
+  ViewMenssagem.sTituloJanela := TituloJanela;
+  ViewMenssagem.sTituloMsg := TituloMSG;
+  ViewMenssagem.sMSG := MSG;
+  ViewMenssagem.sCaminhoIcone := Icone;
+
+  ViewMenssagem.sTipo := Tipo;
+
+  ViewMenssagem.ShowModal;
+  Result := ViewMenssagem.bRespostaMsg;
+
+end;
+
+end.

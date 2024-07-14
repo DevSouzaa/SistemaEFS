@@ -1,0 +1,101 @@
+unit UsuarioService;
+
+interface
+
+uses
+  Usuario, Acesso, SysUtils, Generics.Collections, Enums, UsuarioRepositorio;
+
+type
+  TUsuarioService = class
+  private
+    FUsuarioRepositorio: TUsuarioRepositorio;
+    function CarregarAcessos(IDPerfil: Integer): TList<TAcesso>;
+  public
+    constructor Create;
+    function Autenticar(Login, Senha: string): TUsuario;
+    function TemPermissao(Usuario: TUsuario; AcaoId: Integer; Permissao: TAcaoUser): Boolean;
+    function SalvarUsuario(Usuario: TUsuario): Boolean;
+    function CarregarUsuarios: TList<TUsuario>;
+    function CarregarUsuarioPorId(Id: Integer): TUsuario;
+    function DeletarUsuario(Id: Integer): Boolean;
+  end;
+
+implementation
+
+{ TUsuarioService }
+
+constructor TUsuarioService.Create;
+begin
+  FUsuarioRepositorio := TUsuarioRepositorio.Create;
+end;
+
+function TUsuarioService.CarregarAcessos(IDPerfil: Integer): TList<TAcesso>;
+begin
+  // Implementar a lógica para carregar acessos
+end;
+
+function TUsuarioService.Autenticar(Login, Senha: string): TUsuario;
+var
+  Usuario: TUsuario;
+begin
+  Usuario := FUsuarioRepositorio.ObterPorLogin(Login);
+  if Assigned(Usuario) and (Usuario.Senha = Senha) then
+    Result := Usuario
+  else
+    Result := nil;
+end;
+
+function TUsuarioService.TemPermissao(Usuario: TUsuario; AcaoId: Integer; Permissao: TAcaoUser): Boolean;
+var
+  Acessos: TList<TAcesso>;
+  Acesso: TAcesso;
+begin
+  if not Assigned(Usuario) then
+    raise Exception.Create('Usuário não pode ser nulo.');
+
+  Acessos := CarregarAcessos(Usuario.PerfilId);
+  try
+    for Acesso in Acessos do
+    begin
+      if Acesso.AcaoId = AcaoId then
+      begin
+        case Permissao of
+          AcUInserir: Result := Acesso.Inserir;
+          AcUAlterar: Result := Acesso.Alterar;
+          AcUExcluir: Result := Acesso.Excluir;
+          AcUListar: Result := Acesso.Listar;
+        end;
+        Exit(True);
+      end;
+    end;
+    Result := False;
+  finally
+    Acessos.Free;
+  end;
+end;
+
+function TUsuarioService.SalvarUsuario(Usuario: TUsuario): Boolean;
+begin
+  if Usuario.Id = 0 then
+    Result := FUsuarioRepositorio.Inserir(Usuario)
+  else
+    Result := FUsuarioRepositorio.Atualizar(Usuario);
+end;
+
+function TUsuarioService.CarregarUsuarios: TList<TUsuario>;
+begin
+  Result := FUsuarioRepositorio.ObterTodos;
+end;
+
+function TUsuarioService.CarregarUsuarioPorId(Id: Integer): TUsuario;
+begin
+  Result := FUsuarioRepositorio.ObterPorId(Id);
+end;
+
+function TUsuarioService.DeletarUsuario(Id: Integer): Boolean;
+begin
+  Result := FUsuarioRepositorio.Deletar(Id);
+end;
+
+end.
+

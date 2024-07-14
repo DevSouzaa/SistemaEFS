@@ -1,0 +1,12 @@
+unit Provider.Constantes;
+
+interface
+ uses
+  Vcl.Graphics;
+
+Const
+  _CorReceberFoco = $00715536;
+  _CorPerderFoco = ClWindow;
+implementation
+
+end.
