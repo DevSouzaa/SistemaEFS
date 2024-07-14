@@ -187,40 +187,6 @@ type
     ActFiscal: TAction;
     Unidades: TMenuItem;
     LblMenu: TLabel;
-    Panel1: TPanel;
-    Shape1: TShape;
-    Panel2: TPanel;
-    Shape2: TShape;
-    Panel3: TPanel;
-    Shape3: TShape;
-    Panel4: TPanel;
-    Shape4: TShape;
-    Label1: TLabel;
-    Label2: TLabel;
-    Label3: TLabel;
-    Label4: TLabel;
-    Label5: TLabel;
-    Label6: TLabel;
-    Label7: TLabel;
-    Label8: TLabel;
-    Label11: TLabel;
-    Label12: TLabel;
-    Label10: TLabel;
-    Label9: TLabel;
-    Label13: TLabel;
-    Panel5: TPanel;
-    Shape5: TShape;
-    Label14: TLabel;
-    Label15: TLabel;
-    Label16: TLabel;
-    Label17: TLabel;
-    Label18: TLabel;
-    Label19: TLabel;
-    Label20: TLabel;
-    Label23: TLabel;
-    Label24: TLabel;
-    Label25: TLabel;
-    Label26: TLabel;
     procedure ImgUserEscuraMouseEnter(Sender: TObject);
     procedure ImgUserClaraMouseLeave(Sender: TObject);
     procedure BtnMinimizarClick(Sender: TObject);
@@ -512,7 +478,7 @@ begin
   PG_Abas.OnMouseMove := PG_AbasMouseMove;
   PG_Abas.OnChange := PG_AbasChange; // Adicione isto
 
-//  UserControl.StartLogin;
+  UserControl.StartLogin;
 end;
 
 procedure TViewPrincipal.PG_AbasChange(Sender: TObject);

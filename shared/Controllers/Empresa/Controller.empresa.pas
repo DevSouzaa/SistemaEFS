@@ -15,11 +15,18 @@ type
     function ObterPorId(Id: Integer): TEmpresa;
     function ObterFilialPadrao: TEmpresa;
     function ObterTodas: TList<TEmpresa>;
-    function Salvar(Empresa: TEmpresa): Boolean;
+    function Atualizar(Empresa: TEmpresa): Boolean;
+    function Inserir(Empresa: TEmpresa): Boolean;
     function Deletar(Id: Integer): Boolean;
+    function ObterPorNome(Nome: String): TList<TEmpresa>;
   end;
 
 implementation
+
+function TControllerEmpresa.Atualizar(Empresa: TEmpresa): Boolean;
+begin
+  Result := FService.Atualizar(Empresa);
+end;
 
 constructor TControllerEmpresa.Create;
 begin
@@ -31,14 +38,19 @@ begin
   Result := FService.ObterPorId(Id);
 end;
 
+function TControllerEmpresa.ObterPorNome(Nome: String): TList<TEmpresa>;
+begin
+  Result := FService.ObterTodas;
+end;
+
 function TControllerEmpresa.ObterTodas: TList<TEmpresa>;
 begin
   Result := FService.ObterTodas;
 end;
 
-function TControllerEmpresa.Salvar(Empresa: TEmpresa): Boolean;
+function TControllerEmpresa.Inserir(Empresa: TEmpresa): Boolean;
 begin
-  Result := FService.Salvar(Empresa);
+  Result := FService.Inserir(Empresa);
 end;
 
 function TControllerEmpresa.Deletar(Id: Integer): Boolean;

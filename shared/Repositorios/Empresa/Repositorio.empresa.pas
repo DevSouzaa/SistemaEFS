@@ -7,6 +7,8 @@ uses
 
 type
   TRepositorioEmpresa = class(TRepositorioBase)
+  private
+
   public
     function ObterPorId(Id: Integer): TEmpresa;
     function ObterFilialPadrao: TEmpresa;
@@ -14,6 +16,7 @@ type
     function Inserir(Empresa: TEmpresa): Boolean;
     function Atualizar(Empresa: TEmpresa): Boolean;
     function Deletar(Id: Integer): Boolean;
+    function ObterPorNome(Nome: String): TList<TEmpresa>;
   end;
 
 implementation
@@ -104,6 +107,7 @@ begin
 end;
 
 function TRepositorioEmpresa.ObterTodos: TList<TEmpresa>;
+
 var
   Query: TFDQuery;
   Empresas: TList<TEmpresa>;
@@ -116,6 +120,55 @@ begin
     Query.SQL.Text := 'SELECT * FROM EMPRESA';
     Query.Open;
 
+    while not Query.Eof do
+    begin
+      Empresa := TEmpresa.Create;
+      Empresa.Id := Query.FieldByName('ID').AsInteger;
+      Empresa.RazaoSocial := Query.FieldByName('RAZAOSOCIAL').AsString;
+      Empresa.Fantasia := Query.FieldByName('FANTASIA').AsString;
+      Empresa.CNPJ := Query.FieldByName('CNPJ').AsString;
+      Empresa.IE := Query.FieldByName('IE').AsString;
+      Empresa.Endereco := Query.FieldByName('ENDERECO').AsString;
+      Empresa.Numero := Query.FieldByName('NUMERO').AsString;
+      Empresa.Cidade := Query.FieldByName('CIDADE').AsString;
+      Empresa.Bairro := Query.FieldByName('BAIRRO').AsString;
+      Empresa.UF := Query.FieldByName('UF').AsString;
+      Empresa.CEP := Query.FieldByName('CEP').AsString;
+      Empresa.Telefone := Query.FieldByName('TELEFONE').AsString;
+      Empresa.IM := Query.FieldByName('IM').AsString;
+      Empresa.CRT := Query.FieldByName('CRT').AsInteger;
+      Empresa.Complemento := Query.FieldByName('COMPLEMENTO').AsString;
+      Empresa.IdPais := Query.FieldByName('ID_PAIS').AsInteger;
+      Empresa.CodigoIBGE := Query.FieldByName('CODIGO_IBGE').AsString;
+      Empresa.LogoMarca := Query.FieldByName('LOGOMARCA').AsString;
+      Empresas.Add(Empresa);
+      Query.Next;
+    end;
+    Result := Empresas;
+  finally
+    Query.Free;
+  end;
+end;
+
+function TRepositorioEmpresa.ObterPorNome(Nome: String): TList<TEmpresa>;
+var
+  Query: TFDQuery;
+  Empresas: TList<TEmpresa>;
+  Empresa: TEmpresa;
+begin
+  Empresas := TList<TEmpresa>.Create;
+  Query := TFDQuery.Create(nil);
+  try
+    Query.Connection := FDConn;
+    if Nome = '' then
+      Query.SQL.Text := 'SELECT * FROM EMPRESA'
+    else
+      Query.SQL.Text := 'SELECT * FROM EMPRESA WHERE RAZAOSOCIAL LIKE :Nome OR FANTASIA LIKE :Nome';
+    if Nome <> '' then
+    begin
+      Query.ParamByName('Nome').AsString := '%' + Nome + '%';
+    end;
+    Query.Open;
     while not Query.Eof do
     begin
       Empresa := TEmpresa.Create;

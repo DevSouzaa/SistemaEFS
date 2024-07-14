@@ -93,7 +93,7 @@ uses
   {$ENDIF}
   ComCtrls,
 
-  UCBase, acPNG, sPanel, Dm.UserControl;
+  UCBase, acPNG, sPanel, Dm.UserControl, Vcl.Imaging.pngimage;
 
 type
   TfrmLoginWindow = class(TForm)
@@ -105,17 +105,29 @@ type
     ImgBottom: TImage;
     Panel1: TPanel;
     StatusBar: TStatusBar;
-    PnlPrincipal: TsGradientPanel;
-    PnlLogin: TsGradientPanel;
-    LbSenha: TLabel;
-    LbUsuario: TLabel;
-    Image1: TImage;
+    PLogin: TPanel;
+    pnl_lateral: TPanel;
+    img_botao_sair: TImage;
+    lbl_autor: TLabel;
+    pnl_campos: TPanel;
+    pnl_botao_entrar: TPanel;
+    img_botao_impostos: TImage;
+    lbl_botao_entrar: TLabel;
+    pnl_login: TPanel;
+    lbUsuario: TLabel;
+    EditUsuario: TEdit;
+    pnl_barra_login: TPanel;
+    pnl_senha: TPanel;
+    lbsenha: TLabel;
     EditSenha: TEdit;
-    btOK: TBitBtn;
+    pnl_barra_senha: TPanel;
+    Panel2: TPanel;
+    EditUsuario2: TComboBox;
+    Image1: TImage;
     lbEsqueci: TLabel;
     BtCancela: TBitBtn;
-    PLogin: TPanel;
-    EditUsuario: TComboBox;
+    btOK: TBitBtn;
+    Image2: TImage;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure BtCancelaClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -123,7 +135,8 @@ type
     procedure FormKeyPress(Sender: TObject; var Key: char);
     procedure BotoesClickVisualizacao(Sender: TObject);
     procedure btOKClick(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
+    procedure lbl_botao_entrarClick(Sender: TObject);
+    procedure img_botao_sairClick(Sender: TObject);
   private
     procedure ArredondarBorda(Control: TWinControl);
   public
@@ -141,14 +154,6 @@ implementation
 procedure TfrmLoginWindow.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   Action := caFree;
-end;
-
-procedure TfrmLoginWindow.FormCreate(Sender: TObject);
-begin
- ArredondarBorda(PnlLogin);
- ArredondarBorda(PnlPrincipal);
- ArredondarBorda(EditSenha);
- ArredondarBorda(EditSenha);
 end;
 
 procedure TfrmLoginWindow.ArredondarBorda(Control: TWinControl) ;
@@ -237,25 +242,32 @@ begin
 
 
   //Carrega os usuários
-  EditUsuario.Items.Clear;
+//  EditUsuario.Items.Clear;
+//
+//  DMUserControl.QRY_usuarios.First;
+//  while not DMUserControl.QRY_usuarios.Eof do
+//  begin
+//
+//    EditUsuario.Items.Add(DMUserControl.QRY_usuariosUCLOGIN.AsString);
+//
+//    DMUserControl.QRY_usuarios.Next;
+//
+//  end;
+//
+//  EditUsuario.ItemIndex := 0;
+//
+//  EditUsuario.SetFocus;
 
-  DMUserControl.QRY_usuarios.First;
-  while not DMUserControl.QRY_usuarios.Eof do
-  begin
+end;
 
-    EditUsuario.Items.Add(DMUserControl.QRY_usuariosUCLOGIN.AsString);
+procedure TfrmLoginWindow.img_botao_sairClick(Sender: TObject);
+begin
+  BtCancela.Click;
+end;
 
-    DMUserControl.QRY_usuarios.Next;
-
-  end;
-
-  EditUsuario.ItemIndex := 0;
-
-  EditUsuario.SetFocus;
-
-  ArredondarBorda(PnlPrincipal);
-//  ArredondarBorda(StatusBar);
-
+procedure TfrmLoginWindow.lbl_botao_entrarClick(Sender: TObject);
+begin
+  btOK.Click
 end;
 
 procedure TfrmLoginWindow.EditUsuarioChange(Sender: TObject);

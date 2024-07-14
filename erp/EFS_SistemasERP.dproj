@@ -341,6 +341,30 @@
             <Form>ViewListaUnidades</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="src\View\modal\View.modal.cadastro.empresa.pas">
+            <Form>ViewModalCadastroEmpresas</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\View\modal\View.modal.cadastro.grupo.pas">
+            <Form>ViewBaseTelaModal2</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\View\modal\View.modal.cadastro.subgrupo.pas">
+            <Form>ViewBaseTelaModal3</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\View\modal\View.modal.cadastro.marca.pas">
+            <Form>ViewBaseTelaModal4</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\View\modal\View.Modal.Cadastro.fabricante.pas">
+            <Form>ViewBaseTelaModal5</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\View\modal\View.modal.cadastro.unidades.pas">
+            <Form>ViewBaseTelaModal6</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

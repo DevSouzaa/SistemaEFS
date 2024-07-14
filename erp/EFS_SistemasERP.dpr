@@ -140,7 +140,13 @@ uses
   View.lista.subgrupos in 'src\View\lista\View.lista.subgrupos.pas' {ViewListaSubGrupos},
   View.lista.marca in 'src\View\lista\View.lista.marca.pas' {ViewListaMarca},
   View.lista.fabricante in 'src\View\lista\View.lista.fabricante.pas' {ViewListaFabricante},
-  View.lista.unidade in 'src\View\lista\View.lista.unidade.pas' {ViewListaUnidades};
+  View.lista.unidade in 'src\View\lista\View.lista.unidade.pas' {ViewListaUnidades},
+  View.modal.cadastro.empresa in 'src\View\modal\View.modal.cadastro.empresa.pas' {ViewModalCadastroEmpresas},
+  View.modal.cadastro.grupo in 'src\View\modal\View.modal.cadastro.grupo.pas' {ViewBaseTelaModal2},
+  View.modal.cadastro.subgrupo in 'src\View\modal\View.modal.cadastro.subgrupo.pas' {ViewBaseTelaModal3},
+  View.modal.cadastro.marca in 'src\View\modal\View.modal.cadastro.marca.pas' {ViewBaseTelaModal4},
+  View.Modal.Cadastro.fabricante in 'src\View\modal\View.Modal.Cadastro.fabricante.pas' {ViewBaseTelaModal5},
+  View.modal.cadastro.unidades in 'src\View\modal\View.modal.cadastro.unidades.pas' {ViewBaseTelaModal6};
 
 {$R *.res}
 

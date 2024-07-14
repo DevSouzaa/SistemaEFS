@@ -134,6 +134,7 @@ var
   ViewModalCadastroProduto: TViewModalCadastroProduto;
 implementation
 {$R *.dfm}
+
 procedure TViewModalCadastroProduto.FormCreate(Sender: TObject);
 begin
   inherited;
@@ -154,6 +155,7 @@ begin
   FreeAndNil(FControllerMarca);
   FreeAndNil(FControllerUnidade);
 end;
+
 procedure TViewModalCadastroProduto.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   inherited;

@@ -11,7 +11,7 @@ inherited ViewModalCadastroProduto: TViewModalCadastroProduto
     Width = 891
     ExplicitWidth = 891
     inherited LblTituloDaTela: TLabel
-      Width = 212
+      Width = 740
       Caption = 'Cadastro de Produtos'
       ExplicitWidth = 212
     end

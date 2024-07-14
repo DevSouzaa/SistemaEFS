@@ -139,8 +139,8 @@ inherited ViewBaseLista: TViewBaseLista
           AlignWithMargins = True
           Left = 50
           Top = 3
-          Width = 69
-          Height = 21
+          Width = 97
+          Height = 37
           Margins.Left = 50
           Align = alClient
           Caption = 'Novo | F2'
@@ -153,6 +153,8 @@ inherited ViewBaseLista: TViewBaseLista
           Layout = tlCenter
           OnMouseEnter = LblBtnNovoMouseEnter
           OnMouseLeave = LblBtnNovoMouseLeave
+          ExplicitWidth = 69
+          ExplicitHeight = 21
         end
       end
       object PnlBtnEditar: TPanel
@@ -323,8 +325,8 @@ inherited ViewBaseLista: TViewBaseLista
           AlignWithMargins = True
           Left = 50
           Top = 3
-          Width = 71
-          Height = 21
+          Width = 97
+          Height = 37
           Margins.Left = 50
           Align = alClient
           Caption = 'Editar | F3'
@@ -337,6 +339,8 @@ inherited ViewBaseLista: TViewBaseLista
           Layout = tlCenter
           OnMouseEnter = LblBtnEditarMouseEnter
           OnMouseLeave = LblBtnEditarMouseLeave
+          ExplicitWidth = 71
+          ExplicitHeight = 21
         end
       end
     end
@@ -372,11 +376,19 @@ inherited ViewBaseLista: TViewBaseLista
           Height = 49
           ExplicitLeft = 43
           ExplicitHeight = 49
+          inherited LblTexto1: TLabel
+            Width = 106
+            Height = 43
+          end
         end
         inherited PnlIconText2: TPanel
           Height = 49
           ExplicitLeft = 190
           ExplicitHeight = 49
+          inherited LblTexto2: TLabel
+            Width = 312
+            Height = 43
+          end
         end
         inherited PnlIconText: TPanel
           Height = 49
@@ -31738,7 +31750,7 @@ inherited ViewBaseLista: TViewBaseLista
           ExplicitWidth = 1022
           ExplicitHeight = 569
           inherited VirtualImage1: TVirtualImage
-            ImageIndex = -1
+            ImageIndex = 2
             ImageName = 'BtnMenu_AzuFraco'
           end
           inherited BtnEditar: TControlListButton
@@ -31815,6 +31827,7 @@ inherited ViewBaseLista: TViewBaseLista
     Width = 1024
     Height = 29
     Align = alTop
+    CharCase = ecUpperCase
     TabOrder = 3
     TextHint = 'Digite sua pesquisa'
   end

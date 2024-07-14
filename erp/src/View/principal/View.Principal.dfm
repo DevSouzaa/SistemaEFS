@@ -39,7 +39,7 @@ inherited ViewPrincipal: TViewPrincipal
         Height = 50
         Align = alTop
         BevelOuter = bvNone
-        Color = 5322779
+        Color = 1644825
         ParentBackground = False
         TabOrder = 0
         object LblVersion: TLabel
@@ -768,7 +768,7 @@ inherited ViewPrincipal: TViewPrincipal
             Height = 50
             Align = alRight
             BevelOuter = bvNone
-            Color = 5322779
+            Color = 1644825
             ParentBackground = False
             TabOrder = 2
             object LblPerfilUser: TLabel
@@ -934,7 +934,7 @@ inherited ViewPrincipal: TViewPrincipal
         Height = 41
         Align = alTop
         BevelOuter = bvNone
-        Color = 7427382
+        Color = 2631720
         ParentBackground = False
         TabOrder = 1
       end
@@ -975,435 +975,6 @@ inherited ViewPrincipal: TViewPrincipal
         OnMouseMove = PG_AbasMouseMove
         object TabHome: TTabSheet
           Caption = 'Home'
-          DesignSize = (
-            816
-            582)
-          object Panel1: TPanel
-            Left = 48
-            Top = 20
-            Width = 313
-            Height = 138
-            BevelOuter = bvNone
-            Padding.Bottom = 10
-            TabOrder = 0
-            object Shape1: TShape
-              Left = 0
-              Top = 0
-              Width = 313
-              Height = 128
-              Align = alClient
-              Brush.Color = 6374953
-              Pen.Style = psClear
-              Shape = stRoundRect
-              ExplicitLeft = -96
-              ExplicitTop = -60
-              ExplicitHeight = 138
-            end
-            object Label1: TLabel
-              Left = 8
-              Top = 6
-              Width = 205
-              Height = 30
-              Caption = 'Total de vendas Hoje:'
-              Font.Charset = ANSI_CHARSET
-              Font.Color = clWhite
-              Font.Height = -21
-              Font.Name = 'Segoe UI Semibold'
-              Font.Style = [fsBold]
-              ParentFont = False
-            end
-            object Label5: TLabel
-              Left = 16
-              Top = 42
-              Width = 85
-              Height = 25
-              Caption = '36 Vendas'
-              Font.Charset = ANSI_CHARSET
-              Font.Color = 6337992
-              Font.Height = -19
-              Font.Name = 'Segoe UI Semilight'
-              Font.Style = []
-              ParentFont = False
-            end
-            object Label6: TLabel
-              Left = 16
-              Top = 78
-              Width = 152
-              Height = 25
-              Caption = 'Total de R$ 12.423 '
-              Font.Charset = ANSI_CHARSET
-              Font.Color = 6337992
-              Font.Height = -19
-              Font.Name = 'Segoe UI Semilight'
-              Font.Style = []
-              ParentFont = False
-            end
-          end
-          object Panel2: TPanel
-            Left = 482
-            Top = 20
-            Width = 313
-            Height = 138
-            Anchors = [akTop, akRight]
-            BevelOuter = bvNone
-            Padding.Bottom = 10
-            TabOrder = 1
-            object Shape2: TShape
-              Left = 0
-              Top = 0
-              Width = 313
-              Height = 128
-              Align = alClient
-              Anchors = [akTop, akBottom]
-              Brush.Color = 6374953
-              Pen.Style = psClear
-              Shape = stRoundRect
-              ExplicitLeft = -96
-              ExplicitTop = -60
-              ExplicitHeight = 138
-            end
-            object Label2: TLabel
-              Left = 8
-              Top = 6
-              Width = 261
-              Height = 30
-              Caption = 'Total de Vendas na Semana'
-              Font.Charset = ANSI_CHARSET
-              Font.Color = clWhite
-              Font.Height = -21
-              Font.Name = 'Segoe UI Semibold'
-              Font.Style = [fsBold]
-              ParentFont = False
-            end
-            object Label11: TLabel
-              Left = 16
-              Top = 42
-              Width = 95
-              Height = 25
-              Caption = '239 Vendas'
-              Font.Charset = ANSI_CHARSET
-              Font.Color = 6337992
-              Font.Height = -19
-              Font.Name = 'Segoe UI Semilight'
-              Font.Style = []
-              ParentFont = False
-            end
-            object Label12: TLabel
-              Left = 16
-              Top = 78
-              Width = 150
-              Height = 25
-              Caption = 'Total de R$ 80.733'
-              Font.Charset = ANSI_CHARSET
-              Font.Color = 6337992
-              Font.Height = -19
-              Font.Name = 'Segoe UI Semilight'
-              Font.Style = []
-              ParentFont = False
-            end
-          end
-          object Panel3: TPanel
-            Left = 56
-            Top = 385
-            Width = 313
-            Height = 138
-            Anchors = [akLeft, akBottom]
-            BevelOuter = bvNone
-            Padding.Bottom = 10
-            TabOrder = 2
-            object Shape3: TShape
-              Left = 0
-              Top = 0
-              Width = 313
-              Height = 128
-              Align = alClient
-              Brush.Color = 6374953
-              Pen.Style = psClear
-              Shape = stRoundRect
-              ExplicitLeft = -96
-              ExplicitTop = -60
-              ExplicitHeight = 138
-            end
-            object Label4: TLabel
-              Left = 8
-              Top = 6
-              Width = 226
-              Height = 30
-              Caption = 'Total de vendas no Mes'
-              Font.Charset = ANSI_CHARSET
-              Font.Color = clWhite
-              Font.Height = -21
-              Font.Name = 'Segoe UI Semibold'
-              Font.Style = [fsBold]
-              ParentFont = False
-            end
-            object Label7: TLabel
-              Left = 16
-              Top = 42
-              Width = 99
-              Height = 25
-              Caption = '1120 Vendas'
-              Font.Charset = ANSI_CHARSET
-              Font.Color = 6337992
-              Font.Height = -19
-              Font.Name = 'Segoe UI Semilight'
-              Font.Style = []
-              ParentFont = False
-            end
-            object Label8: TLabel
-              Left = 16
-              Top = 78
-              Width = 185
-              Height = 25
-              Caption = 'Total de R$ 399.875'
-              Font.Charset = ANSI_CHARSET
-              Font.Color = 6337992
-              Font.Height = -19
-              Font.Name = 'Segoe UI Semilight'
-              Font.Style = []
-              ParentFont = False
-            end
-          end
-          object Panel4: TPanel
-            Left = 482
-            Top = 391
-            Width = 313
-            Height = 138
-            Anchors = [akRight, akBottom]
-            BevelOuter = bvNone
-            Padding.Bottom = 10
-            TabOrder = 3
-            object Shape4: TShape
-              Left = 0
-              Top = 0
-              Width = 313
-              Height = 128
-              Align = alClient
-              Brush.Color = 6374953
-              Pen.Style = psClear
-              Shape = stRoundRect
-              ExplicitLeft = -96
-              ExplicitTop = -60
-              ExplicitHeight = 138
-            end
-            object Label3: TLabel
-              Left = 0
-              Top = 6
-              Width = 305
-              Height = 30
-              Caption = 'Produtos mais vendidos 30 dias'
-              Font.Charset = ANSI_CHARSET
-              Font.Color = clWhite
-              Font.Height = -21
-              Font.Name = 'Segoe UI Semibold'
-              Font.Style = [fsBold]
-              ParentFont = False
-            end
-            object Label10: TLabel
-              Left = 0
-              Top = 42
-              Width = 200
-              Height = 21
-              Caption = 'ID: 12 - Nome: Tijolo R$ 9.656'
-              Font.Charset = ANSI_CHARSET
-              Font.Color = 8452607
-              Font.Height = -16
-              Font.Name = 'Segoe UI Semilight'
-              Font.Style = []
-              ParentFont = False
-            end
-            object Label9: TLabel
-              Left = 1
-              Top = 66
-              Width = 215
-              Height = 21
-              Caption = 'ID: 74 - Nome: Cimento  R$ 556'
-              Font.Charset = ANSI_CHARSET
-              Font.Color = 4966364
-              Font.Height = -16
-              Font.Name = 'Segoe UI Semilight'
-              Font.Style = []
-              ParentFont = False
-            end
-            object Label13: TLabel
-              Left = 4
-              Top = 90
-              Width = 224
-              Height = 21
-              Caption = 'ID: 12 - Descricao: Vedacit R$ 956'
-              Font.Charset = ANSI_CHARSET
-              Font.Color = 45499
-              Font.Height = -16
-              Font.Name = 'Segoe UI Semilight'
-              Font.Style = []
-              ParentFont = False
-            end
-          end
-          object Panel5: TPanel
-            Left = 136
-            Top = 164
-            Width = 569
-            Height = 215
-            Anchors = []
-            BevelOuter = bvNone
-            FullRepaint = False
-            Padding.Bottom = 10
-            TabOrder = 4
-            object Shape5: TShape
-              Left = 0
-              Top = 0
-              Width = 569
-              Height = 205
-              Align = alClient
-              Brush.Color = 6374953
-              Pen.Style = psClear
-              Shape = stRoundRect
-              ExplicitHeight = 201
-            end
-            object Label14: TLabel
-              Left = 208
-              Top = 14
-              Width = 139
-              Height = 30
-              Caption = 'Resumo Diario'
-              Font.Charset = ANSI_CHARSET
-              Font.Color = clWhite
-              Font.Height = -21
-              Font.Name = 'Segoe UI Semibold'
-              Font.Style = [fsBold]
-              ParentFont = False
-            end
-            object Label15: TLabel
-              Left = 53
-              Top = 77
-              Width = 86
-              Height = 25
-              Caption = '12 Clientes'
-              Font.Charset = ANSI_CHARSET
-              Font.Color = 6337992
-              Font.Height = -19
-              Font.Name = 'Segoe UI Semilight'
-              Font.Style = []
-              ParentFont = False
-            end
-            object Label16: TLabel
-              Left = 296
-              Top = 136
-              Width = 259
-              Height = 25
-              Caption = 'Entrada de Caixa total: R$ 5.003'
-              Font.Charset = ANSI_CHARSET
-              Font.Color = 6337992
-              Font.Height = -19
-              Font.Name = 'Segoe UI Semilight'
-              Font.Style = []
-              ParentFont = False
-            end
-            object Label17: TLabel
-              Left = 296
-              Top = 167
-              Width = 227
-              Height = 25
-              Caption = 'Saida de Caixa total: R$ 253'
-              Font.Charset = ANSI_CHARSET
-              Font.Color = 6337992
-              Font.Height = -19
-              Font.Name = 'Segoe UI Semilight'
-              Font.Style = []
-              ParentFont = False
-            end
-            object Label18: TLabel
-              Left = 24
-              Top = 50
-              Width = 144
-              Height = 21
-              Caption = 'Clientes Cadastrados'
-              Font.Charset = ANSI_CHARSET
-              Font.Color = clWhite
-              Font.Height = -16
-              Font.Name = 'Segoe UI Semilight'
-              Font.Style = []
-              ParentFont = False
-            end
-            object Label19: TLabel
-              Left = 246
-              Top = 77
-              Width = 67
-              Height = 25
-              Caption = '3 Caixas'
-              Font.Charset = ANSI_CHARSET
-              Font.Color = 6337992
-              Font.Height = -19
-              Font.Name = 'Segoe UI Semilight'
-              Font.Style = []
-              ParentFont = False
-            end
-            object Label20: TLabel
-              Left = 233
-              Top = 50
-              Width = 101
-              Height = 21
-              Caption = 'Caixas Abertos'
-              Font.Charset = ANSI_CHARSET
-              Font.Color = clWhite
-              Font.Height = -16
-              Font.Name = 'Segoe UI Semilight'
-              Font.Style = []
-              ParentFont = False
-            end
-            object Label23: TLabel
-              Left = 429
-              Top = 77
-              Width = 75
-              Height = 25
-              Caption = '0 Vendas'
-              Font.Charset = ANSI_CHARSET
-              Font.Color = 6337992
-              Font.Height = -19
-              Font.Name = 'Segoe UI Semilight'
-              Font.Style = []
-              ParentFont = False
-            end
-            object Label24: TLabel
-              Left = 424
-              Top = 50
-              Width = 132
-              Height = 21
-              Caption = 'Vendas Canceladas'
-              Font.Charset = ANSI_CHARSET
-              Font.Color = clWhite
-              Font.Height = -16
-              Font.Name = 'Segoe UI Semilight'
-              Font.Style = []
-              ParentFont = False
-            end
-            object Label25: TLabel
-              Left = 53
-              Top = 141
-              Width = 125
-              Height = 25
-              Caption = '32 Orcamentos'
-              Font.Charset = ANSI_CHARSET
-              Font.Color = 6337992
-              Font.Height = -19
-              Font.Name = 'Segoe UI Semilight'
-              Font.Style = []
-              ParentFont = False
-            end
-            object Label26: TLabel
-              Left = 24
-              Top = 114
-              Width = 156
-              Height = 21
-              Caption = 'Orcamentos realizados'
-              Font.Charset = ANSI_CHARSET
-              Font.Color = clWhite
-              Font.Height = -16
-              Font.Name = 'Segoe UI Semilight'
-              Font.Style = []
-              ParentFont = False
-            end
-          end
         end
       end
     end
@@ -1424,7 +995,7 @@ inherited ViewPrincipal: TViewPrincipal
         Height = 670
         Align = alRight
         BevelOuter = bvNone
-        Color = 3941385
+        Color = 1644825
         ParentBackground = False
         TabOrder = 1
       end
@@ -1435,7 +1006,7 @@ inherited ViewPrincipal: TViewPrincipal
         Height = 670
         Align = alClient
         BevelOuter = bvNone
-        Color = 7427382
+        Color = 2631720
         ParentBackground = False
         TabOrder = 2
         object PnlBtnConfiguracao: TPanel
@@ -1454,7 +1025,7 @@ inherited ViewPrincipal: TViewPrincipal
             Width = 186
             Height = 36
             Align = alClient
-            Brush.Color = 5322779
+            Brush.Color = 1644825
             Pen.Color = 3217920
             Pen.Style = psClear
             Pen.Width = 0
@@ -1613,7 +1184,7 @@ inherited ViewPrincipal: TViewPrincipal
             Width = 186
             Height = 36
             Align = alClient
-            Brush.Color = 5322779
+            Brush.Color = 1644825
             Pen.Color = 3217920
             Pen.Style = psClear
             Pen.Width = 0
@@ -1764,7 +1335,7 @@ inherited ViewPrincipal: TViewPrincipal
             Height = 36
             Cursor = crHandPoint
             Align = alClient
-            Brush.Color = 5322779
+            Brush.Color = 1644825
             Pen.Color = 3217920
             Pen.Style = psClear
             Pen.Width = 0
@@ -1913,7 +1484,7 @@ inherited ViewPrincipal: TViewPrincipal
             Width = 186
             Height = 36
             Align = alClient
-            Brush.Color = 5322779
+            Brush.Color = 1644825
             Pen.Color = 3217920
             Pen.Style = psClear
             Pen.Width = 0
@@ -2064,7 +1635,7 @@ inherited ViewPrincipal: TViewPrincipal
             Width = 186
             Height = 36
             Align = alClient
-            Brush.Color = 5322779
+            Brush.Color = 1644825
             Pen.Color = 3217920
             Pen.Style = psClear
             Pen.Width = 0
@@ -2215,7 +1786,7 @@ inherited ViewPrincipal: TViewPrincipal
             Width = 186
             Height = 36
             Align = alClient
-            Brush.Color = 5322779
+            Brush.Color = 1644825
             Pen.Color = 3217920
             Pen.Style = psClear
             Pen.Width = 0
@@ -2365,7 +1936,7 @@ inherited ViewPrincipal: TViewPrincipal
             Width = 186
             Height = 36
             Align = alClient
-            Brush.Color = 5322779
+            Brush.Color = 1644825
             Pen.Color = 3217920
             Pen.Style = psClear
             Pen.Width = 0
@@ -2515,7 +2086,7 @@ inherited ViewPrincipal: TViewPrincipal
             Width = 186
             Height = 36
             Align = alClient
-            Brush.Color = 5322779
+            Brush.Color = 1644825
             Pen.Color = 3217920
             Pen.Style = psClear
             Pen.Width = 0
@@ -2666,7 +2237,7 @@ inherited ViewPrincipal: TViewPrincipal
             Width = 186
             Height = 36
             Align = alClient
-            Brush.Color = 5322779
+            Brush.Color = 1644825
             Pen.Color = 3217920
             Pen.Style = psClear
             Pen.Width = 0
@@ -2809,7 +2380,7 @@ inherited ViewPrincipal: TViewPrincipal
         Height = 50
         Align = alTop
         BevelOuter = bvNone
-        Color = 5322779
+        Color = 1644825
         ParentBackground = False
         TabOrder = 0
         object LblMenu: TLabel
@@ -3460,7 +3031,7 @@ inherited ViewPrincipal: TViewPrincipal
       Height = 48
       Align = alBottom
       BevelOuter = bvNone
-      Color = 6374953
+      Color = 2631720
       ParentBackground = False
       TabOrder = 2
       object PnlBtnSair: TPanel
@@ -3472,7 +3043,7 @@ inherited ViewPrincipal: TViewPrincipal
         Align = alRight
         BevelOuter = bvNone
         Caption = 'Sair'
-        Color = 5322779
+        Color = 1644825
         FullRepaint = False
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite

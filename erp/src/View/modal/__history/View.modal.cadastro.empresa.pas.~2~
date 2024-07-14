@@ -1,0 +1,54 @@
+unit View.modal.cadastro.empresa;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, View.Base.Tela.Modal, Vcl.ExtCtrls,
+  acPNG, Vcl.StdCtrls;
+
+type
+  TViewModalCadastroEmpresas = class(TViewBaseTelaModal)
+    PnlPrincipal: TPanel;
+    edtEmitUF: TEdit;
+    lblUF: TLabel;
+    edtEmitCidade: TEdit;
+    lblCidade: TLabel;
+    edtEmitCodCidade: TEdit;
+    lblCodCidade: TLabel;
+    edtEmitBairro: TEdit;
+    lblLogradouro: TLabel;
+    edtEmitLogradouro: TEdit;
+    lblFone: TLabel;
+    edtEmitFone: TEdit;
+    edtEmitCEP: TEdit;
+    lblCEP: TLabel;
+    edtEmitNumero: TEdit;
+    lblNumero: TLabel;
+    edtEmitComp: TEdit;
+    lblComplemento: TLabel;
+    edtEmitFantasia: TEdit;
+    lblFantasia: TLabel;
+    edtEmitRazao: TEdit;
+    lblRazaoSocial: TLabel;
+    cbTipoEmpresa: TComboBox;
+    edtEmitIE: TEdit;
+    lblIe: TLabel;
+    edtEmitCNPJ: TEdit;
+    lblCNPJ: TLabel;
+    lblTipoEmpresa: TLabel;
+    lblBairro: TLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ViewModalCadastroEmpresas: TViewModalCadastroEmpresas;
+
+implementation
+
+{$R *.dfm}
+
+end.
