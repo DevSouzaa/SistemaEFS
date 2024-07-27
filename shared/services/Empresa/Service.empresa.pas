@@ -3,7 +3,7 @@ unit Service.Empresa;
 interface
 
 uses
-  Empresa, Repositorio.Empresa, Generics.Collections;
+  Empresa, Repositorio.Empresa, Generics.Collections, System.SysUtils;
 
 type
   TServiceEmpresa = class
@@ -12,6 +12,7 @@ type
 
   public
     constructor Create;
+    destructor destroy;override;
     function ObterPorId(Id: Integer): TEmpresa;
     function ObterFilialPadrao: TEmpresa;
     function ObterTodas: TList<TEmpresa>;
@@ -56,6 +57,12 @@ end;
 function TServiceEmpresa.Deletar(Id: Integer): Boolean;
 begin
   Result := FRepositorio.Deletar(Id);
+end;
+
+destructor TServiceEmpresa.destroy;
+begin
+  FRepositorio.Free;
+  inherited;
 end;
 
 function TServiceEmpresa.ObterFilialPadrao: TEmpresa;

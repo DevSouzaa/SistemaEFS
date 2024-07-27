@@ -237,10 +237,6 @@ inherited ViewModalCadastroEmpresas: TViewModalCadastroEmpresas
       Height = 29
       Style = csDropDownList
       TabOrder = 13
-      Items.Strings = (
-        'Simples Nacional'
-        'Simples Nacional, excesso sublimite de receita bruta'
-        'Regime Normal')
     end
   end
 end

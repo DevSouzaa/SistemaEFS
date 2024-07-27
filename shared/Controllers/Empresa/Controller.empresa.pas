@@ -3,7 +3,7 @@ unit Controller.Empresa;
 interface
 
 uses
-  Empresa, Service.Empresa, Generics.Collections;
+  Empresa, Service.Empresa, Generics.Collections, System.SysUtils;
 
 type
   TControllerEmpresa = class
@@ -12,6 +12,7 @@ type
 
   public
     constructor Create;
+    destructor  Destroy; override;
     function ObterPorId(Id: Integer): TEmpresa;
     function ObterFilialPadrao: TEmpresa;
     function ObterTodas: TList<TEmpresa>;
@@ -56,6 +57,12 @@ end;
 function TControllerEmpresa.Deletar(Id: Integer): Boolean;
 begin
   Result := FService.Deletar(Id);
+end;
+
+destructor TControllerEmpresa.Destroy;
+begin
+  FService.Free;
+  inherited;
 end;
 
 function TControllerEmpresa.ObterFilialPadrao: TEmpresa;

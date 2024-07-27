@@ -1,0 +1,35 @@
+inherited ViewModalCadastroGrupo: TViewModalCadastroGrupo
+  Caption = 'ViewModalCadastroGrupo'
+  ClientHeight = 484
+  ClientWidth = 793
+  ExplicitWidth = 793
+  ExplicitHeight = 484
+  TextHeight = 21
+  inherited PnlTopo: TPanel
+    Width = 793
+    inherited LblTituloDaTela: TLabel
+      Width = 642
+      Height = 29
+      Caption = 'CADASTRO DE GRUPO'
+      ExplicitWidth = 223
+    end
+    inherited PnlFecharTela: TPanel
+      Left = 683
+      inherited lblFechar: TLabel
+        Width = 102
+        Height = 23
+      end
+    end
+  end
+  inherited PnlRodaPe: TPanel
+    Top = 436
+    Width = 793
+    inherited PnlBtnGravar: TPanel
+      Left = 640
+      inherited LblBtnGravar: TLabel
+        Width = 97
+        Height = 36
+      end
+    end
+  end
+end

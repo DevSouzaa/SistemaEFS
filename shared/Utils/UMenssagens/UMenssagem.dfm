@@ -135,7 +135,7 @@ inherited ViewMenssagem: TViewMenssagem
           Margins.Bottom = 55
           Align = alRight
           BevelOuter = bvNone
-          Color = 6374953
+          Color = 7822349
           ParentBackground = False
           TabOrder = 1
           object BtnSim: TSpeedButton
@@ -173,7 +173,7 @@ inherited ViewMenssagem: TViewMenssagem
       Margins.Bottom = 0
       Align = alTop
       BevelOuter = bvNone
-      Color = 6374953
+      Color = 7822349
       ParentBackground = False
       TabOrder = 1
       object LbTituloJanela: TLabel

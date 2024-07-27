@@ -22,7 +22,7 @@ uses
 
   vcl.Themes,
   Winapi.UxTheme,
-  //Views
+  View.venda,
   View.Base,
   View.lista.produtos,
   View.config.fiscal,
@@ -40,8 +40,21 @@ uses
 
   Generics.Collections,
 
-  Vcl.ComCtrls, UCSettings, System.Actions, Vcl.ActnList, UCDataConnector,
-  UCFireDACConn, UCBase, Dm.UserControl, AdvMenus, Vcl.Menus;
+  Vcl.ComCtrls,
+  UCSettings,
+
+  System.Actions,
+
+  Vcl.ActnList,
+  UCDataConnector,
+  UCFireDACConn,
+  UCBase,
+
+  Dm.UserControl,
+  AdvMenus,
+  Vcl.Menus;
+
+  procedure MudarBotao ( Form: Tform; Botao : TPanel );
 
 type
   TMyTabSheet = Class(TTabSheet)
@@ -77,7 +90,6 @@ type
     PnlMinimizar: TPanel;
     BtnMinimizar: TSpeedButton;
     PnlBtnConfiguracao: TPanel;
-    zPnlEspacoMenu: TPanel;
     ShapeBtnConfiguracao: TShape;
     PnlImgMenu: TPanel;
     ImgMenuEscura: TImage;
@@ -187,6 +199,9 @@ type
     ActFiscal: TAction;
     Unidades: TMenuItem;
     LblMenu: TLabel;
+    pnlTitMenu: TPanel;
+    lblTitMenu: TLabel;
+    Image1: TImage;
     procedure ImgUserEscuraMouseEnter(Sender: TObject);
     procedure ImgUserClaraMouseLeave(Sender: TObject);
     procedure BtnMinimizarClick(Sender: TObject);
@@ -217,6 +232,12 @@ type
     procedure MenuItem3Click(Sender: TObject);
     procedure MenuItem4Click(Sender: TObject);
     procedure SubGrupoClick(Sender: TObject);
+    procedure BtnEstoqueMouseEnter(Sender: TObject);
+    procedure BtnFaturamentoClick(Sender: TObject);
+    procedure ImgUserClaraClick(Sender: TObject);
+    procedure Vendas1Click(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure FormDestroy(Sender: TObject);
   private
 
     FCloseButtonRect: TRect;
@@ -225,10 +246,10 @@ type
 
     function GetVersaoExe(Prog: string): string;
 
-    procedure CriarFormularioAbas(FormClass: TFormClass; Multiplos: Boolean);
+    procedure CriarFormularioAbas(FormClass: TFormClass; Multiplos: Boolean; Movimento: string);
     Procedure FecharSistema;
     procedure FecharAbasAbertas;
-    procedure MostrarMenuMouseEnter(Sender: TObject);
+    procedure MostrarMenuOnClick(Sender: TObject);
     procedure SetaPropriedadesMenu;
     procedure MostrarSubMenu(PopupMenu: TAdvPopupMenu; Botao: TSpeedButton);
 
@@ -249,13 +270,13 @@ uses View.Base.Tela.Modal;
 procedure TViewPrincipal.MarcaClick(Sender: TObject);
 begin
   inherited;
-  CriarFormularioAbas(TViewListaMarca, false);
+  CriarFormularioAbas(TViewListaMarca, false,'');
 end;
 
 procedure TViewPrincipal.MenuItem3Click(Sender: TObject);
 begin
   inherited;
-  CriarFormularioAbas(TViewlistaEmpresas, false);
+  CriarFormularioAbas(TViewlistaEmpresas, false,'');
 end;
 
 procedure TViewPrincipal.MenuItem4Click(Sender: TObject);
@@ -267,10 +288,10 @@ end;
 procedure TViewPrincipal.GrupoClick(Sender: TObject);
 begin
   inherited;
-  CriarFormularioAbas(TViewListaGrupos, false);
+  CriarFormularioAbas(TViewListaGrupos, false, 'Grupo');
 end;
 
-procedure TViewPrincipal.MostrarMenuMouseEnter(Sender: TObject);
+procedure TViewPrincipal.MostrarMenuOnClick(Sender: TObject);
 begin  //Mostra o Menu
 
   if Sender is TSpeedButton then
@@ -287,31 +308,37 @@ end;
 
 procedure TViewPrincipal.SetaPropriedadesMenu;
 begin
-  BtnMovimentos.OnMouseEnter      := MostrarMenuMouseEnter;
-  btnCadastro.OnMouseEnter       := MostrarMenuMouseEnter;
-  btnEstoque.OnMouseEnter         := MostrarMenuMouseEnter;
-  btnFinanceiro.OnMouseEnter      := MostrarMenuMouseEnter;
-//  btnRelatorios.OnMouseEnter      := MostrarMenuMouseEnter;
-  btnFiscal.OnMouseEnter          := MostrarMenuMouseEnter;
-//  btnConfiguracoes.OnMouseEnter   := MostrarMenuMouseEnter;
+  BtnMovimentos.OnClick      := MostrarMenuOnClick;
+  btnCadastro.OnClick       := MostrarMenuOnClick;
+  btnEstoque.OnClick         := MostrarMenuOnClick;
+  btnFinanceiro.OnClick      := MostrarMenuOnClick;
+//  btnRelatorios.OnMouseEnter      := MostrarMenuOnClick;
+  btnFiscal.OnClick          := MostrarMenuOnClick;
+//  btnConfiguracoes.OnMouseEnter   := MostrarMenuOnClick;
 end;
 
 procedure TViewPrincipal.SubGrupoClick(Sender: TObject);
 begin
   inherited;
-  CriarFormularioAbas(TViewListaSubGrupos, false);
+  CriarFormularioAbas(TViewListaSubGrupos, false,'SubGrupo');
 end;
 
 procedure TViewPrincipal.UnidadesClick(Sender: TObject);
 begin
   inherited;
-  CriarFormularioAbas(TViewListaUnidades, false);
+  CriarFormularioAbas(TViewListaUnidades, false,'Unidades');
+end;
+
+procedure TViewPrincipal.Vendas1Click(Sender: TObject);
+begin
+  inherited;
+  CriarFormularioAbas(TViewVenda, true, 'VENDA');
 end;
 
 procedure TViewPrincipal.FabricanteClick(Sender: TObject);
 begin
   inherited;
-  CriarFormularioAbas(TViewListaFabricante, false);
+  CriarFormularioAbas(TViewListaFabricante, false,'Fabricante');
 end;
 
 procedure TViewPrincipal.MostrarSubMenu(PopupMenu: TAdvPopupMenu; Botao: TSpeedButton);
@@ -333,13 +360,14 @@ end;
 procedure TViewPrincipal.ActCadastroExecute(Sender: TObject);
 begin //
   inherited;
-  CriarFormularioAbas(TViewlistaPessoas, false);
+    CriarFormularioAbas(TViewlistaPessoas, false,'Pessoa');
+
 end;
 
 procedure TViewPrincipal.ActConfiguracoesExecute(Sender: TObject);
 begin
   inherited;
-  CriarFormularioAbas(TViewConfigFiscal, false);
+  CriarFormularioAbas(TViewConfigFiscal, false,'Configurações');
 end;
 
 procedure TViewPrincipal.ActMovimentosExecute(Sender: TObject);
@@ -351,13 +379,77 @@ end;
 procedure TViewPrincipal.ActEstoqueExecute(Sender: TObject);
 begin///
   inherited;
-  CriarFormularioAbas(TViewListaProdutos, false);
+  CriarFormularioAbas(TViewListaProdutos, false,'Produto');
 end;
 
 procedure TViewPrincipal.ActFiscalExecute(Sender: TObject);
 begin //
   inherited;
 
+end;
+
+procedure TViewPrincipal.BtnEstoqueMouseEnter(Sender: TObject);
+begin
+  inherited;
+  if ( Sender is TPanel ) then
+    MudarBotao ( ViewPrincipal, ( Sender AS TPanel ) )
+  else
+  if ( Sender is TLabel ) then
+    MudarBotao ( ViewPrincipal, ( ( Sender AS TLabel ).Parent As TPanel ) )
+  else
+  if ( Sender is TImage ) then
+    MudarBotao ( ViewPrincipal, ( ( Sender AS TImage ).Parent As TPanel ) );
+end;
+
+procedure MudarBotao ( Form: Tform; Botao : TPanel );
+var
+  i: Integer;
+
+begin
+  //percorre todos os componentes do formulario
+  for i:= 0 to Form.ComponentCount - 1 do
+  begin
+     //selecionando os label tag <> de 0, indicando que sao labels dos botoes
+     if ( Form.Components[i] is TLabel ) and
+        ( ( Form.Components[i] as TLabel ).Tag > 0 ) then
+     begin
+
+       //se a tag do label =  a do botao focado entao mud a cor
+       if ( Botao as TPanel ).Tag = ( Form.Components[i] as TLabel ).Tag then
+       begin
+         ( Form.Components[i] as TLabel ).Font.Color := $000080FF;
+         ( Form.Components[i] as TLabel ).Font.Style := [fsBold];
+       end else //nao tem a mesma tage entao é label dos outros botoes
+       begin
+         ( Form.Components[i] as TLabel ).Font.Color := clWhite;
+         ( Form.Components[i] as TLabel ).Font.Style := [];
+       end;
+
+     end;
+
+
+    //voltar a cor original de todos os outros botoes
+    if ( Form.Components[i] is TPanel ) and
+       (
+         ( ( ( Form.Components[i] as TPanel ).Parent ).Name = 'pnl_menulateral' ) or
+         ( ( ( Form.Components[i] as TPanel ).Parent ).Name = 'pnl_submenu_config' ) or
+         ( ( ( Form.Components[i] as TPanel ).Parent ).Name = 'pnl_submenu_tabelas' )
+       ) then
+    begin
+       ( Form.Components[i] as TPanel ).Color := $00191919;
+    end;
+
+  end;
+
+  //muda a cor do panel focado para um tom mais escuro
+  ( Botao as TPanel ).Color      := $00141414;
+end;
+
+
+procedure TViewPrincipal.BtnFaturamentoClick(Sender: TObject);
+begin
+  inherited;
+  TSpeedButton(Sender).Invalidate;
 end;
 
 procedure TViewPrincipal.BtnFiscalClick(Sender: TObject);
@@ -397,6 +489,12 @@ begin
   inherited;
   ImgMenuEscura.Visible := False;
   ImgMenuClara.Visible := True;
+end;
+
+procedure TViewPrincipal.ImgUserClaraClick(Sender: TObject);
+begin
+  inherited;
+  ActCadUsuario.Execute;
 end;
 
 procedure TViewPrincipal.ImgUserClaraMouseLeave(Sender: TObject);
@@ -481,6 +579,12 @@ begin
   UserControl.StartLogin;
 end;
 
+procedure TViewPrincipal.FormDestroy(Sender: TObject);
+begin
+  inherited;
+  FreeAndNil(FormInstances);
+end;
+
 procedure TViewPrincipal.PG_AbasChange(Sender: TObject);
 var
   TabRect: TRect;
@@ -512,8 +616,14 @@ end;
 
 
 
+procedure TViewPrincipal.FormKeyPress(Sender: TObject; var Key: Char);
+begin//para funcionar as vendas nas abar
+//  inherited;
+
+end;
+
 {$REGION 'TDI'}
-procedure TViewPrincipal.CriarFormularioAbas(FormClass: TFormClass; Multiplos: Boolean);
+procedure TViewPrincipal.CriarFormularioAbas(FormClass: TFormClass; Multiplos: Boolean; Movimento: String);
 var
   Form: TForm;
   TabSheet: TMyTabSheet;
@@ -530,6 +640,7 @@ begin
   FormInstances.AddOrSetValue(Form.ClassType, Form);
   Form.Parent := PG_Abas;
   Form.BorderStyle := bsNone;
+  Form.Caption := Movimento;
   Form.Align := alClient;
   TabSheet := TMyTabSheet.Create(PG_Abas);
   TabSheet.Caption := Form.Caption; // O título da aba será o título do formulário
@@ -539,6 +650,7 @@ begin
   Form.Show;
   TabSheet.Form := Form;
   PG_AbasChange(Self);
+
 end;
 
 procedure TViewPrincipal.FecharAbasAbertas;

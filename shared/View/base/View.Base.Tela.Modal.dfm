@@ -16,7 +16,7 @@ inherited ViewBaseTelaModal: TViewBaseTelaModal
     Height = 35
     Align = alTop
     BevelOuter = bvNone
-    Color = 6374953
+    Color = 7822349
     ParentBackground = False
     TabOrder = 0
     object LblTituloDaTela: TLabel

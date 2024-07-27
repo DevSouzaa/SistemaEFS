@@ -13,7 +13,7 @@ inherited ViewBaseLista: TViewBaseLista
     Height = 49
     Align = alTop
     BevelOuter = bvNone
-    Color = 11570304
+    Color = 7822349
     ParentBackground = False
     TabOrder = 0
     object PnlBotoes: TPanel
@@ -23,7 +23,7 @@ inherited ViewBaseLista: TViewBaseLista
       Height = 49
       Align = alRight
       BevelOuter = bvNone
-      Color = 10062452
+      Color = 7822349
       ParentBackground = False
       TabOrder = 0
       object PnlBtnNovo: TPanel
@@ -356,10 +356,12 @@ inherited ViewBaseLista: TViewBaseLista
       inherited PnlBackGound: TPanel
         Width = 651
         Height = 49
+        Color = 7822349
         ExplicitWidth = 651
         ExplicitHeight = 49
         inherited PnlIcon: TPanel
           Height = 43
+          Color = 7822349
           ExplicitLeft = 5
           ExplicitTop = 3
           ExplicitHeight = 43
@@ -374,6 +376,8 @@ inherited ViewBaseLista: TViewBaseLista
         end
         inherited PnlIcon2: TPanel
           Height = 49
+          Color = 7822349
+          ParentBackground = False
           ExplicitLeft = 43
           ExplicitHeight = 49
           inherited LblTexto1: TLabel

@@ -1,0 +1,115 @@
+unit Repositorio.Pessoa;
+
+interface
+
+uses
+  System.Generics.Collections, RepositorioBase, Model.Pessoa, FireDAC.Comp.Client;
+
+type
+  TRepositorioPessoa = class(TRepositorioBase)
+  public
+    function ObterTodos: TList<TPessoa>;
+    function ObterPorId(AID: Integer): TPessoa;
+    function ObterPorNome(ANome: string): TList<TPessoa>;
+    procedure Inserir(Pessoa: TPessoa);
+    procedure Atualizar(Pessoa: TPessoa);
+    procedure Deletar(AID: Integer);
+  end;
+
+implementation
+
+uses
+  System.SysUtils;
+
+function TRepositorioPessoa.ObterTodos: TList<TPessoa>;
+var
+  Query: TFDQuery;
+  Pessoas: TList<TPessoa>;
+  Pessoa: TPessoa;
+begin
+  Pessoas := TList<TPessoa>.Create;
+  Query := TFDQuery.Create(nil);
+  try
+    Query.Connection := FDConn;
+    Query.SQL.Text := 'SELECT * FROM PESSOA';
+    Query.Open;
+    while not Query.Eof do
+    begin
+      Pessoa := TPessoa.Create;
+      Pessoa.ID := Query.FieldByName('ID').AsInteger;
+      Pessoa.RazaoSocial := Query.FieldByName('RAZAO_SOCIAL').AsString;
+      Pessoa.Fantasia := Query.FieldByName('FANTASIA').AsString;
+      Pessoa.Cidade := Query.FieldByName('CIDADE').AsString;
+      Pessoa.Endereco := Query.FieldByName('ENDERECO').AsString;
+      Pessoa.Bairro := Query.FieldByName('BAIRRO').AsString;
+      Pessoa.CEP := Query.FieldByName('CEP').AsString;
+      Pessoa.UF := Query.FieldByName('UF').AsString;
+      Pessoa.Email := Query.FieldByName('EMAIL').AsString;
+      Pessoa.Telefone := Query.FieldByName('TELEFONE').AsString;
+      Pessoa.NumeroEndereco := Query.FieldByName('NUMERO_ENDERECO').AsString;
+      Pessoa.Complemento := Query.FieldByName('COMPLEMENTO').AsString;
+      Pessoa.PontoReferencia := Query.FieldByName('PONTO_REFERENCIA').AsString;
+      Pessoa.CNPJCPF := Query.FieldByName('CNPJCPF').AsString;
+      Pessoa.IERG := Query.FieldByName('IERG').AsString;
+      Pessoa.DtaCadastro := Query.FieldByName('DTA_CADASTRO').AsDateTime;
+      Pessoa.HraCadastro := Query.FieldByName('HRA_CADASTRO').AsDateTime;
+      Pessoa.DtaNascimento := Query.FieldByName('DTA_NASCIMENTO').AsDateTime;
+      Pessoa.TipoFJ := Query.FieldByName('TIPO_FJ').AsString;
+      Pessoa.LimiteLiberado := Query.FieldByName('LIMITE_LIBERADO').AsFloat;
+      Pessoa.LimiteUsado := Query.FieldByName('LIMITE_USADO').AsFloat;
+      Pessoa.Observacao := Query.FieldByName('OBSERVACAO').AsString;
+      Pessoa.TaxaJuro := Query.FieldByName('TAXA_JURO').AsFloat;
+      Pessoa.Contribuinte := Query.FieldByName('CONTRIBUINTE').AsInteger;
+      Pessoa.ConsumidorFinal := Query.FieldByName('CONSUMIDOR_FINAL').AsInteger;
+      Pessoa.IDPais := Query.FieldByName('ID_PAIS').AsInteger;
+      Pessoa.IDTipoPessoa := Query.FieldByName('ID_TIPOPESSOA').AsInteger;
+      Pessoa.CodigoIBGE := Query.FieldByName('CODIGO_IBGE').AsString;
+      Pessoa.IndIEDest := Query.FieldByName('INDIEDEST').AsInteger;
+      Pessoa.Ativo := Query.FieldByName('ATIVO').AsBoolean;
+      Pessoa.Regime := Query.FieldByName('REGIME').AsInteger;
+      Pessoa.Promotor := Query.FieldByName('PROMOTOR').AsInteger;
+      Pessoa.Cobrar := Query.FieldByName('COBRAR').AsBoolean;
+      Pessoa.VenderAPrazo := Query.FieldByName('VENDERAPRAZO').AsBoolean;
+      Pessoa.DescontoVendaAVista := Query.FieldByName('DESCONTOVENDAAVISTA').AsFloat;
+      Pessoa.AcrescimoVendaPrazo := Query.FieldByName('ACRESCIMOVENDAPRAZO').AsFloat;
+      Pessoas.Add(Pessoa);
+      Query.Next;
+    end;
+  finally
+    Query.Free;
+  end;
+  Result := Pessoas;
+end;
+
+function TRepositorioPessoa.ObterPorId(AID: Integer): TPessoa;
+var
+  Query: TFDQuery;
+  Pessoa: TPessoa;
+begin
+  Pessoa := nil;
+  Query := TFDQuery.Create(nil);
+  try
+    Query.Connection := FDConn;
+    Query.SQL.Text := 'SELECT * FROM PESSOA WHERE ID = :ID';
+    Query.ParamByName('ID').AsInteger := AID;
+    Query.Open;
+    if not Query.Eof then
+    begin
+      Pessoa := TPessoa.Create;
+      Pessoa.ID := Query.FieldByName('ID').AsInteger;
+      Pessoa.RazaoSocial := Query.FieldByName('RAZAO_SOCIAL').AsString;
+      Pessoa.Fantasia := Query.FieldByName('FANTASIA').AsString;
+      Pessoa.Cidade := Query.FieldByName('CIDADE').AsString;
+      Pessoa.Endereco := Query.FieldByName('ENDERECO').AsString;
+      Pessoa.Bairro := Query.FieldByName('BAIRRO').AsString;
+      Pessoa.CEP := Query.FieldByName('CEP').AsString;
+      Pessoa.UF := Query.FieldByName('UF').AsString;
+      Pessoa.Email := Query.FieldByName('EMAIL').AsString;
+      Pessoa.Telefone := Query.FieldByName('TELEFONE').AsString;
+      Pessoa.NumeroEndereco := Query.FieldByName('NUMERO_ENDERECO').AsString;
+      Pessoa.Complemento := Query.FieldByName('COMPLEMENTO').AsString;
+      Pessoa.PontoReferencia := Query.FieldByName('PONTO_REFERENCIA').AsString;
+      Pessoa.CNPJCPF := Query.FieldByName('CNPJCPF').AsString;
+      Pessoa.IERG := Query.FieldByName('IERG').AsString;
+      Pessoa
+

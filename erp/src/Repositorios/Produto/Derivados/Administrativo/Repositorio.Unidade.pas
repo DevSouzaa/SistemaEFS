@@ -1,10 +1,8 @@
 unit Repositorio.Unidade;
 
 interface
-
 uses
   System.Generics.Collections, RepositorioBase, Model.Unidade, FireDAC.Comp.Client, System.SysUtils;
-
 type
   TRepositorioUnidade = class(TRepositorioBase)
   public
@@ -15,9 +13,7 @@ type
     procedure Atualizar(Unidade: TUnidade);
     procedure Deletar(AID: Integer);
   end;
-
 implementation
-
 function TRepositorioUnidade.ObterTodos: TList<TUnidade>;
 var
   Query: TFDQuery;
@@ -33,7 +29,7 @@ begin
     while not Query.Eof do
     begin
       Unidade := TUnidade.Create;
-      Unidade.IDUnidade := Query.FieldByName('IDUNIDADE').AsInteger;
+      Unidade.ID := Query.FieldByName('IDUNIDADE').AsInteger;
       Unidade.Descricao := Query.FieldByName('DESCRICAO').AsString;
       Unidade.IDUsuarioCadastro := Query.FieldByName('IDUSUARIOCADASTRO').AsInteger;
       Unidade.IDUsuarioAlteracao := Query.FieldByName('IDUSUARIOALTERACAO').AsInteger;
@@ -50,7 +46,6 @@ begin
   end;
   Result := Unidades;
 end;
-
 function TRepositorioUnidade.ObterPorId(AID: Integer): TUnidade;
 var
   Query: TFDQuery;
@@ -66,7 +61,7 @@ begin
     if not Query.Eof then
     begin
       Unidade := TUnidade.Create;
-      Unidade.IDUnidade := Query.FieldByName('IDUNIDADE').AsInteger;
+      Unidade.ID := Query.FieldByName('IDUNIDADE').AsInteger;
       Unidade.Descricao := Query.FieldByName('DESCRICAO').AsString;
       Unidade.IDUsuarioCadastro := Query.FieldByName('IDUSUARIOCADASTRO').AsInteger;
       Unidade.IDUsuarioAlteracao := Query.FieldByName('IDUSUARIOALTERACAO').AsInteger;
@@ -81,7 +76,6 @@ begin
   end;
   Result := Unidade;
 end;
-
 function TRepositorioUnidade.ObterPorNome(ANome: string): TList<TUnidade>;
 var
   Query: TFDQuery;
@@ -98,7 +92,7 @@ begin
     while not Query.Eof do
     begin
       Unidade := TUnidade.Create;
-      Unidade.IDUnidade := Query.FieldByName('IDUNIDADE').AsInteger;
+      Unidade.ID := Query.FieldByName('IDUNIDADE').AsInteger;
       Unidade.Descricao := Query.FieldByName('DESCRICAO').AsString;
       Unidade.IDUsuarioCadastro := Query.FieldByName('IDUSUARIOCADASTRO').AsInteger;
       Unidade.IDUsuarioAlteracao := Query.FieldByName('IDUSUARIOALTERACAO').AsInteger;
@@ -115,7 +109,6 @@ begin
   end;
   Result := Unidades;
 end;
-
 procedure TRepositorioUnidade.Inserir(Unidade: TUnidade);
 var
   Query: TFDQuery;
@@ -137,7 +130,6 @@ begin
     Query.Free;
   end;
 end;
-
 procedure TRepositorioUnidade.Atualizar(Unidade: TUnidade);
 var
   Query: TFDQuery;
@@ -157,13 +149,12 @@ begin
     Query.ParamByName('Ativo').AsBoolean := Unidade.Ativo;
     Query.ParamByName('DataHoraAlteracao').AsDateTime := Unidade.DataHoraAlteracao;
     Query.ParamByName('DataHoraCadastro').AsDateTime := Unidade.DataHoraCadastro;
-    Query.ParamByName('ID').AsInteger := Unidade.IDUnidade;
+    Query.ParamByName('ID').AsInteger := Unidade.ID;
     Query.ExecSQL;
   finally
     Query.Free;
   end;
 end;
-
 procedure TRepositorioUnidade.Deletar(AID: Integer);
 var
   Query: TFDQuery;
@@ -178,5 +169,4 @@ begin
     Query.Free;
   end;
 end;
-
 end.

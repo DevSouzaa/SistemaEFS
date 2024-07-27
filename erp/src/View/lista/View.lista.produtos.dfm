@@ -2,6 +2,7 @@ inherited ViewListaProdutos: TViewListaProdutos
   Margins.Left = 5
   Caption = 'Produtos'
   ClientWidth = 1021
+  OnDestroy = FormDestroy
   ExplicitWidth = 1021
   TextHeight = 21
   inherited PnlTopo: TPanel
@@ -173,7 +174,7 @@ inherited ViewListaProdutos: TViewListaProdutos
             Width = 106
             Height = 43
             Caption = 'Estoque'
-            ExplicitWidth = 55
+            ExplicitWidth = 106
           end
         end
         inherited PnlIconText2: TPanel
@@ -181,7 +182,7 @@ inherited ViewListaProdutos: TViewListaProdutos
             Width = 312
             Height = 43
             Caption = 'Produtos'
-            ExplicitWidth = 67
+            ExplicitWidth = 312
           end
         end
       end

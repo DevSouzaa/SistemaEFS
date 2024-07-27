@@ -45,6 +45,7 @@ type
 
     class var FInstance: TConfigFiscal;
     constructor Create;
+    destructor destroy;
   public
     class function GetInstance: TConfigFiscal;
     procedure LoadConfigurations;
@@ -87,6 +88,29 @@ begin
   FConfigArquivosController    := TConfigArquivosController.Create;
 
   LoadConfigurations;
+end;
+
+destructor TConfigFiscal.destroy;
+begin
+  FConfigCertificado.Free;
+  FConfigGeral.Free;
+  FConfigDanfe.Free;
+  FConfigDiversos.Free;
+  FConfigPosPrinter.Free;
+  FConfigProxy.Free;
+  FConfigWebService.Free;
+  FConfigArquivos.Free;
+
+  FConfigCertificadoController.Free;
+  FConfigGeralController.Free;
+  FConfigDanfeController.Free;
+  FConfigDiversosController.Free;
+  FConfigPosPrinterController.Free;
+  FConfigProxyController.Free;
+  FConfigWebServiceController.Free;
+  FConfigArquivosController.Free;
+
+  inherited Destroy;
 end;
 
 class function TConfigFiscal.GetInstance: TConfigFiscal;

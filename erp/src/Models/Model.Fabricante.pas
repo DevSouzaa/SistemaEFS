@@ -7,9 +7,41 @@ uses
 
 type
   TFabricante = class(TModelBase)
+  private
+    FID: Integer;
+    FDescricao: string;
+    function GetID: Integer;
+    procedure SetID(Value: Integer);
+    function GetDescricao: string;
+    procedure SetDescricao(Value: string);
+  public
+    property ID: Integer read GetID write SetID;
+    property Descricao: string read GetDescricao write SetDescricao;
   end;
 
 implementation
+
+{ TFabricante }
+
+function TFabricante.GetID: Integer;
+begin
+  Result := FID;
+end;
+
+procedure TFabricante.SetID(Value: Integer);
+begin
+  FID := Value;
+end;
+
+function TFabricante.GetDescricao: string;
+begin
+  Result := FDescricao;
+end;
+
+procedure TFabricante.SetDescricao(Value: string);
+begin
+  FDescricao := Value;
+end;
 
 end.
 

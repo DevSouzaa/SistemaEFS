@@ -346,23 +346,35 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\View\modal\View.modal.cadastro.grupo.pas">
-            <Form>ViewBaseTelaModal2</Form>
+            <Form>ViewModalCadastroGrupo</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\View\modal\View.modal.cadastro.subgrupo.pas">
-            <Form>ViewBaseTelaModal3</Form>
+            <Form>ViewModalCadastroSubGrupo</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\View\modal\View.modal.cadastro.marca.pas">
-            <Form>ViewBaseTelaModal4</Form>
+            <Form>ViewModalCadastroMarca</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\View\modal\View.Modal.Cadastro.fabricante.pas">
-            <Form>ViewBaseTelaModal5</Form>
+            <Form>ViewModalCadastroFabricante</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="src\View\modal\View.modal.cadastro.unidades.pas">
-            <Form>ViewBaseTelaModal6</Form>
+            <Form>ViewModalCadastroUnidades</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="..\shared\Models\Model.Pessoa.pas"/>
+        <DCCReference Include="..\shared\Repositorios\Repositorio.Pessoa.pas"/>
+        <DCCReference Include="..\shared\services\Service.Pessoa.pas"/>
+        <DCCReference Include="..\shared\Controllers\Controller.Pessoa.pas"/>
+        <DCCReference Include="..\shared\View\view.modal.cadastro.pessoa.pas">
+            <Form>ViewModalCadastroPessoas</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\View\View.Venda.pas">
+            <Form>ViewVenda</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Base">

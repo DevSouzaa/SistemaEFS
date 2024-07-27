@@ -113,6 +113,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure LblBtnGravarClick(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
   private
     FControllerProduto: TControllerProduto;
     FControllerGrupo: TControllerGrupo;
@@ -239,9 +240,9 @@ begin
   try
     CBB_Unidade.Items.Clear;
     for Unidade in Unidades do
-      CBB_Unidade.AddItem(Unidade.IDUnidade, Unidade.DESCRICAO);
+      CBB_Unidade.AddItem(Unidade.ID, Unidade.DESCRICAO);
   finally
-    Unidades.Free;
+
   end;
 end;
 
@@ -272,6 +273,7 @@ begin
     CBB_SubGrupo.SelectByID(Produto.IdSubgrupo);
     CBB_Fabricante.SelectByID(Produto.IdFabricante);
     CBB_Marcas.SelectByID(Produto.IdMarca);
+
     CBB_Unidade.SelectByID(Produto.IdUnidade);
 
     Mm_OBS.Text := Produto.InfAdicionais;
@@ -311,21 +313,23 @@ begin
     Produto.IdMarca                := CBB_Marcas.SelectedID;
     Produto.IdUnidade              := CBB_Unidade.SelectedID;
 
+
     Produto.InfAdicionais          := Mm_OBS.Text;
     Produto.Item.ValorFreteCompra  := EDT_VALORFRETE.Value;
     Produto.Item.ValorCustoInicial := EDT_CUSTOINICIAL.Value;
     Produto.Item.ValorOutrosCustos := EDT_OUTRASDESPESAS.Value;
     Produto.Item.ValorCustoEntrada := EDT_CUSTOENTRADA.Value;
-    Produto.Item.Estoque := EDT_ESTOQUE.Value;
-    Produto.Item.ValorVendaVista := EDT_VALORVENDA.Value;
+    Produto.Item.Estoque           := EDT_ESTOQUE.Value;
+    Produto.Item.ValorVendaVista   := EDT_VALORVENDA.Value;
     Produto.Item.ValorPercentualMargemLucro := EDT_MARGEMLUCRO.Value;
-    Produto.Item.ICMSCompra := StrToFloatDef(EDT_ICMS.Text, 0);
-    Produto.Item.IPICompra := StrToFloatDef(EDT_IPI.Text, 0);
-    Produto.CSTPisCofinsEntrada := StrToInt(EDT_PISCOFINS.Text);
-    Produto.Ativo := Check_Ativo.Checked;
-    Produto.VendeFracionado := CheckFracionar.Checked;
-    Produto.NCM := EDT_NCM.Text;
-    Produto.DescricaoNCM := Edt_DescricaoNCM.Text;
+    Produto.Item.ICMSCompra                 := StrToFloatDef(EDT_ICMS.Text, 0);
+    Produto.Item.IPICompra                  := StrToFloatDef(EDT_IPI.Text, 0);
+    Produto.CSTPisCofinsEntrada             := StrToInt(EDT_PISCOFINS.Text);
+    Produto.Ativo                           := Check_Ativo.Checked;
+    Produto.VendeFracionado                 := CheckFracionar.Checked;
+    Produto.NCM                             := EDT_NCM.Text;
+    Produto.DescricaoNCM                    := Edt_DescricaoNCM.Text;
+
     if Produto.IdProduto = 0 then
       FControllerProduto.Inserir(Produto)
     else
@@ -333,6 +337,12 @@ begin
   finally
     Produto.Free;
   end;
+end;
+
+procedure TViewModalCadastroProduto.SpeedButton1Click(Sender: TObject);
+begin //aumentar estoque
+  inherited;
+  EDT_ESTOQUE.Value :=   EDT_ESTOQUE.Value + 1;
 end;
 
 end.

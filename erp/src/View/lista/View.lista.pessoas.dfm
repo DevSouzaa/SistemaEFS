@@ -41,6 +41,7 @@ inherited ViewListaPessoas: TViewListaPessoas
     inherited Card_DuasColuna: TCard
       inherited ViewFrameDuasColuna: TViewFrameDuasColuna
         inherited ControlList1: TControlList
+          OnBeforeDrawItem = ViewFrameDuasColunaControlList1BeforeDrawItem
           inherited VirtualImage1: TVirtualImage
             ImageIndex = 2
           end

@@ -81,6 +81,7 @@ begin
     edtEmitCEP.Text := Empresa.CEP;
     edtEmitFone.Text := Empresa.Telefone;
     edtEmitCodCidade.Text := Empresa.CodigoIBGE;
+    cbTipoEmpresa.SelectByID(Empresa.Tributacao);
 
   finally
     Empresa.Free;
@@ -91,6 +92,11 @@ procedure TViewModalCadastroEmpresas.FormCreate(Sender: TObject);
 begin
   inherited;
   FControllerEmpresa := TControllerEmpresa.Create;
+
+  cbTipoEmpresa.AddItem(1,'Simples Nacional');
+  cbTipoEmpresa.AddItem(2,'Lucro Presumido');
+  cbTipoEmpresa.AddItem(3,'Lucro Real');
+  cbTipoEmpresa.AddItem(4,'MEI');
 end;
 
 procedure TViewModalCadastroEmpresas.FormDestroy(Sender: TObject);
@@ -138,6 +144,7 @@ begin
     Empresa.CEP := edtEmitCEP.Text;
     Empresa.Telefone := edtEmitFone.Text;
     Empresa.CodigoIBGE := edtEmitCodCidade.Text;
+    Empresa.Tributacao := cbTipoEmpresa.SelectedID;
 
     // Decide se o registro será inserido ou atualizado
     if IDPesquisa = 0 then
@@ -146,7 +153,6 @@ begin
     begin
       FControllerEmpresa.Atualizar(Empresa);
     end;
-
   finally
     Empresa.Free;
   end;

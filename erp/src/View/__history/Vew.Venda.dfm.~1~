@@ -1,0 +1,8 @@
+inherited ViewBase1: TViewBase1
+  Caption = ''
+  ClientHeight = 729
+  ClientWidth = 1008
+  ExplicitWidth = 1024
+  ExplicitHeight = 768
+  TextHeight = 21
+end

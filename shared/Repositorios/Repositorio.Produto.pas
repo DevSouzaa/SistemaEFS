@@ -449,8 +449,8 @@ begin
                       'PERC_COFINS_VENDA = :PERC_COFINS_VENDA, DESP_OPER_VENDA = :DESP_OPER_VENDA, PERC_COMISSAO_VENDA_AVISTA = :PERC_COMISSAO_VENDA_AVISTA, ' +
                       'PERC_COMISSAO_VENDA_PRAZO = :PERC_COMISSAO_VENDA_PRAZO, PERC_OUTROS_VENDA = :PERC_OUTROS_VENDA, ' +
                       'DESCONTO_PRECO_COMPRA = :DESCONTO_PRECO_COMPRA, VALOR_CUSTO_VENDA = :VALOR_CUSTO_VENDA ' +
-                      'WHERE IDPRODUTOITEM = :IDPRODUTOITEM';
-    Query.ParamByName('IDPRODUTOITEM').AsInteger := Produto.Item.IdProdutoItem;
+                      'WHERE IDPRODUTO = :IDPRODUTO';
+    Query.ParamByName('IDPRODUTO').AsInteger := Produto.IdProduto;
     Query.ParamByName('VLRCUSTOINICIAL').AsFloat := Produto.Item.ValorCustoInicial;
     Query.ParamByName('VLRCUSTOENTRADA').AsFloat := Produto.Item.ValorCustoEntrada;
     Query.ParamByName('VLRVENDAVISTA').AsFloat := Produto.Item.ValorVendaVista;

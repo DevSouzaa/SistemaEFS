@@ -11,7 +11,7 @@ inherited ViewModalCadastroProduto: TViewModalCadastroProduto
     Width = 891
     ExplicitWidth = 891
     inherited LblTituloDaTela: TLabel
-      Width = 740
+      Width = 212
       Caption = 'Cadastro de Produtos'
       ExplicitWidth = 212
     end
@@ -490,6 +490,7 @@ inherited ViewModalCadastroProduto: TViewModalCadastroProduto
             Font.Name = 'Segoe UI'
             Font.Style = [fsBold]
             ParentFont = False
+            OnClick = SpeedButton1Click
           end
           object EDT_MARGEMLUCRO: TJvCalcEdit
             AlignWithMargins = True

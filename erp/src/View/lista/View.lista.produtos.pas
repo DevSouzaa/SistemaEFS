@@ -17,6 +17,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure EdtPesquisaChange(Sender: TObject);
     procedure ViewFrameDuasColunaBtnEditarClick(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
 
   private
     FocusedItemIndex: Integer;
@@ -48,6 +49,12 @@ begin
   GET_Produtos;
 end;
 
+procedure TViewListaProdutos.FormDestroy(Sender: TObject);
+begin
+  inherited;
+  FreeAndNil(FProdutos);
+end;
+
 procedure TViewListaProdutos.GET_Produtos;
 var
   ControllerProduto: TControllerProduto;
@@ -69,7 +76,7 @@ begin
         CadPanel_Dados.ActiveCard := Card_DuasColuna;
       end;
     finally
-      Produtos.Free;
+      FreeAndNil(Produtos);
     end;
   finally
     ControllerProduto.Free;
@@ -133,8 +140,20 @@ begin
     TLabel(FindComponent('LblSubTexto1')).Caption   := Produto.NCM;
     TLabel(FindComponent('LblTexto2')).Caption      := 'VALOR DE VENDA';
     TLabel(FindComponent('LblSubTexto2')).Caption   := FormatFloat('R$ ,0.00', Produto.ValorVenda);
+
+    TLabel(FindComponent('LblTexto3')).font.Color      := clBackground;
+    TLabel(FindComponent('LblSubTexto3')).font.Color   := clBackground;
+
+    if Produto.Estoque < 0 then
+    begin
+      TLabel(FindComponent('LblTexto3')).font.Color      := clRed;
+      TLabel(FindComponent('LblSubTexto3')).font.Color   := clRed;
+    end;
+
     TLabel(FindComponent('LblTexto3')).Caption      := 'ESTOQUE';
     TLabel(FindComponent('LblSubTexto3')).Caption   := FloatToStr(Produto.Estoque);
+
+
     // Aqui você adicionaria um evento de clique que atualiza uma variável do índice focado
    // Aqui você adiciona o índice ao botão de editar
     TButton(FindComponent('BtnEditar')).Tag := AIndex;

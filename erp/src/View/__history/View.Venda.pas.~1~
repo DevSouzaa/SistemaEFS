@@ -1,0 +1,86 @@
+unit Vew.Venda;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, View.Base, Vcl.ExtCtrls, Vcl.StdCtrls,
+  Vcl.Buttons, Vcl.Mask, JvExMask, JvToolEdit, JvBaseEdits;
+
+type
+  TViewBase1 = class(TViewBase)
+    pnlDadosFiltroNovaVenda: TPanel;
+    pnlBtnFecharVenda: TPanel;
+    ShapeBtnFecharVenda: TShape;
+    pnlDadosBtnFecharVenda: TPanel;
+    lblTitBtnFecharVenda: TLabel;
+    pnlDadosVendedor: TPanel;
+    lblVendedor: TLabel;
+    pnlContentVendedor: TPanel;
+    lblNomeVendedor: TLabel;
+    btnPesquisaUsuarios: TSpeedButton;
+    edtVendedor: TEdit;
+    pnlLineDivBotoesVendas: TPanel;
+    pnlCliente: TPanel;
+    pnlDadosClientes: TPanel;
+    lblCliente: TLabel;
+    BtnPesquisaCliente: TSpeedButton;
+    pnlContentCliente: TPanel;
+    lblNomeCliente: TLabel;
+    pnlInfoVenda: TPanel;
+    lblTitCaixa: TLabel;
+    lblNumCaixa: TLabel;
+    lblDtaAberturaCaixa: TLabel;
+    lblDtaAberturaCaixaInfo: TLabel;
+    lblOperador: TLabel;
+    lblNomeOperador: TLabel;
+    pnlLineInfoCaixa: TPanel;
+    pnlTopo: TPanel;
+    pnlConteudoTopo: TPanel;
+    pnlFechar: TPanel;
+    btnSair: TSpeedButton;
+    pnlLogo: TPanel;
+    imgLogoPequena: TImage;
+    pnlNomeEmpresa: TPanel;
+    lblNomeEmpresa: TLabel;
+    pnlNFe: TPanel;
+    Panel1: TPanel;
+    lblMovimento: TLabel;
+    Panel8: TPanel;
+    lblPesquisaMovimento: TLabel;
+    SpeedButton1: TSpeedButton;
+    edtIdMovimento: TEdit;
+    pnlLineNFe: TPanel;
+    pnlPesquisaProdutos: TPanel;
+    pnlLineTopPesquisaProdutos: TPanel;
+    pnlContentPesquisaProdutos: TPanel;
+    lblPesquisaProdutos: TLabel;
+    lblPrecoUnitario: TLabel;
+    lblPercDescontoProduto: TLabel;
+    lblQtdProduto: TLabel;
+    lblSubTotalProduto: TLabel;
+    btnPesquisarProdutos: TSpeedButton;
+    pnlAdicionarProduto: TPanel;
+    btnAddProduto: TSpeedButton;
+    pnlLineBtnAdicionar: TPanel;
+    edtQtdProduto: TJvCalcEdit;
+    edtPrecoUnitario: TJvCalcEdit;
+    edtPercDescontoProduto: TJvCalcEdit;
+    edtPrecoFinalProduto: TJvCalcEdit;
+    edtPesquisaProdutos: TEdit;
+    pnlLineBaixoPesquisaProdutos: TPanel;
+    EdtIDCliente: TEdit;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  ViewBase1: TViewBase1;
+
+implementation
+
+{$R *.dfm}
+
+end.

@@ -7,9 +7,41 @@ uses
 
 type
   TMarca = class(TModelBase)
+  private
+    FID: Integer;
+    FDescricao: string;
+    function GetID: Integer;
+    procedure SetID(Value: Integer);
+    function GetDescricao: string;
+    procedure SetDescricao(Value: string);
+  public
+    property ID: Integer read GetID write SetID;
+    property Descricao: string read GetDescricao write SetDescricao;
   end;
 
 implementation
+
+{ TMarca }
+
+function TMarca.GetID: Integer;
+begin
+  Result := FID;
+end;
+
+procedure TMarca.SetID(Value: Integer);
+begin
+  FID := Value;
+end;
+
+function TMarca.GetDescricao: string;
+begin
+  Result := FDescricao;
+end;
+
+procedure TMarca.SetDescricao(Value: string);
+begin
+  FDescricao := Value;
+end;
 
 end.
 

@@ -23,6 +23,8 @@ type
     FIdPais          : Integer;
     FCodigoIBGE      : String;
     FLogoMarca       : String;
+    FTributacao      : Integer;
+
 
   public
     Property Id            :  Integer     read FId            write FId          ;
@@ -43,6 +45,7 @@ type
     Property IdPais        :  Integer     read FIdPais        write FIdPais      ;
     Property CodigoIBGE    :  String      read FCodigoIBGE    write FCodigoIBGE  ;
     Property LogoMarca     :  String      read FLogoMarca     write FLogoMarca   ;
+    property Tributacao    :  Integer      read FTributacao    write FTributacao  ;
 
     constructor create;
 end;
@@ -71,6 +74,7 @@ begin
   FIdPais       := 0 ;
   FCodigoIBGE   := '';
   FLogoMarca    := '';
+  FTributacao   := 0;
 end;
 
 

@@ -5,10 +5,12 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, View.Base.Tela.Modal, Vcl.ExtCtrls,
-  acPNG, Vcl.StdCtrls;
+  acPNG, Vcl.StdCtrls, Vcl.Mask;
 
 type
-  TViewBaseTelaModal2 = class(TViewBaseTelaModal)
+  TViewModalCadastroGrupo = class(TViewBaseTelaModal)
+    EdtDescricao: TLabeledEdit;
+    EdtID: TLabeledEdit;
   private
     { Private declarations }
   public
@@ -16,7 +18,7 @@ type
   end;
 
 var
-  ViewBaseTelaModal2: TViewBaseTelaModal2;
+  ViewModalCadastroGrupo: TViewModalCadastroGrupo;
 
 implementation
 

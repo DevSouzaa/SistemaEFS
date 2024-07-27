@@ -1,11 +1,18 @@
 unit RepositorioBase;
 
 interface
+
 uses
   FireDAC.Comp.Client, FireDAC.Stan.Def, FireDAC.Stan.Async, FireDAC.Phys.FB, FireDAC.Phys.FBDef,
   FireDAC.UI.Intf, FireDAC.VCLUI.Wait, FireDAC.Comp.UI, System.SysUtils, Conexao, Generics.Collections;
+
 type
-  TRepositorioBase = class(TInterfacedObject)
+  IRepositorioBase = interface
+    ['{D5F5A5F0-2C3D-4D2A-9F9E-1AFA2D5A1A0A}']
+    function ExecutarQuery(Query: TFDQuery; SQL: string; Params: array of Variant): TFDQuery;
+  end;
+
+  TRepositorioBase = class(TInterfacedObject, IRepositorioBase)
   private
     FDriverLink: TFDPhysFBDriverLink;
     FWaitCursor: TFDGUIxWaitCursor;
@@ -17,10 +24,9 @@ type
     function ExecutarQuery(Query: TFDQuery; SQL: string; Params: array of Variant): TFDQuery;
   end;
 
-
 implementation
 
-{ TBaseRepository }
+{ TRepositorioBase }
 
 constructor TRepositorioBase.Create;
 var
@@ -44,42 +50,12 @@ end;
 
 destructor TRepositorioBase.Destroy;
 begin
-  FDConn.Free;
-  FWaitCursor.Free;
-  FDriverLink.Free;
+  FreeAndNil(FDConn);
+  FreeAndNil(FWaitCursor);
+  FreeAndNil(FDriverLink);
   inherited;
 end;
 
-function TRepositorioBase.ExecutarQuery(Query: TFDQuery; SQL: string; Params: array of Variant): TFDQuery;
-var
-  I: Integer;
-begin
-  Result := nil;
-  try
-    Query.Params.Clear;
-    Query.SQL.Text := SQL;
-    Query.Close;
-    if Length(Params) <> Query.Params.Count then
-      raise Exception.Create('O número de parâmetros não coincide com o esperado pela consulta SQL.');
-    for I := 0 to High(Params) do
-      Query.Params[I].Value := Params[I];
-    Query.Open;
-    Result := Query;
-  except
-    on E: Exception do
-    begin
-      {$IFDEF DEBUG}
-      // Em modo Debug, exibe a mensagem de erro detalhada
-//      ShowMessage('Erro na Consulta SQL: ' + E.Message);
-      {$ELSE}
-      // Em modo Release, exibe a mensagem de erro customizada
-      fnc_CriarMensagem('Erro ao Executar Consulta', 'Erro na Consulta SQL',
-        'Erro: ' + E.Message, ExtractFilePath(Application.ExeName) + '\Icones\Atencao.png', 'OK');
-      {$ENDIF}
-      raise;
-    end;
-  end;
-end;
 
 end.
 
