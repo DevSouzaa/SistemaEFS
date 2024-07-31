@@ -8,23 +8,23 @@ uses
 type
   TRepositorioGrupo = class(TRepositorioBase)
   public
-    function ObterTodos: TList<TGrupo>;
-    function ObterPorId(AID: Integer): TGrupo;
-    function ObterPorNome(ANome: string): TList<TGrupo>;
-    procedure Inserir(Grupo: TGrupo);
-    procedure Atualizar(Grupo: TGrupo);
+    function ObterTodos: TList<IGrupo>;
+    function ObterPorId(AID: Integer): IGrupo;
+    function ObterPorNome(ANome: string): TList<IGrupo>;
+    procedure Inserir(Grupo: IGrupo);
+    procedure Atualizar(Grupo: IGrupo);
     procedure Deletar(AID: Integer);
   end;
 
 implementation
 
-function TRepositorioGrupo.ObterTodos: TList<TGrupo>;
+function TRepositorioGrupo.ObterTodos: TList<IGrupo>;
 var
   Query: TFDQuery;
-  Grupos: TList<TGrupo>;
-  Grupo: TGrupo;
+  Grupos: TList<IGrupo>;
+  Grupo: IGrupo;
 begin
-  Grupos := TList<TGrupo>.Create;
+  Grupos := TList<IGrupo>.Create;
   Query := TFDQuery.Create(nil);
   try
     Query.Connection := FDConn;
@@ -32,9 +32,9 @@ begin
     Query.Open;
     while not Query.Eof do
     begin
-      Grupo := TGrupo.Create;
+      Grupo := TGrupo.Create;// as IGrupo;
       Grupo.ID := Query.FieldByName('ID').AsInteger;
-      Grupo.DESCRICAO := Query.FieldByName('DESCRICAO').AsString;
+      Grupo.Descricao := Query.FieldByName('DESCRICAO').AsString;
       Grupos.Add(Grupo);
       Query.Next;
     end;
@@ -44,10 +44,10 @@ begin
   Result := Grupos;
 end;
 
-function TRepositorioGrupo.ObterPorId(AID: Integer): TGrupo;
+function TRepositorioGrupo.ObterPorId(AID: Integer): IGrupo;
 var
   Query: TFDQuery;
-  Grupo: TGrupo;
+  Grupo: IGrupo;
 begin
   Grupo := nil;
   Query := TFDQuery.Create(nil);
@@ -58,9 +58,9 @@ begin
     Query.Open;
     if not Query.Eof then
     begin
-      Grupo := TGrupo.Create;
+      Grupo := TGrupo.Create as IGrupo;
       Grupo.ID := Query.FieldByName('ID').AsInteger;
-      Grupo.DESCRICAO := Query.FieldByName('DESCRICAO').AsString;
+      Grupo.Descricao := Query.FieldByName('DESCRICAO').AsString;
     end;
   finally
     Query.Free;
@@ -68,13 +68,13 @@ begin
   Result := Grupo;
 end;
 
-function TRepositorioGrupo.ObterPorNome(ANome: string): TList<TGrupo>;
+function TRepositorioGrupo.ObterPorNome(ANome: string): TList<IGrupo>;
 var
   Query: TFDQuery;
-  Grupos: TList<TGrupo>;
-  Grupo: TGrupo;
+  Grupos: TList<IGrupo>;
+  Grupo: IGrupo;
 begin
-  Grupos := TList<TGrupo>.Create;
+  Grupos := TList<IGrupo>.Create;
   Query := TFDQuery.Create(nil);
   try
     Query.Connection := FDConn;
@@ -83,9 +83,9 @@ begin
     Query.Open;
     while not Query.Eof do
     begin
-      Grupo := TGrupo.Create;
+      Grupo := TGrupo.Create as IGrupo;
       Grupo.ID := Query.FieldByName('ID').AsInteger;
-      Grupo.DESCRICAO := Query.FieldByName('DESCRICAO').AsString;
+      Grupo.Descricao := Query.FieldByName('DESCRICAO').AsString;
       Grupos.Add(Grupo);
       Query.Next;
     end;
@@ -95,7 +95,7 @@ begin
   Result := Grupos;
 end;
 
-procedure TRepositorioGrupo.Inserir(Grupo: TGrupo);
+procedure TRepositorioGrupo.Inserir(Grupo: IGrupo);
 var
   Query: TFDQuery;
 begin
@@ -103,14 +103,14 @@ begin
   try
     Query.Connection := FDConn;
     Query.SQL.Text := 'INSERT INTO Grupo (DESCRICAO) VALUES (:DESCRICAO)';
-    Query.ParamByName('DESCRICAO').AsString := Grupo.DESCRICAO;
+    Query.ParamByName('DESCRICAO').AsString := Grupo.Descricao;
     Query.ExecSQL;
   finally
     Query.Free;
   end;
 end;
 
-procedure TRepositorioGrupo.Atualizar(Grupo: TGrupo);
+procedure TRepositorioGrupo.Atualizar(Grupo: IGrupo);
 var
   Query: TFDQuery;
 begin
@@ -118,7 +118,7 @@ begin
   try
     Query.Connection := FDConn;
     Query.SQL.Text := 'UPDATE Grupo SET DESCRICAO = :DESCRICAO WHERE ID = :ID';
-    Query.ParamByName('DESCRICAO').AsString := Grupo.DESCRICAO;
+    Query.ParamByName('DESCRICAO').AsString := Grupo.Descricao;
     Query.ParamByName('ID').AsInteger := Grupo.ID;
     Query.ExecSQL;
   finally

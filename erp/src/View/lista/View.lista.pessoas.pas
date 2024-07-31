@@ -1,13 +1,13 @@
-unit View.lista.pessoas;
+unit View.Lista.Pessoas;
 
 interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, View.Base.Lista, Vcl.StdCtrls,
-  Vcl.WinXCtrls, View.frame.grid.tres.coluna, Vcl.WinXPanels,
-  View.frame.caminho, acPNG, Vcl.ExtCtrls, Generics.Collections, Model.Pessoa,
-  Controller.Pessoa, view.telaFundo, view.modal.cadastro.pessoa, ControlList;
+  Vcl.WinXCtrls, View.Frame.Grid.Tres.Coluna, Vcl.WinXPanels,
+  View.Frame.Caminho, acPNG, Vcl.ExtCtrls, Generics.Collections, Model.Pessoa,
+  Controller.Pessoa, View.TelaFundo, View.Modal.Cadastro.Pessoa, ControlList;
 
 type
   TViewListaPessoas = class(TViewBaseLista)
@@ -18,10 +18,11 @@ type
     procedure ControlListButtonClick(Sender: TObject);
     procedure ViewFrameDuasColunaControlList1BeforeDrawItem(AIndex: Integer;
       ACanvas: TCanvas; ARect: TRect; AState: TOwnerDrawState);
+    procedure FormDestroy(Sender: TObject);
 
   private
     FocusedItemIndex: Integer;
-    FPessoas: TList<TPessoa>;
+    FPessoas: TObjectList<TPessoa>;
     procedure GET_Pessoas;
     procedure AtualizarLista(Nome: string);
 
@@ -36,13 +37,19 @@ implementation
 
 {$R *.dfm}
 
-uses Enums, View.modal.cadastro.unidades;
+uses Enums, View.Modal.Cadastro.Unidades;
 
 procedure TViewListaPessoas.FormCreate(Sender: TObject);
 begin
   inherited;
-  FPessoas := TList<TPessoa>.Create;
+  FPessoas := TObjectList<TPessoa>.Create;
   GET_Pessoas;
+end;
+
+procedure TViewListaPessoas.FormDestroy(Sender: TObject);
+begin
+  FPessoas.Free;
+  inherited;
 end;
 
 procedure TViewListaPessoas.EdtPesquisaChange(Sender: TObject);
@@ -54,15 +61,18 @@ end;
 procedure TViewListaPessoas.GET_Pessoas;
 var
   ControllerPessoa: TPessoaController;
-  Pessoas: TList<TPessoa>;
+  Pessoas: TObjecTList<TPessoa>;
 begin
   ControllerPessoa := TPessoaController.Create;
   try
     Pessoas := ControllerPessoa.ObterTodos;
-    FPessoas.Clear;
-    FPessoas.AddRange(Pessoas);
+    try
+      FPessoas.AddRange(Pessoas);
+    finally
+      Pessoas.OwnsObjects := false;
+      Pessoas.Free; // Libere a lista Pessoas para evitar vazamento de memória
+    end;
   finally
-    FreeAndNil(Pessoas);
     ControllerPessoa.Free;
   end;
 
@@ -72,15 +82,20 @@ end;
 procedure TViewListaPessoas.AtualizarLista(Nome: string);
 var
   ControllerPessoa: TPessoaController;
-  Pessoas: TList<TPessoa>;
+  Pessoas: TObjectList<TPessoa>;
 begin
   ControllerPessoa := TPessoaController.Create;
   try
     Pessoas := ControllerPessoa.ObterPorNome(Nome);
-    FPessoas.Clear;
-    FPessoas.AddRange(Pessoas);
+    try
+      FPessoas.Clear; // Limpa a lista antes de adicionar novos objetos
+
+      FPessoas.AddRange(Pessoas); // Adiciona os objetos de Pessoas a FPessoas
+    finally
+      Pessoas.OwnsObjects := False; // Evita que os objetos sejam destruídos
+      Pessoas.Free; // Libera a lista, mas não os objetos
+    end;
   finally
-    FreeAndNil(Pessoas);
     ControllerPessoa.Free;
   end;
 
@@ -117,12 +132,12 @@ begin
   ViewModalCadastroPessoas := TViewModalCadastroPessoas.Create(Self);
   try
     ViewModalCadastroPessoas.Operacao := Enums.AcaoUserToStr(AcUAlterar);
-    ViewModalCadastroPessoas.IDPesquisa := FPessoas[FocusedItemIndex].ID; // passar id do que esta focado
+    ViewModalCadastroPessoas.IDPesquisa := FPessoas[FocusedItemIndex].ID; // passar id do que está focado
     ViewModalCadastroPessoas.ShowModal;
   finally
     TelaFundo.Hide;
-    FreeAndNil(TelaFundo);
-    FreeAndNil(ViewModalCadastroPessoas);
+    TelaFundo.Free;
+    ViewModalCadastroPessoas.Free;
   end;
 end;
 

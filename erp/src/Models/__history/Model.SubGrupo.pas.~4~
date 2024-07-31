@@ -1,0 +1,22 @@
+unit Model.SubGrupo;
+
+interface
+
+
+type
+  TSubGrupo = class
+  private
+    FID: Integer;
+    FDescricao: string;
+
+  public
+    property ID: Integer read FID write FID;
+    property Descricao: string read FDescricao write FDescricao;
+  end;
+
+implementation
+
+{ TSubGrupo }
+
+end.
+

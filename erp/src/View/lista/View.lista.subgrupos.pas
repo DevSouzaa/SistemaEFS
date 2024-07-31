@@ -1,4 +1,4 @@
-unit View.lista.subgrupos;
+unit View.Lista.SubGrupos;
 
 interface
 
@@ -13,12 +13,13 @@ type
     procedure LblBtnNovoClick(Sender: TObject);
     procedure LblBtnEditarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
     procedure EdtPesquisaChange(Sender: TObject);
     procedure ViewFrameDuasColunaControlList1BeforeDrawItem(AIndex: Integer;
       ACanvas: TCanvas; ARect: TRect; AState: TOwnerDrawState);
   private
     FocusedItemIndex: Integer;
-    FSubGrupos: TList<TSubGrupo>;
+    FSubGrupos: TList<ISubGrupo>;
     procedure GET_SubGrupos;
     procedure AtualizarLista(Nome: string);
     procedure ControlListButtonClick(Sender: TObject);
@@ -42,14 +43,20 @@ end;
 procedure TViewListaSubGrupos.FormCreate(Sender: TObject);
 begin
   inherited;
-  FSubGrupos := TList<TSubGrupo>.Create;
+  FSubGrupos := TList<ISubGrupo>.Create;
   GET_SubGrupos;
+end;
+
+procedure TViewListaSubGrupos.FormDestroy(Sender: TObject);
+begin
+  FSubGrupos.Free;
+  inherited;
 end;
 
 procedure TViewListaSubGrupos.GET_SubGrupos;
 var
   ControllerSubGrupo: TControllerSubGrupo;
-  SubGrupos: TList<TSubGrupo>;
+  SubGrupos: TList<ISubGrupo>;
 begin
   ControllerSubGrupo := TControllerSubGrupo.Create;
   try
@@ -67,7 +74,7 @@ begin
         CadPanel_Dados.ActiveCard := Card_DuasColuna;
       end;
     finally
-      SubGrupos.Free;
+      SubGrupos.Free; // Libere a lista SubGrupos para evitar vazamento de memória
     end;
   finally
     ControllerSubGrupo.Free;
@@ -91,12 +98,12 @@ end;
 procedure TViewListaSubGrupos.ViewFrameDuasColunaControlList1BeforeDrawItem(AIndex: Integer;
   ACanvas: TCanvas; ARect: TRect; AState: TOwnerDrawState);
 var
-  SubGrupo: TSubGrupo;
+  SubGrupo: ISubGrupo;
 begin
   SubGrupo := FSubGrupos[AIndex];
   with ViewFrameDuasColuna do
   begin
-    TLabel(FindComponent('LblID')).Caption          := IntToStr(SubGrupo.Id);
+    TLabel(FindComponent('LblID')).Caption          := IntToStr(SubGrupo.ID);
     TLabel(FindComponent('LblTexto1')).Caption      := 'Descrição';
     TLabel(FindComponent('LblSubTexto1')).Caption   := SubGrupo.Descricao;
     TLabel(FindComponent('LblTexto2')).Visible      := false;
@@ -118,7 +125,7 @@ end;
 procedure TViewListaSubGrupos.AtualizarLista(Nome: string);
 var
   ControllerSubGrupo: TControllerSubGrupo;
-  SubGrupos: TList<TSubGrupo>;
+  SubGrupos: TList<ISubGrupo>;
 begin
   ControllerSubGrupo := TControllerSubGrupo.Create;
   try
@@ -136,7 +143,7 @@ begin
         CadPanel_Dados.ActiveCard := Card_DuasColuna;
       end;
     finally
-      SubGrupos.Free;
+      SubGrupos.Free; // Libere a lista SubGrupos para evitar vazamento de memória
     end;
   finally
     ControllerSubGrupo.Free;

@@ -46,6 +46,7 @@ type
     procedure ViewFrameDuasColunaBtnEditarClick(Sender: TObject);
     procedure LblBtnNovoClick(Sender: TObject);
     procedure ControlListButtonClick(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
 
   private
     FocusedItemIndex: Integer;
@@ -71,6 +72,12 @@ begin
   GET_Empresas;
 end;
 
+procedure TViewListaEmpresas.FormDestroy(Sender: TObject);
+begin
+  inherited;
+  FreeAndNil(FEmpresas);
+end;
+
 procedure TViewListaEmpresas.EdtPesquisaChange(Sender: TObject);
 begin
   inherited;
@@ -83,12 +90,13 @@ var
   Empresas: TList<TEmpresa>;
 begin
   ControllerEmpresa := TControllerEmpresa.Create;
+  Empresas := ControllerEmpresa.ObterTodas;
   try
-    Empresas := ControllerEmpresa.ObterTodas;
+
     FEmpresas.Clear;
     FEmpresas.AddRange(Empresas);
   finally
-    FreeAndNil(Empresas);
+    Empresas.Free;
     ControllerEmpresa.Free;
   end;
 

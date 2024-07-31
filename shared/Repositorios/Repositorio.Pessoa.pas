@@ -8,9 +8,9 @@ uses
 type
   TRepositorioPessoa = class(TRepositorioBase)
   public
-    function ObterTodos: TList<TPessoa>;
+    function ObterTodos: TObjecTList<TPessoa>;
     function ObterPorId(AID: Integer): TPessoa;
-    function ObterPorNome(ANome: string): TList<TPessoa>;
+    function ObterPorNome(ANome: string): TObjecTList<TPessoa>;
     procedure Inserir(Pessoa: TPessoa);
     procedure Atualizar(Pessoa: TPessoa);
     procedure Deletar(AID: Integer);
@@ -21,13 +21,13 @@ implementation
 uses
   System.SysUtils;
 
-function TRepositorioPessoa.ObterTodos: TList<TPessoa>;
+function TRepositorioPessoa.ObterTodos: TObjecTList<TPessoa>;
 var
   Query: TFDQuery;
-  Pessoas: TList<TPessoa>;
+  Pessoas: TObjecTList<TPessoa>;
   Pessoa: TPessoa;
 begin
-  Pessoas := TList<TPessoa>.Create;
+  Pessoas := TObjecTList<TPessoa>.Create;
   Query := TFDQuery.Create(nil);
   try
     Query.Connection := FDConn;
@@ -139,13 +139,13 @@ begin
   Result := Pessoa;
 end;
 
-function TRepositorioPessoa.ObterPorNome(ANome: string): TList<TPessoa>;
+function TRepositorioPessoa.ObterPorNome(ANome: string): TObjecTList<TPessoa>;
 var
   Query: TFDQuery;
-  Pessoas: TList<TPessoa>;
+  Pessoas: TObjecTList<TPessoa>;
   Pessoa: TPessoa;
 begin
-  Pessoas := TList<TPessoa>.Create;
+  Pessoas := TObjecTList<TPessoa>.Create;
   Query := TFDQuery.Create(nil);
   try
     Query.Connection := FDConn;

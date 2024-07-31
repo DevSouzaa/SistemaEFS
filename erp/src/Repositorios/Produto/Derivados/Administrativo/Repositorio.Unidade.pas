@@ -6,21 +6,21 @@ uses
 type
   TRepositorioUnidade = class(TRepositorioBase)
   public
-    function ObterTodos: TList<TUnidade>;
-    function ObterPorId(AID: Integer): TUnidade;
-    function ObterPorNome(ANome: string): TList<TUnidade>;
-    procedure Inserir(Unidade: TUnidade);
-    procedure Atualizar(Unidade: TUnidade);
+    function ObterTodos: TList<IUnidade>;
+    function ObterPorId(AID: Integer): IUnidade;
+    function ObterPorNome(ANome: string): TList<IUnidade>;
+    procedure Inserir(Unidade: IUnidade);
+    procedure Atualizar(Unidade: IUnidade);
     procedure Deletar(AID: Integer);
   end;
 implementation
-function TRepositorioUnidade.ObterTodos: TList<TUnidade>;
+function TRepositorioUnidade.ObterTodos: TList<IUnidade>;
 var
   Query: TFDQuery;
-  Unidades: TList<TUnidade>;
-  Unidade: TUnidade;
+  Unidades: TList<IUnidade>;
+  Unidade: IUnidade;
 begin
-  Unidades := TList<TUnidade>.Create;
+  Unidades := TList<IUnidade>.Create;
   Query := TFDQuery.Create(nil);
   try
     Query.Connection := FDConn;
@@ -46,10 +46,10 @@ begin
   end;
   Result := Unidades;
 end;
-function TRepositorioUnidade.ObterPorId(AID: Integer): TUnidade;
+function TRepositorioUnidade.ObterPorId(AID: Integer): IUnidade;
 var
   Query: TFDQuery;
-  Unidade: TUnidade;
+  Unidade: IUnidade;
 begin
   Unidade := nil;
   Query := TFDQuery.Create(nil);
@@ -76,13 +76,13 @@ begin
   end;
   Result := Unidade;
 end;
-function TRepositorioUnidade.ObterPorNome(ANome: string): TList<TUnidade>;
+function TRepositorioUnidade.ObterPorNome(ANome: string): TList<IUnidade>;
 var
   Query: TFDQuery;
-  Unidades: TList<TUnidade>;
-  Unidade: TUnidade;
+  Unidades: TList<IUnidade>;
+  Unidade: IUnidade;
 begin
-  Unidades := TList<TUnidade>.Create;
+  Unidades := TList<IUnidade>.Create;
   Query := TFDQuery.Create(nil);
   try
     Query.Connection := FDConn;
@@ -109,7 +109,7 @@ begin
   end;
   Result := Unidades;
 end;
-procedure TRepositorioUnidade.Inserir(Unidade: TUnidade);
+procedure TRepositorioUnidade.Inserir(Unidade: IUnidade);
 var
   Query: TFDQuery;
 begin
@@ -130,7 +130,7 @@ begin
     Query.Free;
   end;
 end;
-procedure TRepositorioUnidade.Atualizar(Unidade: TUnidade);
+procedure TRepositorioUnidade.Atualizar(Unidade: IUnidade);
 var
   Query: TFDQuery;
 begin

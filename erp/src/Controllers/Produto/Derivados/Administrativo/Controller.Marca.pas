@@ -12,11 +12,11 @@ type
   public
     constructor Create;
     destructor Destroy; override;
-    function ObterTodos: TList<TMarca>;
-    function ObterPorId(AID: Integer): TMarca;
-    function ObterPorNome(ANome: string): TList<TMarca>;
-    procedure Inserir(Marca: TMarca);
-    procedure Atualizar(Marca: TMarca);
+    function ObterTodos: TList<IMarca>;
+    function ObterPorId(AID: Integer): IMarca;
+    function ObterPorNome(ANome: string): TList<IMarca>;
+    procedure Inserir(Marca: IMarca);
+    procedure Atualizar(Marca: IMarca);
     procedure Deletar(AID: Integer);
   end;
 
@@ -33,27 +33,27 @@ begin
   inherited;
 end;
 
-function TControllerMarca.ObterTodos: TList<TMarca>;
+function TControllerMarca.ObterTodos: TList<IMarca>;
 begin
   Result := FServiceMarca.ObterTodos;
 end;
 
-function TControllerMarca.ObterPorId(AID: Integer): TMarca;
+function TControllerMarca.ObterPorId(AID: Integer): IMarca;
 begin
   Result := FServiceMarca.ObterPorId(AID);
 end;
 
-function TControllerMarca.ObterPorNome(ANome: string): TList<TMarca>;
+function TControllerMarca.ObterPorNome(ANome: string): TList<IMarca>;
 begin
   Result := FServiceMarca.ObterPorNome(ANome);
 end;
 
-procedure TControllerMarca.Inserir(Marca: TMarca);
+procedure TControllerMarca.Inserir(Marca: IMarca);
 begin
   FServiceMarca.Inserir(Marca);
 end;
 
-procedure TControllerMarca.Atualizar(Marca: TMarca);
+procedure TControllerMarca.Atualizar(Marca: IMarca);
 begin
   FServiceMarca.Atualizar(Marca);
 end;

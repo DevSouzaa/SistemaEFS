@@ -5,11 +5,9 @@ interface
 uses
   Winapi.Windows,
   Winapi.Messages,
-
   System.SysUtils,
   System.Variants,
   System.Classes,
-
   Vcl.Graphics,
   Vcl.Controls,
   Vcl.Forms,
@@ -19,15 +17,11 @@ uses
   Vcl.Buttons,
   Vcl.Mask,
   Vcl.WinXPanels,
-
   View.Base.Tela.Modal,
-
   acPNG,
-
   Generics.Collections,
-
-
   ProdutoCompleto,
+
   Model.Grupo,
   Model.SubGrupo,
   Model.Marca,
@@ -40,12 +34,9 @@ uses
   JvExMask,
   JvToolEdit,
   JvBaseEdits,
-
   UFuncoes,
-
   ComboExpress,
   ComboBoxExpress,
-
   Controller.Grupo,
   Controller.SubGrupo,
   Controller.Fabricante,
@@ -131,9 +122,12 @@ type
   public
     { Public declarations }
   end;
+
 var
   ViewModalCadastroProduto: TViewModalCadastroProduto;
+
 implementation
+
 {$R *.dfm}
 
 procedure TViewModalCadastroProduto.FormCreate(Sender: TObject);
@@ -146,15 +140,16 @@ begin
   FControllerMarca := TControllerMarca.Create;
   FControllerUnidade := TControllerUnidade.Create;
 end;
+
 procedure TViewModalCadastroProduto.FormDestroy(Sender: TObject);
 begin
   inherited;
-  FreeAndNil(FControllerProduto);
-  FreeAndNil(FControllerGrupo);
-  FreeAndNil(FControllerSubGrupo);
-  FreeAndNil(FControllerFabricante);
-  FreeAndNil(FControllerMarca);
-  FreeAndNil(FControllerUnidade);
+  FControllerProduto.Free;
+  FControllerGrupo.Free;
+  FControllerSubGrupo.Free;
+  FControllerFabricante.Free;
+  FControllerMarca.Free;
+  FControllerUnidade.Free;
 end;
 
 procedure TViewModalCadastroProduto.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -164,6 +159,7 @@ begin
     VK_ESCAPE: Self.Close;
   end;
 end;
+
 procedure TViewModalCadastroProduto.FormShow(Sender: TObject);
 begin
   inherited;
@@ -175,74 +171,79 @@ begin
   if IDPesquisa <> 0 then
     CarregarProduto(IDPesquisa);
 end;
+
 procedure TViewModalCadastroProduto.CarregarGrupos;
 var
-  Grupos: TList<TGrupo>;
-  Grupo: TGrupo;
+  Grupos: TList<IGrupo>;
+  Grupo: IGrupo;
 begin
   Grupos := FControllerGrupo.ObterTodos;
   try
     CBB_Grupo.Items.Clear;
     for Grupo in Grupos do
-      CBB_Grupo.AddItem(Grupo.ID, Grupo.DESCRICAO);
+      CBB_Grupo.AddItem(Grupo.ID, Grupo.Descricao);
   finally
-    Grupos.Free;
+    Grupos.Free; // A lista é liberada, e as referências de interface gerenciam a destruição dos objetos
   end;
 end;
+
 procedure TViewModalCadastroProduto.CarregarSubGrupos;
 var
-  SubGrupos: TList<TSubGrupo>;
-  SubGrupo: TSubGrupo;
+  SubGrupos: TList<ISubGrupo>;
+  SubGrupo: ISubGrupo;
 begin
   SubGrupos := FControllerSubGrupo.ObterTodos;
   try
     CBB_SubGrupo.Items.Clear;
     for SubGrupo in SubGrupos do
-      CBB_SubGrupo.AddItem(SubGrupo.ID, SubGrupo.DESCRICAO);
+      CBB_SubGrupo.AddItem(SubGrupo.ID, SubGrupo.Descricao);
   finally
-    SubGrupos.Free;
+   SubGrupos.Free; // A lista é liberada, e as referências de interface gerenciam a destruição dos objetos
   end;
 end;
+
 procedure TViewModalCadastroProduto.CarregarFabricantes;
 var
-  Fabricantes: TList<TFabricante>;
-  Fabricante: TFabricante;
+  Fabricantes: TList<IFabricante>;
+  Fabricante: IFabricante;
 begin
   Fabricantes := FControllerFabricante.ObterTodos;
   try
     CBB_Fabricante.Items.Clear;
     for Fabricante in Fabricantes do
-      CBB_Fabricante.AddItem(Fabricante.ID, Fabricante.DESCRICAO);
+      CBB_Fabricante.AddItem(Fabricante.ID, Fabricante.Descricao);
   finally
-    Fabricantes.Free;
+    Fabricantes.Free; // A lista é liberada, e as referências de interface gerenciam a destruição dos objetos
   end;
 end;
+
 procedure TViewModalCadastroProduto.CarregarMarcas;
 var
-  Marcas: TList<TMarca>;
-  Marca: TMarca;
+  Marcas: TList<IMarca>;
+  Marca: IMarca;
 begin
   Marcas := FControllerMarca.ObterTodos;
   try
     CBB_Marcas.Items.Clear;
     for Marca in Marcas do
-      CBB_Marcas.AddItem(Marca.ID, Marca.DESCRICAO);
+      CBB_Marcas.AddItem(Marca.ID, Marca.Descricao);
   finally
-    Marcas.Free;
+    Marcas.Free; // A lista é liberada, e as referências de interface gerenciam a destruição dos objetos
   end;
 end;
+
 procedure TViewModalCadastroProduto.CarregarUnidades;
 var
-  Unidades: TList<TUnidade>;
-  Unidade: TUnidade;
+  Unidades: TList<IUnidade>;
+  Unidade: IUnidade;
 begin
   Unidades := FControllerUnidade.ObterTodos;
   try
     CBB_Unidade.Items.Clear;
     for Unidade in Unidades do
-      CBB_Unidade.AddItem(Unidade.ID, Unidade.DESCRICAO);
+      CBB_Unidade.AddItem(Unidade.ID, Unidade.Descricao);
   finally
-
+    Unidades.Free; // A lista é liberada, e as referências de interface gerenciam a destruição dos objetos
   end;
 end;
 
@@ -250,7 +251,7 @@ procedure TViewModalCadastroProduto.LblBtnGravarClick(Sender: TObject);
 begin
   inherited;
   SalvarProduto;
-    fnc_CriarMensagem('CADASTRO DE PRODUTOS', 'CONFIRMANDO DADOS',
+  fnc_CriarMensagem('CADASTRO DE PRODUTOS', 'CONFIRMANDO DADOS',
             'PRODUTO CADASTRADO COM SUCESSO!',
             ExtractFilepath(Application.ExeName) +
             '\Icones\Confirmacao.png', 'OK');
@@ -263,17 +264,16 @@ var
 begin
   Produto := FControllerProduto.ObterPorId(Id);
   if Assigned(Produto) then
-  try
+  begin
     EdtID.Text := Produto.IdProduto.ToString;
     EdtNome.Text := Produto.Descricao;
     Edt_Referencia.Text := Produto.Referencia;
     Edt_CodBarras.Text := Produto.CodBarras;
 
-    CBB_Grupo.SelectByID(Produto.IdGrupo) ;
+    CBB_Grupo.SelectByID(Produto.IdGrupo);
     CBB_SubGrupo.SelectByID(Produto.IdSubgrupo);
     CBB_Fabricante.SelectByID(Produto.IdFabricante);
     CBB_Marcas.SelectByID(Produto.IdMarca);
-
     CBB_Unidade.SelectByID(Produto.IdUnidade);
 
     Mm_OBS.Text := Produto.InfAdicionais;
@@ -286,14 +286,14 @@ begin
     EDT_MARGEMLUCRO.Value := Produto.Item.ValorPercentualMargemLucro;
     EDT_ICMS.Text := Produto.Item.ICMSCompra.ToString;
     EDT_IPI.Text := Produto.Item.IPICompra.ToString;
-    EDT_PISCOFINS.Text := IntToStr(Produto.CSTPisCofinsEntrada);//AliquotaPISCompra.ToString + ' / ' + Produto.Item.AliquotaCOFINSCompra.ToString;
+    EDT_PISCOFINS.Text := IntToStr(Produto.CSTPisCofinsEntrada);
     Check_Ativo.Checked := Produto.Ativo;
     CheckFracionar.Checked := Produto.VendeFracionado;
     EDT_NCM.Text := Produto.NCM;
     Edt_DescricaoNCM.Text := Produto.DescricaoNCM;
-  finally
-    Produto.Free;
   end;
+
+  FreeAndNil(Produto);
 end;
 
 procedure TViewModalCadastroProduto.SalvarProduto;
@@ -301,48 +301,44 @@ var
   Produto: TProdutoCompleto;
 begin
   Produto := TProdutoCompleto.Create;
-  try
-    Produto.IdProduto := StrToIntDef(EdtID.Text, 0);
-    Produto.Descricao := EdtNome.Text;
-    Produto.Referencia := Edt_Referencia.Text;
-    Produto.CodBarras := Edt_CodBarras.Text;
+  Produto.IdProduto := StrToIntDef(EdtID.Text, 0);
+  Produto.Descricao := EdtNome.Text;
+  Produto.Referencia := Edt_Referencia.Text;
+  Produto.CodBarras := Edt_CodBarras.Text;
+  Produto.IdGrupo := CBB_Grupo.SelectedID;
+  Produto.IdSubgrupo := CBB_SubGrupo.SelectedID;
+  Produto.IdFabricante := CBB_Fabricante.SelectedID;
+  Produto.IdMarca := CBB_Marcas.SelectedID;
+  Produto.IdUnidade := CBB_Unidade.SelectedID;
+  Produto.InfAdicionais := Mm_OBS.Text;
+  Produto.Item.ValorFreteCompra := EDT_VALORFRETE.Value;
+  Produto.Item.ValorCustoInicial := EDT_CUSTOINICIAL.Value;
+  Produto.Item.ValorOutrosCustos := EDT_OUTRASDESPESAS.Value;
+  Produto.Item.ValorCustoEntrada := EDT_CUSTOENTRADA.Value;
+  Produto.Item.Estoque := EDT_ESTOQUE.Value;
+  Produto.Item.ValorVendaVista := EDT_VALORVENDA.Value;
+  Produto.Item.ValorPercentualMargemLucro := EDT_MARGEMLUCRO.Value;
+  Produto.Item.ICMSCompra := StrToFloatDef(EDT_ICMS.Text, 0);
+  Produto.Item.IPICompra := StrToFloatDef(EDT_IPI.Text, 0);
+  Produto.CSTPisCofinsEntrada := StrToInt(EDT_PISCOFINS.Text);
+  Produto.Ativo := Check_Ativo.Checked;
+  Produto.VendeFracionado := CheckFracionar.Checked;
+  Produto.NCM := EDT_NCM.Text;
+  Produto.DescricaoNCM := Edt_DescricaoNCM.Text;
 
-    Produto.IdGrupo                := CBB_Grupo.SelectedID;
-    Produto.IdSubgrupo             := CBB_SubGrupo.SelectedID;
-    Produto.IdFabricante           := CBB_Fabricante.SelectedID;
-    Produto.IdMarca                := CBB_Marcas.SelectedID;
-    Produto.IdUnidade              := CBB_Unidade.SelectedID;
+  if Produto.IdProduto = 0 then
+    FControllerProduto.Inserir(Produto)
+  else
+    FControllerProduto.Atualizar(Produto);
 
-
-    Produto.InfAdicionais          := Mm_OBS.Text;
-    Produto.Item.ValorFreteCompra  := EDT_VALORFRETE.Value;
-    Produto.Item.ValorCustoInicial := EDT_CUSTOINICIAL.Value;
-    Produto.Item.ValorOutrosCustos := EDT_OUTRASDESPESAS.Value;
-    Produto.Item.ValorCustoEntrada := EDT_CUSTOENTRADA.Value;
-    Produto.Item.Estoque           := EDT_ESTOQUE.Value;
-    Produto.Item.ValorVendaVista   := EDT_VALORVENDA.Value;
-    Produto.Item.ValorPercentualMargemLucro := EDT_MARGEMLUCRO.Value;
-    Produto.Item.ICMSCompra                 := StrToFloatDef(EDT_ICMS.Text, 0);
-    Produto.Item.IPICompra                  := StrToFloatDef(EDT_IPI.Text, 0);
-    Produto.CSTPisCofinsEntrada             := StrToInt(EDT_PISCOFINS.Text);
-    Produto.Ativo                           := Check_Ativo.Checked;
-    Produto.VendeFracionado                 := CheckFracionar.Checked;
-    Produto.NCM                             := EDT_NCM.Text;
-    Produto.DescricaoNCM                    := Edt_DescricaoNCM.Text;
-
-    if Produto.IdProduto = 0 then
-      FControllerProduto.Inserir(Produto)
-    else
-      FControllerProduto.Atualizar(Produto);
-  finally
-    Produto.Free;
-  end;
+  FreeAndNil(Produto);
 end;
 
 procedure TViewModalCadastroProduto.SpeedButton1Click(Sender: TObject);
-begin //aumentar estoque
+begin
   inherited;
-  EDT_ESTOQUE.Value :=   EDT_ESTOQUE.Value + 1;
+  EDT_ESTOQUE.Value := EDT_ESTOQUE.Value + 1;
 end;
 
 end.
+

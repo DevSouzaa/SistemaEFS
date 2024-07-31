@@ -1,5 +1,6 @@
 inherited ViewListaFabricante: TViewListaFabricante
   Caption = 'Fabricante'
+  OnDestroy = FormDestroy
   TextHeight = 21
   inherited PnlTopo: TPanel
     inherited PnlBotoes: TPanel

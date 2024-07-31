@@ -12,11 +12,11 @@ type
   public
     constructor Create;
     destructor Destroy; override;
-    function ObterTodos: TList<TSubGrupo>;
-    function ObterPorId(AID: Integer): TSubGrupo;
-    function ObterPorNome(ANome: string): TList<TSubGrupo>;
-    procedure Inserir(SubGrupo: TSubGrupo);
-    procedure Atualizar(SubGrupo: TSubGrupo);
+    function ObterTodos: TList<ISubGrupo>;
+    function ObterPorId(AID: Integer): ISubGrupo;
+    function ObterPorNome(ANome: string): TList<ISubGrupo>;
+    procedure Inserir(SubGrupo: ISubGrupo);
+    procedure Atualizar(SubGrupo: ISubGrupo);
     procedure Deletar(AID: Integer);
   end;
 
@@ -33,27 +33,27 @@ begin
   inherited;
 end;
 
-function TControllerSubGrupo.ObterTodos: TList<TSubGrupo>;
+function TControllerSubGrupo.ObterTodos: TList<ISubGrupo>;
 begin
   Result := FServiceSubGrupo.ObterTodos;
 end;
 
-function TControllerSubGrupo.ObterPorId(AID: Integer): TSubGrupo;
+function TControllerSubGrupo.ObterPorId(AID: Integer): ISubGrupo;
 begin
   Result := FServiceSubGrupo.ObterPorId(AID);
 end;
 
-function TControllerSubGrupo.ObterPorNome(ANome: string): TList<TSubGrupo>;
+function TControllerSubGrupo.ObterPorNome(ANome: string): TList<ISubGrupo>;
 begin
   Result := FServiceSubGrupo.ObterPorNome(ANome);
 end;
 
-procedure TControllerSubGrupo.Inserir(SubGrupo: TSubGrupo);
+procedure TControllerSubGrupo.Inserir(SubGrupo: ISubGrupo);
 begin
   FServiceSubGrupo.Inserir(SubGrupo);
 end;
 
-procedure TControllerSubGrupo.Atualizar(SubGrupo: TSubGrupo);
+procedure TControllerSubGrupo.Atualizar(SubGrupo: ISubGrupo);
 begin
   FServiceSubGrupo.Atualizar(SubGrupo);
 end;

@@ -1,0 +1,26 @@
+unit Model.Marca;
+
+interface
+
+uses
+  Model.Base;
+
+type
+  TMarca = class
+  private
+    FID: Integer;
+    FDescricao: string;
+
+  public
+    property ID: Integer read FID write FID;
+    property Descricao: string read FDescricao write FDescricao;
+  end;
+
+implementation
+
+{ TMarca }
+
+
+
+end.
+

@@ -4,15 +4,15 @@ interface
 
 uses
   FireDAC.Comp.Client, FireDAC.Stan.Def, FireDAC.Stan.Async, FireDAC.Phys.FB, FireDAC.Phys.FBDef,
-  FireDAC.UI.Intf, FireDAC.VCLUI.Wait, FireDAC.Comp.UI, System.SysUtils, Conexao, Generics.Collections;
+  FireDAC.UI.Intf, FireDAC.VCLUI.Wait, FireDAC.Comp.UI, System.SysUtils, Conexao, Generics.Collections, FireDAC.Stan.Param;
 
 type
-  IRepositorioBase = interface
-    ['{D5F5A5F0-2C3D-4D2A-9F9E-1AFA2D5A1A0A}']
-    function ExecutarQuery(Query: TFDQuery; SQL: string; Params: array of Variant): TFDQuery;
-  end;
+//  IRepositorioBase = interface
+//    ['{D5F5A5F0-2C3D-4D2A-9F9E-1AFA2D5A1A0A}']
+//    function ExecutarQuery(Query: TFDQuery; SQL: string; Params: array of Variant): TFDQuery;
+//  end;
 
-  TRepositorioBase = class(TInterfacedObject, IRepositorioBase)
+  TRepositorioBase = class//(TInterfacedObject, IRepositorioBase)
   private
     FDriverLink: TFDPhysFBDriverLink;
     FWaitCursor: TFDGUIxWaitCursor;
@@ -21,7 +21,7 @@ type
   public
     constructor Create;
     destructor Destroy; override;
-    function ExecutarQuery(Query: TFDQuery; SQL: string; Params: array of Variant): TFDQuery;
+//    function ExecutarQuery(Query: TFDQuery; SQL: string; Params: array of Variant): TFDQuery;
   end;
 
 implementation
@@ -56,6 +56,11 @@ begin
   inherited;
 end;
 
+
+//function TRepositorioBase.ExecutarQuery(Query: TFDQuery; SQL: string;Params: array of Variant): TFDQuery;
+//begin//
+//
+//end;
 
 end.
 

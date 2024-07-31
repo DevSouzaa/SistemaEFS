@@ -8,23 +8,23 @@ uses
 type
   TRepositorioFabricante = class(TRepositorioBase)
   public
-    function ObterTodos: TList<TFabricante>;
-    function ObterPorId(AID: Integer): TFabricante;
-    function ObterPorNome(ANome: string): TList<TFabricante>;
-    procedure Inserir(Fabricante: TFabricante);
-    procedure Atualizar(Fabricante: TFabricante);
+    function ObterTodos: TList<IFabricante>;
+    function ObterPorId(AID: Integer): IFabricante;
+    function ObterPorNome(ANome: string): TList<IFabricante>;
+    procedure Inserir(Fabricante: IFabricante);
+    procedure Atualizar(Fabricante: IFabricante);
     procedure Deletar(AID: Integer);
   end;
 
 implementation
 
-function TRepositorioFabricante.ObterTodos: TList<TFabricante>;
+function TRepositorioFabricante.ObterTodos: TList<IFabricante>;
 var
   Query: TFDQuery;
-  Fabricantes: TList<TFabricante>;
-  Fabricante: TFabricante;
+  Fabricantes: TList<IFabricante>;
+  Fabricante: IFabricante;
 begin
-  Fabricantes := TList<TFabricante>.Create;
+  Fabricantes := TList<IFabricante>.Create;
   Query := TFDQuery.Create(nil);
   try
     Query.Connection := FDConn;
@@ -44,10 +44,10 @@ begin
   Result := Fabricantes;
 end;
 
-function TRepositorioFabricante.ObterPorId(AID: Integer): TFabricante;
+function TRepositorioFabricante.ObterPorId(AID: Integer): IFabricante;
 var
   Query: TFDQuery;
-  Fabricante: TFabricante;
+  Fabricante: IFabricante;
 begin
   Fabricante := nil;
   Query := TFDQuery.Create(nil);
@@ -68,13 +68,13 @@ begin
   Result := Fabricante;
 end;
 
-function TRepositorioFabricante.ObterPorNome(ANome: string): TList<TFabricante>;
+function TRepositorioFabricante.ObterPorNome(ANome: string): TList<IFabricante>;
 var
   Query: TFDQuery;
-  Fabricantes: TList<TFabricante>;
-  Fabricante: TFabricante;
+  Fabricantes: TList<IFabricante>;
+  Fabricante: IFabricante;
 begin
-  Fabricantes := TList<TFabricante>.Create;
+  Fabricantes := TList<IFabricante>.Create;
   Query := TFDQuery.Create(nil);
   try
     Query.Connection := FDConn;
@@ -95,7 +95,7 @@ begin
   Result := Fabricantes;
 end;
 
-procedure TRepositorioFabricante.Inserir(Fabricante: TFabricante);
+procedure TRepositorioFabricante.Inserir(Fabricante: IFabricante);
 var
   Query: TFDQuery;
 begin
@@ -110,7 +110,7 @@ begin
   end;
 end;
 
-procedure TRepositorioFabricante.Atualizar(Fabricante: TFabricante);
+procedure TRepositorioFabricante.Atualizar(Fabricante: IFabricante);
 var
   Query: TFDQuery;
 begin

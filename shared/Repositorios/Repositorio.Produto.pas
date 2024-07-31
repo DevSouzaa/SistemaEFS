@@ -9,8 +9,8 @@ type
   TRepositorioProduto = class(TRepositorioBase)
   public
     function ObterPorId(Id: Integer): TProdutoCompleto;
-    function ObterPorNome(Nome: string): TList<TProdutoSimplificado>;
-    function ObterTodos: TList<TProdutoSimplificado>;
+    function ObterPorNome(Nome: string): TObjectList<TProdutoSimplificado>;
+    function ObterTodos: TObjectList<TProdutoSimplificado>;
     function Inserir(Produto: TProdutoCompleto): Boolean;
     function Atualizar(Produto: TProdutoCompleto): Boolean;
     function Deletar(Id: Integer): Boolean;
@@ -150,13 +150,13 @@ begin
   end;
 end;
 
-function TRepositorioProduto.ObterPorNome(Nome: string): TList<TProdutoSimplificado>;
+function TRepositorioProduto.ObterPorNome(Nome: string): TObjectList<TProdutoSimplificado>;
 var
   Query: TFDQuery;
-  Produtos: TList<TProdutoSimplificado>;
+  Produtos: TObjectList<TProdutoSimplificado>;
   Produto: TProdutoSimplificado;
 begin
-  Produtos := TList<TProdutoSimplificado>.Create;
+  Produtos := TObjectList<TProdutoSimplificado>.Create(true);
   Query := TFDQuery.Create(nil);
   try
     Query.Connection := FDConn;
@@ -184,13 +184,13 @@ begin
   end;
 end;
 
-function TRepositorioProduto.ObterTodos: TList<TProdutoSimplificado>;
+function TRepositorioProduto.ObterTodos: TObjectList<TProdutoSimplificado>;
 var
   Query: TFDQuery;
-  Produtos: TList<TProdutoSimplificado>;
+  Produtos: TObjectList<TProdutoSimplificado>;
   Produto: TProdutoSimplificado;
 begin
-  Produtos := TList<TProdutoSimplificado>.Create;
+  Produtos := TObjectList<TProdutoSimplificado>.Create(true);
   Query := TFDQuery.Create(nil);
   try
     Query.Connection := FDConn;

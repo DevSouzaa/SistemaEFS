@@ -1,0 +1,26 @@
+unit Model.Fabricante;
+
+interface
+
+uses
+  Model.Base;
+
+type
+  TFabricante = class
+  private
+    FID: Integer;
+    FDescricao: string;
+
+  public
+    property ID: Integer read FID write FID;
+    property Descricao: string read FDescricao write FDescricao;
+  end;
+
+implementation
+
+{ TFabricante }
+
+
+
+end.
+

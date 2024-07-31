@@ -9,23 +9,23 @@ type
   TRepositorioSubGrupo = class(TRepositorioBase)
 
   public
-    function ObterTodos: TList<TSubGrupo>;
-    function ObterPorId(AID: Integer): TSubGrupo;
-    function ObterPorNome(ANome: string): TList<TSubGrupo>;
-    procedure Inserir(SubGrupo: TSubGrupo);
-    procedure Atualizar(SubGrupo: TSubGrupo);
+    function ObterTodos: TList<ISubGrupo>;
+    function ObterPorId(AID: Integer): ISubGrupo;
+    function ObterPorNome(ANome: string): TList<ISubGrupo>;
+    procedure Inserir(SubGrupo: ISubGrupo);
+    procedure Atualizar(SubGrupo: ISubGrupo);
     procedure Deletar(AID: Integer);
   end;
 
 implementation
 
-function TRepositorioSubGrupo.ObterTodos: TList<TSubGrupo>;
+function TRepositorioSubGrupo.ObterTodos: TList<ISubGrupo>;
 var
   Query: TFDQuery;
-  SubGrupos: TList<TSubGrupo>;
-  SubGrupo: TSubGrupo;
+  SubGrupos: TList<ISubGrupo>;
+  SubGrupo: ISubGrupo;
 begin
-  SubGrupos := TList<TSubGrupo>.Create;
+  SubGrupos := TList<ISubGrupo>.Create;
   Query := TFDQuery.Create(nil);
   try
     Query.Connection := FDConn;
@@ -45,10 +45,10 @@ begin
   Result := SubGrupos;
 end;
 
-function TRepositorioSubGrupo.ObterPorId(AID: Integer): TSubGrupo;
+function TRepositorioSubGrupo.ObterPorId(AID: Integer): ISubGrupo;
 var
   Query: TFDQuery;
-  SubGrupo: TSubGrupo;
+  SubGrupo: ISubGrupo;
 begin
   SubGrupo := nil;
   Query := TFDQuery.Create(nil);
@@ -69,13 +69,13 @@ begin
   Result := SubGrupo;
 end;
 
-function TRepositorioSubGrupo.ObterPorNome(ANome: string): TList<TSubGrupo>;
+function TRepositorioSubGrupo.ObterPorNome(ANome: string): TList<ISubGrupo>;
 var
   Query: TFDQuery;
-  SubGrupos: TList<TSubGrupo>;
-  SubGrupo: TSubGrupo;
+  SubGrupos: TList<ISubGrupo>;
+  SubGrupo: ISubGrupo;
 begin
-  SubGrupos := TList<TSubGrupo>.Create;
+  SubGrupos := TList<ISubGrupo>.Create;
   Query := TFDQuery.Create(nil);
   try
     Query.Connection := FDConn;
@@ -96,7 +96,7 @@ begin
   Result := SubGrupos;
 end;
 
-procedure TRepositorioSubGrupo.Inserir(SubGrupo: TSubGrupo);
+procedure TRepositorioSubGrupo.Inserir(SubGrupo: ISubGrupo);
 var
   Query: TFDQuery;
 begin
@@ -111,7 +111,7 @@ begin
   end;
 end;
 
-procedure TRepositorioSubGrupo.Atualizar(SubGrupo: TSubGrupo);
+procedure TRepositorioSubGrupo.Atualizar(SubGrupo: ISubGrupo);
 var
   Query: TFDQuery;
 begin

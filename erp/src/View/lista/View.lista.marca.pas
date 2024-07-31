@@ -13,12 +13,13 @@ type
     procedure LblBtnNovoClick(Sender: TObject);
     procedure LblBtnEditarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
     procedure EdtPesquisaChange(Sender: TObject);
     procedure ViewFrameDuasColunaControlList1BeforeDrawItem(AIndex: Integer;
       ACanvas: TCanvas; ARect: TRect; AState: TOwnerDrawState);
   private
     FocusedItemIndex: Integer;
-    FMarcas: TList<TMarca>;
+    FMarcas: TList<IMarca>;
     procedure GET_Marcas;
     procedure AtualizarLista(Nome: string);
     procedure ControlListButtonClick(Sender: TObject);
@@ -42,14 +43,20 @@ end;
 procedure TViewListaMarca.FormCreate(Sender: TObject);
 begin
   inherited;
-  FMarcas := TList<TMarca>.Create;
+  FMarcas := TList<IMarca>.Create;
   GET_Marcas;
+end;
+
+procedure TViewListaMarca.FormDestroy(Sender: TObject);
+begin
+  FMarcas.Free;
+  inherited;
 end;
 
 procedure TViewListaMarca.GET_Marcas;
 var
   ControllerMarca: TControllerMarca;
-  Marcas: TList<TMarca>;
+  Marcas: TList<IMarca>;
 begin
   ControllerMarca := TControllerMarca.Create;
   try
@@ -67,7 +74,7 @@ begin
         CadPanel_Dados.ActiveCard := Card_DuasColuna;
       end;
     finally
-      Marcas.Free;
+      Marcas.Free; // Libere a lista Marcas para evitar vazamento de memória
     end;
   finally
     ControllerMarca.Free;
@@ -91,12 +98,12 @@ end;
 procedure TViewListaMarca.ViewFrameDuasColunaControlList1BeforeDrawItem(AIndex: Integer;
   ACanvas: TCanvas; ARect: TRect; AState: TOwnerDrawState);
 var
-  Marca: TMarca;
+  Marca: IMarca;
 begin
   Marca := FMarcas[AIndex];
   with ViewFrameDuasColuna do
   begin
-    TLabel(FindComponent('LblID')).Caption          := IntToStr(Marca.Id);
+    TLabel(FindComponent('LblID')).Caption          := IntToStr(Marca.ID);
     TLabel(FindComponent('LblTexto1')).Caption      := 'Descrição';
     TLabel(FindComponent('LblSubTexto1')).Caption   := Marca.Descricao;
     TLabel(FindComponent('LblTexto2')).Visible      := false;
@@ -119,7 +126,7 @@ end;
 procedure TViewListaMarca.AtualizarLista(Nome: string);
 var
   ControllerMarca: TControllerMarca;
-  Marcas: TList<TMarca>;
+  Marcas: TList<IMarca>;
 begin
   ControllerMarca := TControllerMarca.Create;
   try
@@ -137,7 +144,7 @@ begin
         CadPanel_Dados.ActiveCard := Card_DuasColuna;
       end;
     finally
-      Marcas.Free;
+      Marcas.Free; // Libere a lista Marcas para evitar vazamento de memória
     end;
   finally
     ControllerMarca.Free;

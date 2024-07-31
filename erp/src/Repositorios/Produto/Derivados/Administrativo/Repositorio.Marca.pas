@@ -8,23 +8,23 @@ uses
 type
   TRepositorioMarca = class(TRepositorioBase)
   public
-    function ObterTodos: TList<TMarca>;
-    function ObterPorId(AID: Integer): TMarca;
-    function ObterPorNome(ANome: string): TList<TMarca>;
-    procedure Inserir(Marca: TMarca);
-    procedure Atualizar(Marca: TMarca);
+    function ObterTodos: TList<IMarca>;
+    function ObterPorId(AID: Integer): IMarca;
+    function ObterPorNome(ANome: string): TList<IMarca>;
+    procedure Inserir(Marca: IMarca);
+    procedure Atualizar(Marca: IMarca);
     procedure Deletar(AID: Integer);
   end;
 
 implementation
 
-function TRepositorioMarca.ObterTodos: TList<TMarca>;
+function TRepositorioMarca.ObterTodos: TList<IMarca>;
 var
   Query: TFDQuery;
-  Marcas: TList<TMarca>;
-  Marca: TMarca;
+  Marcas: TList<IMarca>;
+  Marca: IMarca;
 begin
-  Marcas := TList<TMarca>.Create;
+  Marcas := TList<IMarca>.Create;
   Query := TFDQuery.Create(nil);
   try
     Query.Connection := FDConn;
@@ -44,10 +44,10 @@ begin
   Result := Marcas;
 end;
 
-function TRepositorioMarca.ObterPorId(AID: Integer): TMarca;
+function TRepositorioMarca.ObterPorId(AID: Integer): IMarca;
 var
   Query: TFDQuery;
-  Marca: TMarca;
+  Marca: IMarca;
 begin
   Marca := nil;
   Query := TFDQuery.Create(nil);
@@ -68,13 +68,13 @@ begin
   Result := Marca;
 end;
 
-function TRepositorioMarca.ObterPorNome(ANome: string): TList<TMarca>;
+function TRepositorioMarca.ObterPorNome(ANome: string): TList<IMarca>;
 var
   Query: TFDQuery;
-  Marcas: TList<TMarca>;
-  Marca: TMarca;
+  Marcas: TList<IMarca>;
+  Marca: IMarca;
 begin
-  Marcas := TList<TMarca>.Create;
+  Marcas := TList<IMarca>.Create;
   Query := TFDQuery.Create(nil);
   try
     Query.Connection := FDConn;
@@ -95,7 +95,7 @@ begin
   Result := Marcas;
 end;
 
-procedure TRepositorioMarca.Inserir(Marca: TMarca);
+procedure TRepositorioMarca.Inserir(Marca: IMarca);
 var
   Query: TFDQuery;
 begin
@@ -110,7 +110,7 @@ begin
   end;
 end;
 
-procedure TRepositorioMarca.Atualizar(Marca: TMarca);
+procedure TRepositorioMarca.Atualizar(Marca: IMarca);
 var
   Query: TFDQuery;
 begin

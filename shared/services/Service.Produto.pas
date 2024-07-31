@@ -13,8 +13,8 @@ type
     constructor Create;
     destructor Destroy; override;
     function ObterPorId(Id: Integer): TProdutoCompleto;
-    function ObterPorNome(Nome: string): TList<TProdutoSimplificado>;
-    function ObterTodos: TList<TProdutoSimplificado>;
+    function ObterPorNome(Nome: string): TObjectList<TProdutoSimplificado>;
+    function ObterTodos: TObjectList<TProdutoSimplificado>;
     function Inserir(Produto: TProdutoCompleto): Boolean;
     function Atualizar(Produto: TProdutoCompleto): Boolean;
     function Deletar(Id: Integer): Boolean;
@@ -38,12 +38,12 @@ begin
   Result := FRepositorioProduto.ObterPorId(Id);
 end;
 
-function TServiceProduto.ObterPorNome(Nome: string): TList<TProdutoSimplificado>;
+function TServiceProduto.ObterPorNome(Nome: string): TObjectList<TProdutoSimplificado>;
 begin
   Result := FRepositorioProduto.ObterPorNome(Nome);
 end;
 
-function TServiceProduto.ObterTodos: TList<TProdutoSimplificado>;
+function TServiceProduto.ObterTodos: TObjectList<TProdutoSimplificado>;
 begin
   Result := FRepositorioProduto.ObterTodos;
 end;

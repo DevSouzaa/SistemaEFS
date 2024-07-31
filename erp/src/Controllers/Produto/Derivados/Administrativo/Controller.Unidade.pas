@@ -12,11 +12,11 @@ type
   public
     constructor Create;
     destructor Destroy; override;
-    function ObterTodos: TList<TUnidade>;
-    function ObterPorId(AID: Integer): TUnidade;
-    function ObterPorNome(ANome: string): TList<TUnidade>;
-    procedure Inserir(Unidade: TUnidade);
-    procedure Atualizar(Unidade: TUnidade);
+    function ObterTodos: TList<iUnidade>;
+    function ObterPorId(AID: Integer): iUnidade;
+    function ObterPorNome(ANome: string): TList<iUnidade>;
+    procedure Inserir(Unidade: iUnidade);
+    procedure Atualizar(Unidade: iUnidade);
     procedure Deletar(AID: Integer);
   end;
 
@@ -33,27 +33,27 @@ begin
   inherited;
 end;
 
-function TControllerUnidade.ObterTodos: TList<TUnidade>;
+function TControllerUnidade.ObterTodos: TList<iUnidade>;
 begin
   Result := FServiceUnidade.ObterTodos;
 end;
 
-function TControllerUnidade.ObterPorId(AID: Integer): TUnidade;
+function TControllerUnidade.ObterPorId(AID: Integer): iUnidade;
 begin
   Result := FServiceUnidade.ObterPorId(AID);
 end;
 
-function TControllerUnidade.ObterPorNome(ANome: string): TList<TUnidade>;
+function TControllerUnidade.ObterPorNome(ANome: string): TList<iUnidade>;
 begin
   Result := FServiceUnidade.ObterPorNome(ANome);
 end;
 
-procedure TControllerUnidade.Inserir(Unidade: TUnidade);
+procedure TControllerUnidade.Inserir(Unidade: iUnidade);
 begin
   FServiceUnidade.Inserir(Unidade);
 end;
 
-procedure TControllerUnidade.Atualizar(Unidade: TUnidade);
+procedure TControllerUnidade.Atualizar(Unidade: iUnidade);
 begin
   FServiceUnidade.Atualizar(Unidade);
 end;

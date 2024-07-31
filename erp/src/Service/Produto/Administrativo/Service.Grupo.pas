@@ -12,11 +12,11 @@ type
   public
     constructor Create;
     destructor Destroy; override;
-    function ObterTodos: TList<TGrupo>;
-    function ObterPorId(AID: Integer): TGrupo;
-    function ObterPorNome(ANome: string): TList<TGrupo>;
-    procedure Inserir(Grupo: TGrupo);
-    procedure Atualizar(Grupo: TGrupo);
+    function ObterTodos: TList<IGrupo>;
+    function ObterPorId(AID: Integer): IGrupo;
+    function ObterPorNome(ANome: string): TList<IGrupo>;
+    procedure Inserir(Grupo: IGrupo);
+    procedure Atualizar(Grupo: IGrupo);
     procedure Deletar(AID: Integer);
   end;
 
@@ -33,27 +33,27 @@ begin
   inherited;
 end;
 
-function TServiceGrupo.ObterTodos: TList<TGrupo>;
+function TServiceGrupo.ObterTodos: TList<IGrupo>;
 begin
   Result := FRepositorioGrupo.ObterTodos;
 end;
 
-function TServiceGrupo.ObterPorId(AID: Integer): TGrupo;
+function TServiceGrupo.ObterPorId(AID: Integer): IGrupo;
 begin
   Result := FRepositorioGrupo.ObterPorId(AID);
 end;
 
-function TServiceGrupo.ObterPorNome(ANome: string): TList<TGrupo>;
+function TServiceGrupo.ObterPorNome(ANome: string): TList<IGrupo>;
 begin
   Result := FRepositorioGrupo.ObterPorNome(ANome);
 end;
 
-procedure TServiceGrupo.Inserir(Grupo: TGrupo);
+procedure TServiceGrupo.Inserir(Grupo: IGrupo);
 begin
   FRepositorioGrupo.Inserir(Grupo);
 end;
 
-procedure TServiceGrupo.Atualizar(Grupo: TGrupo);
+procedure TServiceGrupo.Atualizar(Grupo: IGrupo);
 begin
   FRepositorioGrupo.Atualizar(Grupo);
 end;

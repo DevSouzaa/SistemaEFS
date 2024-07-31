@@ -35309,10 +35309,8 @@ inherited ViewPrincipal: TViewPrincipal
               0000000000000000000000000000000000000000000000000000000000000000
               0000000000000000000000000000000000000000000000000000000000000000
               000000000000}
-            ExplicitLeft = 272
-            ExplicitTop = 296
-            ExplicitWidth = 105
-            ExplicitHeight = 105
+            ExplicitLeft = 2
+            ExplicitTop = 1
           end
         end
       end

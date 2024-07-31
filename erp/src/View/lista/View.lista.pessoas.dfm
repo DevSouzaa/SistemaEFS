@@ -1,5 +1,6 @@
 inherited ViewListaPessoas: TViewListaPessoas
   Caption = 'Pessoas'
+  OnDestroy = FormDestroy
   TextHeight = 21
   inherited PnlTopo: TPanel
     inherited PnlBotoes: TPanel
@@ -23,7 +24,7 @@ inherited ViewListaPessoas: TViewListaPessoas
             Width = 106
             Height = 43
             Caption = 'Administra'#231#227'o'
-            ExplicitWidth = 98
+            ExplicitWidth = 106
           end
         end
         inherited PnlIconText2: TPanel
@@ -31,7 +32,7 @@ inherited ViewListaPessoas: TViewListaPessoas
             Width = 312
             Height = 43
             Caption = 'Pessoas'
-            ExplicitWidth = 56
+            ExplicitWidth = 312
           end
         end
       end

@@ -12,9 +12,9 @@ type
   public
     constructor Create;
     destructor Destroy; override;
-    function ObterTodos: TList<TPessoa>;
+    function ObterTodos: TObjecTList<TPessoa>;
     function ObterPorId(AID: Integer): TPessoa;
-    function ObterPorNome(ANome: string): TList<TPessoa>;
+    function ObterPorNome(ANome: string): TObjecTList<TPessoa>;
     procedure Salvar(Pessoa: TPessoa);
     procedure Deletar(AID: Integer);
   end;
@@ -32,7 +32,7 @@ begin
   inherited;
 end;
 
-function TPessoaController.ObterTodos: TList<TPessoa>;
+function TPessoaController.ObterTodos: TObjecTList<TPessoa>;
 begin
   Result := FPessoaService.ObterTodos;
 end;
@@ -42,7 +42,7 @@ begin
   Result := FPessoaService.ObterPorId(AID);
 end;
 
-function TPessoaController.ObterPorNome(ANome: string): TList<TPessoa>;
+function TPessoaController.ObterPorNome(ANome: string): TObjecTList<TPessoa>;
 begin
   Result := FPessoaService.ObterPorNome(ANome);
 end;

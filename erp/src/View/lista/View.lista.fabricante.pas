@@ -13,12 +13,13 @@ type
     procedure LblBtnNovoClick(Sender: TObject);
     procedure LblBtnEditarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
     procedure EdtPesquisaChange(Sender: TObject);
     procedure ViewFrameDuasColunaControlList1BeforeDrawItem(AIndex: Integer;
       ACanvas: TCanvas; ARect: TRect; AState: TOwnerDrawState);
   private
     FocusedItemIndex: Integer;
-    FFabricantes: TList<TFabricante>;
+    FFabricantes: TList<IFabricante>;
     procedure GET_Fabricantes;
     procedure AtualizarLista(Nome: string);
     procedure ControlListButtonClick(Sender: TObject);
@@ -42,14 +43,20 @@ end;
 procedure TViewListaFabricante.FormCreate(Sender: TObject);
 begin
   inherited;
-  FFabricantes := TList<TFabricante>.Create;
+  FFabricantes := TList<IFabricante>.Create;
   GET_Fabricantes;
+end;
+
+procedure TViewListaFabricante.FormDestroy(Sender: TObject);
+begin
+  FFabricantes.Free;
+  inherited;
 end;
 
 procedure TViewListaFabricante.GET_Fabricantes;
 var
   ControllerFabricante: TControllerFabricante;
-  Fabricantes: TList<TFabricante>;
+  Fabricantes: TList<IFabricante>;
 begin
   ControllerFabricante := TControllerFabricante.Create;
   try
@@ -91,12 +98,12 @@ end;
 procedure TViewListaFabricante.ViewFrameDuasColunaControlList1BeforeDrawItem(AIndex: Integer;
   ACanvas: TCanvas; ARect: TRect; AState: TOwnerDrawState);
 var
-  Fabricante: TFabricante;
+  Fabricante: IFabricante;
 begin
   Fabricante := FFabricantes[AIndex];
   with ViewFrameDuasColuna do
   begin
-    TLabel(FindComponent('LblID')).Caption          := IntToStr(Fabricante.Id);
+    TLabel(FindComponent('LblID')).Caption          := IntToStr(Fabricante.ID);
     TLabel(FindComponent('LblTexto1')).Caption      := 'Descrição';
     TLabel(FindComponent('LblSubTexto1')).Caption   := Fabricante.Descricao;
 
@@ -115,7 +122,7 @@ end;
 procedure TViewListaFabricante.AtualizarLista(Nome: string);
 var
   ControllerFabricante: TControllerFabricante;
-  Fabricantes: TList<TFabricante>;
+  Fabricantes: TList<IFabricante>;
 begin
   ControllerFabricante := TControllerFabricante.Create;
   try

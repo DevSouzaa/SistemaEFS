@@ -13,12 +13,13 @@ type
     procedure LblBtnNovoClick(Sender: TObject);
     procedure LblBtnEditarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
     procedure EdtPesquisaChange(Sender: TObject);
     procedure ViewFrameDuasColunaControlList1BeforeDrawItem(AIndex: Integer;
       ACanvas: TCanvas; ARect: TRect; AState: TOwnerDrawState);
   private
     FocusedItemIndex: Integer;
-    FGrupos: TList<TGrupo>;
+    FGrupos: TList<IGrupo>;
     procedure GET_Grupos;
     procedure AtualizarLista(Nome: string);
     procedure ControlListButtonClick(Sender: TObject);
@@ -42,14 +43,20 @@ end;
 procedure TViewListaGrupos.FormCreate(Sender: TObject);
 begin
   inherited;
-  FGrupos := TList<TGrupo>.Create;
+  FGrupos := TList<IGrupo>.Create;
   GET_Grupos;
+end;
+
+procedure TViewListaGrupos.FormDestroy(Sender: TObject);
+begin
+  FGrupos.Free;
+  inherited;
 end;
 
 procedure TViewListaGrupos.GET_Grupos;
 var
   ControllerGrupo: TControllerGrupo;
-  Grupos: TList<TGrupo>;
+  Grupos: TList<IGrupo>;
 begin
   ControllerGrupo := TControllerGrupo.Create;
   try
@@ -67,7 +74,7 @@ begin
         CadPanel_Dados.ActiveCard := Card_DuasColuna;
       end;
     finally
-      Grupos.Free;
+      Grupos.Free; // Libere a lista Grupos para evitar vazamento de memória
     end;
   finally
     ControllerGrupo.Free;
@@ -91,12 +98,12 @@ end;
 procedure TViewListaGrupos.ViewFrameDuasColunaControlList1BeforeDrawItem(AIndex: Integer;
   ACanvas: TCanvas; ARect: TRect; AState: TOwnerDrawState);
 var
-  Grupo: TGrupo;
+  Grupo: IGrupo;
 begin
   Grupo := FGrupos[AIndex];
   with ViewFrameDuasColuna do
   begin
-    TLabel(FindComponent('LblID')).Caption          := IntToStr(Grupo.Id);
+    TLabel(FindComponent('LblID')).Caption          := IntToStr(Grupo.ID);
     TLabel(FindComponent('LblTexto1')).Caption      := 'Descrição:';
     TLabel(FindComponent('LblSubTexto1')).Caption   := Grupo.Descricao;
     TLabel(FindComponent('LblTexto2')).Visible      := false;
@@ -118,7 +125,7 @@ end;
 procedure TViewListaGrupos.AtualizarLista(Nome: string);
 var
   ControllerGrupo: TControllerGrupo;
-  Grupos: TList<TGrupo>;
+  Grupos: TList<IGrupo>;
 begin
   ControllerGrupo := TControllerGrupo.Create;
   try
@@ -136,7 +143,7 @@ begin
         CadPanel_Dados.ActiveCard := Card_DuasColuna;
       end;
     finally
-      Grupos.Free;
+      Grupos.Free; // Libere a lista Grupos para evitar vazamento de memória
     end;
   finally
     ControllerGrupo.Free;

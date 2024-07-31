@@ -1,5 +1,6 @@
 inherited ViewListaMarca: TViewListaMarca
   Caption = 'Marcas'
+  OnDestroy = FormDestroy
   TextHeight = 21
   inherited PnlTopo: TPanel
     inherited PnlBotoes: TPanel
